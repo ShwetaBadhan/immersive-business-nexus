@@ -1,24 +1,197 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useReveal } from "@/hooks/use-reveal";
+import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
+import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
+import { cursorProps } from "@/components/experience/Cursor";
+import { Link } from "@tanstack/react-router";
+import { playCue } from "@/lib/audio";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "239 The Business Developer LLP — Build What Moves Business Forward";
+const DESC =
+  "239 The Business Developer LLP creates strategic, digital and creative solutions that help ambitious businesses grow, connect and stand apart.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  useReveal();
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Telemetry tag="239 / Home" />
+      <Overlay>
+        {/* 01 — HERO */}
+        <section className="flex min-h-svh flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
+          <div className="max-w-[16ch]">
+            <SplitHeading text="Build what moves business forward." className="display-xl text-foreground" />
+          </div>
+          <div className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-[46ch] text-sm leading-relaxed text-muted-foreground md:text-base" data-reveal data-reveal-delay={500}>
+              239 The Business Developer LLP creates strategic, digital and creative solutions that help
+              ambitious businesses grow, connect and stand apart.
+            </p>
+            <div className="flex flex-col items-start gap-8 md:items-end" data-reveal data-reveal-delay={620}>
+              <Action to="/about" label="Explore">
+                Explore 239
+              </Action>
+              <ScrollHint />
+            </div>
+          </div>
+        </section>
+
+        {/* 02 — INTRODUCTION */}
+        <section className="min-h-svh px-5 py-32 md:px-10">
+          <div className="mx-auto max-w-6xl">
+            <SectionMarker index="02" title="Introduction" />
+            <SplitHeading
+              as="h2"
+              text="We turn ideas into business momentum."
+              className="display-lg max-w-[18ch] text-foreground"
+            />
+            <div className="mt-16 grid gap-12 md:grid-cols-12">
+              <p className="text-sm leading-relaxed text-muted-foreground md:col-span-5 md:col-start-7 md:text-base" data-reveal data-reveal-delay={200}>
+                From strategy and digital experiences to brand development and growth solutions, 239 brings
+                business thinking and creative execution together.
+              </p>
+            </div>
+            <div className="mt-24 grid grid-cols-3 gap-6 border-t border-border pt-10" data-reveal data-reveal-delay={280}>
+              {[
+                { n: "2", l: "Disciplines fused — business & creative" },
+                { n: "3", l: "Continents of client work" },
+                { n: "9", l: "Years building momentum" },
+              ].map((s) => (
+                <div key={s.n}>
+                  <div className="font-display text-5xl leading-none text-glow md:text-7xl" style={{ textShadow: "var(--glow-soft)" }}>
+                    {s.n}
+                  </div>
+                  <p className="label mt-4 max-w-[18ch] !tracking-[0.18em]">{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 03 — WHAT WE DO */}
+        <section className="min-h-svh px-5 py-32 md:px-10">
+          <div className="mx-auto max-w-6xl">
+            <SectionMarker index="03" title="What we do" />
+            <ul className="border-t border-border">
+              {SERVICES.map((s, i) => (
+                <li key={s.id} data-reveal data-reveal-delay={i * 70}>
+                  <Link
+                    to="/services"
+                    {...cursorProps("Explore")}
+                    onPointerEnter={() => {
+                      cursorProps("Explore").onPointerEnter();
+                      playCue("hover");
+                    }}
+                    onClick={() => playCue("click")}
+                    className="pointer-events-auto group flex items-baseline gap-5 border-b border-border py-6 transition-colors duration-500 md:gap-10 md:py-8"
+                  >
+                    <span className="font-mono text-[0.6rem] text-neon">{s.index}</span>
+                    <span className="display-md flex-1 text-foreground transition-all duration-700 ease-out group-hover:translate-x-2 group-hover:text-glow">
+                      {s.title}
+                    </span>
+                    <span className="hidden max-w-[30ch] text-xs text-muted-foreground opacity-0 transition-opacity duration-700 group-hover:opacity-100 md:block">
+                      {s.short}
+                    </span>
+                    <span className="label opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100">
+                      Explore →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-16">
+              <Marquee items={HOME_DISCIPLINES} />
+            </div>
+          </div>
+        </section>
+
+        {/* 04 — SELECTED CASE STUDIES */}
+        <section className="min-h-svh px-5 py-32 md:px-10">
+          <div className="mx-auto max-w-6xl">
+            <SectionMarker index="04" title="Selected case studies" />
+            <p className="label mb-14 max-w-[40ch]" data-reveal>
+              Drag the world · click a panel to enter a project
+            </p>
+            <div className="grid gap-x-10 gap-y-16 md:grid-cols-2">
+              {PROJECTS.slice(0, 4).map((p, i) => (
+                <Link
+                  key={p.slug}
+                  to="/case-studies/$slug"
+                  params={{ slug: p.slug }}
+                  {...cursorProps("Open")}
+                  onClick={() => playCue("open")}
+                  className="pointer-events-auto group block"
+                  data-reveal
+                  data-reveal-delay={i * 90}
+                  style={{ marginTop: i % 2 ? "3rem" : 0 }}
+                >
+                  <div className="flex items-baseline justify-between border-b border-border pb-4">
+                    <span className="label !text-glow">Project {p.index}</span>
+                    <span className="label">{p.category}</span>
+                  </div>
+                  <h3 className="display-md mt-5 text-foreground transition-all duration-700 group-hover:translate-x-1.5 group-hover:text-glow">
+                    {p.title}
+                  </h3>
+                  <p className="mt-4 max-w-[38ch] text-xs leading-relaxed text-muted-foreground">{p.kicker}</p>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-24" data-reveal>
+              <Action to="/case-studies" label="View all">
+                All case studies
+              </Action>
+            </div>
+          </div>
+        </section>
+
+        {/* 05 — PHILOSOPHY */}
+        <section className="flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
+          <div className="mx-auto w-full max-w-6xl">
+            <SectionMarker index="05" title="239 Philosophy" />
+            {["Think different.", "Build better.", "Move forward."].map((line, i) => (
+              <h2
+                key={line}
+                className="display-lg text-foreground"
+                data-reveal
+                data-reveal-delay={i * 220}
+                style={{ color: i === 2 ? "var(--color-glow)" : undefined, paddingLeft: `${i * 6}%` }}
+              >
+                {line}
+              </h2>
+            ))}
+          </div>
+        </section>
+
+        {/* 06 — FINAL CTA */}
+        <section className="flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+          <SplitHeading
+            as="h2"
+            text="Let's build something that moves."
+            className="display-lg max-w-[20ch] text-foreground"
+          />
+          <div className="mt-14" data-reveal data-reveal-delay={320}>
+            <Action to="/contact" label="Start">
+              Start a project
+            </Action>
+          </div>
+          <div className="mt-24 flex w-full max-w-6xl items-center justify-between border-t border-border pt-8">
+            <span className="label">239 The Business Developer LLP</span>
+            <span className="label">India</span>
+          </div>
+        </section>
+      </Overlay>
+    </>
   );
 }

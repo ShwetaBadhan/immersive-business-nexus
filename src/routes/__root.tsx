@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { WorldLayer } from "@/components/experience/WorldLayer";
+import { Nav } from "@/components/experience/Nav";
+import { Cursor } from "@/components/experience/Cursor";
+import { SmoothScroll } from "@/components/experience/SmoothScroll";
+import { Loader } from "@/components/experience/Loader";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +82,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "239 The Business Developer LLP" },
+      {
+        name: "description",
+        content:
+          "239 The Business Developer LLP — an immersive creative and business development studio building what moves business forward.",
+      },
+      { name: "author", content: "239 The Business Developer LLP" },
+      { property: "og:title", content: "239 The Business Developer LLP" },
+      {
+        property: "og:description",
+        content: "An immersive creative and business development studio.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -119,6 +131,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <SmoothScroll />
+      <WorldLayer />
+      <Nav />
+      <Cursor />
+      <Loader />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
