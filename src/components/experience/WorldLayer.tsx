@@ -4,7 +4,8 @@ import { live, setWorld, useWorld, type WorldVariant } from "@/lib/world-store";
 import { getProject } from "@/lib/site-data";
 import { playCue } from "@/lib/audio";
 
-const World = lazy(() => import("@/components/three/World"));
+const loadWorld = () => import("@/components/three/World");
+const World = lazy(loadWorld);
 
 function variantFor(pathname: string): WorldVariant {
   if (pathname.startsWith("/about")) return "about";
@@ -84,15 +85,28 @@ function WorldInner() {
     };
   }, []);
 
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    let alive = true;
+    void loadWorld().then(() => {
+      if (alive) setReady(true);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   return (
     <>
       <Suspense fallback={<div className="fixed inset-0 z-0 bg-background" />}>
+        {ready && (
         <div
           className="transition-opacity duration-[1600ms] ease-out"
           style={{ opacity: entered ? 1 : 0.55 }}
         >
           <World variant={variant} hue={hue} />
         </div>
+        )}
       </Suspense>
       <TransitionVeil />
     </>
