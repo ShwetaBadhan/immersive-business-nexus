@@ -228,7 +228,7 @@ export function TrajectoryRibbon() {
         <meshStandardMaterial {...EMERALD} />
       </mesh>
       {markers.map((p, i) => (
-        <mesh key={i} position={p} ref={i === 2 ? glow : undefined}>
+        <mesh key={i} position={p} ref={i === 2 ? glow : null}>
           <icosahedronGeometry args={i === 2 ? [0.17, 1] : [0.1, 1]} />
           {i === 2 ? <meshStandardMaterial {...EMERALD} /> : <meshStandardMaterial {...CHROME} />}
         </mesh>
