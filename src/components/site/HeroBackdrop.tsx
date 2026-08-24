@@ -36,10 +36,10 @@ export function HeroBackdrop() {
 
       // background shifts opposite to the cursor, layers at different depths
       if (far.current) {
-        far.current.style.transform = `scale(1.1) translate3d(${-x * 22}px, ${-y * 14}px, 0)`;
+        far.current.style.transform = `scale(1.05) translate3d(${-x * 22}px, ${-y * 14}px, 0)`;
       }
       if (near.current) {
-        near.current.style.transform = `scale(1.16) translate3d(${-x * 46}px, ${-y * 26}px, 0)`;
+        near.current.style.transform = `scale(1.1) translate3d(${-x * 46}px, ${-y * 26}px, 0)`;
       }
       if (lines.current) {
         lines.current.style.transform = `translate3d(${x * 30}px, ${y * 18}px, 0) rotateX(${-y * 2.2}deg) rotateY(${x * 2.8}deg)`;
@@ -72,7 +72,7 @@ export function HeroBackdrop() {
         style={{
           backgroundImage: `url(${heroEnv})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "50% 35%",
           filter: "blur(4px) saturate(0.55) brightness(1.14) contrast(0.95)",
           opacity: 0.8,
         }}
@@ -85,7 +85,7 @@ export function HeroBackdrop() {
         style={{
           backgroundImage: `url(${heroEnv})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "50% 35%",
           filter: "blur(1px) saturate(0.6) brightness(1.12)",
           opacity: 0.45,
           maskImage:
