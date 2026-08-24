@@ -124,25 +124,24 @@ export function Loader() {
         <button
           {...cursorProps("Enter")}
           onClick={() => enter(true)}
-          onPointerEnter={() => {
-            cursorProps("Enter").onPointerEnter();
-          }}
           disabled={!ready}
-          className="group flex items-center gap-4 border border-border px-8 py-4 transition-colors duration-500 hover:border-neon"
+          className="group pointer-events-auto flex items-center gap-4 border border-border bg-card/60 px-9 py-4 backdrop-blur-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-glow hover:bg-card"
+          style={{ boxShadow: "var(--glow-soft)" }}
         >
-          <span className="label !text-[0.65rem] !text-foreground transition-colors group-hover:!text-glow">
+          <span className="label !text-[0.65rem] !text-foreground transition-colors duration-500 group-hover:!text-glow">
             Enter Experience
           </span>
-          <span className="h-1.5 w-1.5 rounded-full bg-neon pulse-dot" />
+          <span className="h-1.5 w-1.5 rounded-full bg-glow pulse-dot" />
         </button>
         <button
           {...cursorProps()}
           onClick={() => enter(false)}
           disabled={!ready}
-          className="link-underline label transition-colors duration-500 hover:!text-glow"
+          className="link-underline label pointer-events-auto transition-colors duration-500 hover:!text-glow"
         >
           Enter without sound
         </button>
+
       </div>
 
       <div className="absolute bottom-10 left-6 md:left-10">
