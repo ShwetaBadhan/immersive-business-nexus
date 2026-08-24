@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
-import { HeroDiagram } from "@/components/site/HeroDiagram";
 import { HeroBackground } from "@/components/site/HeroBackground";
 
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
@@ -37,11 +36,6 @@ function Home() {
         {/* 01 — HERO */}
         <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
           <HeroBackground />
-          {/* editorial labels frame the centred content */}
-          <div className="pointer-events-none absolute inset-x-0 top-24 z-10 hidden h-[calc(100%-12rem)] lg:block">
-            <HeroDiagram />
-          </div>
-
           {/* content layer — rendered above every environment/reflection pass so type stays crisp */}
           <div className="relative z-[70] isolate flex flex-1 flex-col items-center justify-center text-center [transform:translateZ(0)] [text-rendering:geometricPrecision]">
             <div className="mb-7 flex items-center justify-center gap-4" data-reveal>
