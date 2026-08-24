@@ -47,21 +47,27 @@ export function Cursor() {
   const expanded = mode !== "dot";
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-[70] hidden md:block">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-[100] hidden md:block">
       <div
         ref={ring}
-        className="absolute left-0 top-0 flex items-center justify-center rounded-full border border-neon/60 transition-[width,height,opacity,background-color] duration-500 ease-out"
+        className="absolute left-0 top-0 flex items-center justify-center rounded-full border transition-[width,height,opacity,background-color,border-color] duration-500 ease-out"
         style={{
-          width: expanded ? 88 : 30,
-          height: expanded ? 88 : 30,
-          opacity: expanded ? 1 : 0.4,
-          backgroundColor: expanded ? "oklch(0.7316 0.1714 156.53 / 10%)" : "transparent",
+          width: expanded ? 78 : 34,
+          height: expanded ? 78 : 34,
+          opacity: expanded ? 1 : 0.55,
+          borderColor: expanded
+            ? "oklch(0.4562 0.0975 159.2 / 55%)"
+            : "oklch(0.2312 0.0344 165.2 / 28%)",
+          backgroundColor: expanded
+            ? "oklch(0.9445 0.0132 152.3 / 72%)"
+            : "transparent",
+          backdropFilter: expanded ? "blur(3px)" : "none",
           boxShadow: expanded ? "var(--glow-soft)" : "none",
         }}
       >
         <span
           className="label !text-glow transition-opacity duration-300"
-          style={{ opacity: mode === "label" && label ? 1 : 0, fontSize: "0.55rem" }}
+          style={{ opacity: mode === "label" && label ? 1 : 0, fontSize: "0.5rem" }}
         >
           {label}
         </span>
@@ -69,11 +75,12 @@ export function Cursor() {
       <div
         ref={dot}
         className="absolute left-0 top-0 rounded-full bg-glow transition-opacity duration-300"
-        style={{ width: 5, height: 5, opacity: expanded ? 0 : 1 }}
+        style={{ width: 6, height: 6, opacity: expanded ? 0 : 1 }}
       />
     </div>
   );
 }
+
 
 /** Attach to any interactive element to drive the cursor state. */
 export function cursorProps(text?: string) {

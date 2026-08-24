@@ -153,7 +153,7 @@ export function Monoliths({ count = 9 }: { count?: number }) {
   useFrame((_, dt) => {
     if (group.current) {
       group.current.rotation.y += dt * 0.012;
-      group.current.position.z = live.progress * 16;
+      group.current.position.z = live.progress * 8 - 2;
     }
   });
 
@@ -164,10 +164,12 @@ export function Monoliths({ count = 9 }: { count?: number }) {
           <boxGeometry args={[0.14, s.h, 1.1]} />
           <meshStandardMaterial
             color={COL.moss}
-            metalness={0.92}
-            roughness={0.26}
+            metalness={0.55}
+            roughness={0.35}
+            transparent
+            opacity={0.5}
             emissive={COL.brand}
-            emissiveIntensity={0.22}
+            emissiveIntensity={0.06}
           />
         </mesh>
       ))}
@@ -563,6 +565,145 @@ export function ContactWorld({ burst }: { burst: boolean }) {
         <meshBasicMaterial color={COL.brand} wireframe transparent opacity={0.16} />
       </mesh>
       <OrganicCore detail={30} scale={0.8} amp={0.32} />
+    </group>
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Hero centrepiece — a precise, premium faceted core with orbit rings
+ * (replaces the old soft blob: crisp geometry, real lighting, depth)
+ * ------------------------------------------------------------------ */
+
+export function HeroCore({
+  quality = "high",
+  onOpen,
+}: {
+  quality?: "high" | "low";
+  onOpen?: () => void;
+}) {
+  const group = useRef<THREE.Group>(null);
+  const core = useRef<THREE.Mesh>(null);
+  const shell = useRef<THREE.Mesh>(null);
+  const ringA = useRef<THREE.Mesh>(null);
+  const ringB = useRef<THREE.Mesh>(null);
+  const [hover, setHover] = useState(false);
+  const seg = quality === "high" ? 1 : 0.55;
+
+  useFrame((state, dt) => {
+    const t = state.clock.elapsedTime;
+    const g = group.current;
+    if (g) {
+      g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, live.smoothX * 0.5 + t * 0.06, 0.05);
+      g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, live.smoothY * -0.28, 0.05);
+      g.position.y = 0.45 + Math.sin(t * 0.35) * 0.1;
+      g.position.x = 1.15;
+      g.position.z = live.progress * 5.5;
+      const target = (hover ? 1.06 : 1) * 0.46;
+      g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, target * (1 - live.progress * 0.12), 0.07));
+    }
+    if (core.current) core.current.rotation.y += dt * 0.16;
+    if (shell.current) {
+      shell.current.rotation.y -= dt * 0.09;
+      shell.current.rotation.x += dt * 0.04;
+    }
+    if (ringA.current) ringA.current.rotation.z += dt * 0.22;
+    if (ringB.current) ringB.current.rotation.z -= dt * 0.15;
+  });
+
+  return (
+    <group ref={group}>
+      {/* faceted solid core */}
+      <mesh
+        ref={core}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHover(true);
+          setWorld({ cursorMode: "label", cursorLabel: onOpen ? "Explore" : "View" });
+          playCue("hover");
+        }}
+        onPointerOut={() => {
+          setHover(false);
+          setWorld({ cursorMode: "dot", cursorLabel: null });
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!onOpen) return;
+          playCue("open");
+          onOpen();
+        }}
+      >
+        <icosahedronGeometry args={[1.26, 1]} />
+        <meshPhysicalMaterial
+          color={COL.brand}
+          metalness={0.28}
+          roughness={0.22}
+          clearcoat={1}
+          clearcoatRoughness={0.08}
+          reflectivity={0.9}
+          flatShading
+          emissive={COL.glow}
+          emissiveIntensity={hover ? 0.22 : 0.1}
+        />
+      </mesh>
+
+      {/* glass outer shell for depth */}
+      <mesh ref={shell} scale={1.34}>
+        <icosahedronGeometry args={[1.1, quality === "high" ? 2 : 1]} />
+        <meshPhysicalMaterial
+          color={COL.moss}
+          transparent
+          opacity={0.12}
+          roughness={0.08}
+          metalness={0}
+          transmission={quality === "high" ? 0.86 : 0}
+          thickness={1.1}
+          ior={1.35}
+          clearcoat={1}
+        />
+      </mesh>
+
+      {/* precise wireframe cage */}
+      <mesh scale={1.7}>
+        <icosahedronGeometry args={[1.1, 1]} />
+        <meshBasicMaterial color={COL.brand} wireframe transparent opacity={0.14} />
+      </mesh>
+
+      {/* orbit rings */}
+      <mesh ref={ringA} rotation={[Math.PI / 2.2, 0.3, 0]}>
+        <torusGeometry args={[2.55, 0.012, 8, Math.round(220 * seg)]} />
+        <meshBasicMaterial color={COL.glow} transparent opacity={0.42} />
+      </mesh>
+      <mesh ref={ringB} rotation={[Math.PI / 1.7, -0.5, 0.4]}>
+        <torusGeometry args={[3.1, 0.008, 8, Math.round(220 * seg)]} />
+        <meshBasicMaterial color={COL.neon} transparent opacity={0.26} />
+      </mesh>
+    </group>
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Calm ambience — used on case-study detail pages so content leads
+ * ------------------------------------------------------------------ */
+
+export function CalmField() {
+  const group = useRef<THREE.Group>(null);
+
+  useFrame((state, dt) => {
+    const g = group.current;
+    if (!g) return;
+    g.rotation.y += dt * 0.015;
+    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, live.smoothY * 0.05, 0.03);
+    g.position.z = live.progress * 4;
+  });
+
+  return (
+    <group ref={group} position={[0, 0, -6]}>
+      {[3.2, 4.6, 6.2].map((r, i) => (
+        <mesh key={r} rotation={[Math.PI / 2 + i * 0.2, i * 0.4, 0]}>
+          <torusGeometry args={[r, 0.006, 8, 200]} />
+          <meshBasicMaterial color={COL.brand} transparent opacity={0.2 - i * 0.05} />
+        </mesh>
+      ))}
     </group>
   );
 }

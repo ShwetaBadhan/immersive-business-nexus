@@ -94,12 +94,12 @@ void main(){
   float lightA = clamp(dot(n, normalize(vec3(0.6, 0.9, 0.4))), 0.0, 1.0);
   float lightB = clamp(dot(n, normalize(vec3(-0.8, -0.2, 0.6))), 0.0, 1.0);
 
-  vec3 col = mix(uDeep, uBrand, lightA * 0.85);
-  col += uNeon * lightB * 0.16;
-  col = mix(col, uNeon, fres * 0.5);
-  col += uNeon * rim * 0.65;
-  col += uNeon * smoothstep(0.06, 0.22, vDisp) * 0.22;
-  col *= 0.9 + sin(uTime * 0.6) * 0.05;
+  vec3 col = mix(uBrand, uDeep, lightA * 0.62);
+  col = mix(col, uNeon, lightB * 0.22);
+  col = mix(col, uDeep, fres * 0.55);
+  col = mix(col, uNeon, rim * 0.35);
+  col = mix(col, uNeon, smoothstep(0.06, 0.22, vDisp) * 0.18);
+  col *= 0.97 + sin(uTime * 0.6) * 0.03;
 
   gl_FragColor = vec4(col, 1.0);
 }
@@ -148,7 +148,7 @@ void main(){
   alpha *= vFade;
   if (alpha < 0.01) discard;
   vec3 col = mix(uNeon, uGlow, step(0.86, vSeed));
-  gl_FragColor = vec4(col, alpha * (0.32 + vSeed * 0.5));
+  gl_FragColor = vec4(col, alpha * (0.14 + vSeed * 0.26));
 }
 `;
 
@@ -185,7 +185,7 @@ void main(){
   float n2 = snoise(vec3(uv * 9.0 + n, uTime * 0.05));
   float bands = smoothstep(0.35, 0.65, fract(uv.y * 9.0 + n * 0.5));
 
-  vec3 col = mix(uDeep, uBrand, 0.35 + n * 0.4);
+  vec3 col = mix(uDeep, uBrand, 0.25 + n * 0.3);
   col = mix(col, uNeon, bands * (0.06 + uHover * 0.3));
   col += uNeon * pow(1.0 - abs(uv.x - 0.5) * 2.0, 6.0) * (0.1 + uHover * 0.5);
   col += n2 * 0.035;

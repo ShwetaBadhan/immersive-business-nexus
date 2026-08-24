@@ -16,6 +16,7 @@ import { Nav } from "@/components/experience/Nav";
 import { Cursor } from "@/components/experience/Cursor";
 import { SmoothScroll } from "@/components/experience/SmoothScroll";
 import { Loader } from "@/components/experience/Loader";
+import { Footer } from "@/components/site/Footer";
 
 function NotFoundComponent() {
   return (
@@ -138,6 +139,7 @@ function RootComponent() {
       <Loader />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Footer />
     </QueryClientProvider>
   );
 }

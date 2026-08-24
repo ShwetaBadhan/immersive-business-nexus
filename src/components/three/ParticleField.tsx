@@ -35,11 +35,11 @@ export function ParticleField({ count = 4200, spread = 34 }: { count?: number; s
       uTime: { value: 0 },
       uProgress: { value: 0 },
       uPointer: { value: new THREE.Vector2() },
-      uSize: { value: 5.2 },
+      uSize: { value: 4.4 },
       uPixelRatio: { value: dpr },
       uSpread: { value: spread },
-      uNeon: { value: new THREE.Color(COL.neon) },
-      uGlow: { value: new THREE.Color(COL.glow) },
+      uNeon: { value: new THREE.Color(COL.brand) },
+      uGlow: { value: new THREE.Color(COL.neon) },
     }),
     [dpr, spread],
   );
@@ -61,7 +61,7 @@ export function ParticleField({ count = 4200, spread = 34 }: { count?: number; s
         fragmentShader={PARTICLE_FRAG}
         transparent
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </points>
   );
