@@ -133,7 +133,7 @@ function NavItem({ to, label, active }: { to: string; label: string; active: boo
         e.currentTarget.style.transform = "none";
       }}
       onClick={() => playCue("click")}
-      className="link-underline label !text-[0.6rem] transition-all duration-500"
+      className="link-underline label !text-[0.78rem] !tracking-[0.12em] !font-medium transition-all duration-500"
       style={{
         color: active ? "var(--color-glow)" : undefined,
         textShadow: active ? "var(--glow-hard)" : "none",
@@ -149,7 +149,7 @@ function SoundToggle({ sound, onToggle }: { sound: boolean; onToggle: () => void
     <button
       {...cursorProps(sound ? "Mute" : "Sound")}
       onClick={onToggle}
-      className="label flex items-center gap-2 !text-[0.6rem] transition-colors duration-500"
+      className="label flex items-center gap-2 !text-[0.7rem] !tracking-[0.12em] transition-colors duration-500"
       style={{ color: sound ? "var(--color-glow)" : undefined }}
     >
       <span className="flex h-3 items-end gap-[2px]">
