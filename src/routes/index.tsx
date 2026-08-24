@@ -273,7 +273,9 @@ function Home() {
             <span className="label">239 The Business Developer LLP</span>
             <span className="label">India</span>
           </div>
+          </div>
         </section>
+
       </Overlay>
     </>
   );
