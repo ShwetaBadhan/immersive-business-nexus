@@ -37,39 +37,40 @@ function Home() {
         {/* 01 — HERO */}
         <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
           <HeroBackground />
-          <div className="relative z-10 grid flex-1 items-center gap-12 md:grid-cols-12">
-            {/* headline column */}
-            <div className="md:col-span-7 lg:col-span-6">
-              <div className="mb-7 flex items-center gap-4" data-reveal>
-                <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
-                <span className="h-px w-10 bg-neon/60" />
-                <span className="label">Business × Creativity × Technology</span>
-              </div>
-              <div className="max-w-[15ch]">
-                <SplitHeading
-                  text="Build what moves business forward."
-                  className="display-xl text-foreground !text-[clamp(2.5rem,5.4vw,5.6rem)]"
-                />
-              </div>
-              <p
-                className="mt-8 max-w-[44ch] text-sm leading-relaxed text-muted-foreground md:text-base"
-                data-reveal
-                data-reveal-delay={500}
-              >
-                239 The Business Developer LLP creates strategic, digital and creative solutions that help
-                ambitious businesses grow, connect and stand apart.
-              </p>
-              <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6" data-reveal data-reveal-delay={620}>
-                <Action to="/about" label="Explore">
-                  Explore 239
-                </Action>
-                <ScrollHint />
-              </div>
-            </div>
+          {/* editorial labels frame the centred content */}
+          <div className="pointer-events-none absolute inset-x-0 top-24 z-10 hidden h-[calc(100%-12rem)] lg:block">
+            <HeroDiagram />
+          </div>
 
-            {/* 3D composition column — labels only, the network lives in WebGL */}
-            <div className="relative hidden min-h-[30rem] md:col-span-5 md:block lg:col-span-6">
-              <HeroDiagram />
+          <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
+            <div className="mb-7 flex items-center justify-center gap-4" data-reveal>
+              <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
+              <span className="h-px w-10 bg-neon/60" />
+              <span className="label">Business × Creativity × Technology</span>
+            </div>
+            <div className="mx-auto max-w-[22ch]">
+              <SplitHeading
+                text="Build what moves business forward."
+                className="display-xl text-foreground !text-[clamp(2.4rem,5.2vw,5.4rem)]"
+              />
+            </div>
+            <p
+              className="mx-auto mt-8 max-w-[52ch] text-sm leading-relaxed text-muted-foreground md:text-base"
+              data-reveal
+              data-reveal-delay={420}
+            >
+              239 The Business Developer LLP creates strategic, digital and creative solutions that help
+              ambitious businesses grow, connect and stand apart.
+            </p>
+            <div
+              className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6"
+              data-reveal
+              data-reveal-delay={520}
+            >
+              <Action to="/about" label="Explore">
+                Explore 239
+              </Action>
+              <ScrollHint />
             </div>
           </div>
 
