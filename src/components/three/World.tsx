@@ -108,7 +108,6 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
       {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
-      {variant === "home" && <GrowthNetwork quality={quality} />}
 
       <EffectComposer enableNormalPass={false}>
         <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
