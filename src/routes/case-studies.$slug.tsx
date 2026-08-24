@@ -78,14 +78,11 @@ function CaseStudy() {
           </div>
           <h1
             className="display-lg mt-8 max-w-[18ch] text-foreground"
-            data-reveal
           >
             {project.title}
           </h1>
           <p
             className="mt-8 max-w-[54ch] text-base leading-relaxed text-muted-foreground md:text-lg"
-            data-reveal
-            data-reveal-delay={120}
           >
             {project.kicker}
           </p>
@@ -94,8 +91,6 @@ function CaseStudy() {
         {/* large visual */}
         <div
           className="mx-6 h-[42svh] border border-border md:mx-14 md:h-[52svh]"
-          data-reveal
-          data-reveal-delay={160}
           style={{
             background: `linear-gradient(135deg,
               oklch(0.9445 0.0132 152.3),
@@ -133,7 +128,6 @@ function CaseStudy() {
               </div>
               <p
                 className="text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed"
-                data-reveal
               >
                 {c.b}
               </p>
