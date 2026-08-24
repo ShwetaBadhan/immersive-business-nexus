@@ -108,7 +108,7 @@ function WorldInner() {
   return (
     <>
       <Suspense fallback={<div className="fixed inset-0 z-0 bg-background" />}>
-        {ready && (
+        {ready && variant === "home" && (
         <div
           className="transition-opacity duration-[1600ms] ease-out"
           style={{ opacity: entered ? 1 : 0.55 }}

@@ -2,20 +2,17 @@ import "./r3f-devtag-patch";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, Preload } from "@react-three/drei";
-import { EffectComposer, Bloom, Vignette, DepthOfField, Noise } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
+import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
-import { ParticleField } from "./ParticleField";
-import { Monoliths } from "./worlds";
 import { HeroEnvironment } from "./HeroEnvironment";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
 
 const RIGS: Record<WorldVariant, { from: THREE.Vector3Tuple; to: THREE.Vector3Tuple; fov: number }> = {
-  home: { from: [0, 0.15, 9.2], to: [0, 1.6, -8.5], fov: 40 },
+  home: { from: [0, 0.15, 8.6], to: [0, 1.2, -3.5], fov: 42 },
   about: { from: [0, 0.4, 9.4], to: [0, -1.2, -6.5], fov: 46 },
   services: { from: [0, 0.2, 10.5], to: [0, 0.8, 1.5], fov: 48 },
   work: { from: [0, 0.3, 11.5], to: [0, -0.6, 2.2], fov: 50 },
@@ -74,7 +71,7 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
     const t = state.clock.elapsedTime;
     if (key.current) {
       key.current.position.set(Math.sin(t * 0.18) * 5 + live.smoothX * 2, 3.2, 4 + Math.cos(t * 0.14) * 2);
-      key.current.intensity = 26 + Math.sin(t * 0.5) * 4;
+      key.current.intensity = 9 + Math.sin(t * 0.5) * 1.5;
     }
     if (rim.current) {
       rim.current.position.set(-5 + live.smoothX * -2, -2.4 + live.smoothY * 2, -5);
@@ -84,11 +81,11 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
   return (
     <>
       <color attach="background" args={[COL.deep]} />
-      <fogExp2 attach="fog" args={[COL.deep, quality === "high" ? 0.032 : 0.045]} />
+      <fogExp2 attach="fog" args={[COL.deep, 0.026]} />
       <ambientLight intensity={0.9} color={COL.deep} />
       <hemisphereLight intensity={0.9} color={COL.deep} groundColor={COL.moss} />
-      <pointLight ref={key} color={COL.neon} intensity={26} distance={30} decay={1.6} />
-      <pointLight ref={rim} color={COL.glow} intensity={14} distance={24} decay={1.8} />
+      <pointLight ref={key} color={COL.neon} intensity={9} distance={26} decay={2} />
+      <pointLight ref={rim} color={COL.glow} intensity={5} distance={20} decay={2} />
       <directionalLight position={[4, 6, 6]} intensity={2.2} color="#ffffff" />
       <directionalLight position={[-5, -2, 3]} intensity={0.8} color={COL.forest} />
     </>
@@ -100,26 +97,15 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
 function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | "low" }) {
   const focus = useWorld((s) => s.focus);
 
-  const count = quality === "high" ? 2600 : 1100;
-  const ambient = variant === "work";
-
   return (
     <>
       <Atmosphere quality={quality} />
       <Rig variant={variant} focus={focus} />
-      <ParticleField count={count} />
-      {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
       {variant === "home" && <HeroEnvironment quality={quality} />}
 
       <EffectComposer enableNormalPass={false}>
-        <Bloom intensity={0.16} luminanceThreshold={0.86} luminanceSmoothing={0.4} mipmapBlur />
-        {variant === "home" && quality === "high" ? (
-          <DepthOfField focusDistance={0.012} focalLength={0.05} bokehScale={2.4} height={480} />
-        ) : (
-          <></>
-        )}
-        <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.09} />
-        <Vignette eskil={false} offset={0.42} darkness={0.12} />
+        <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
+        <Vignette eskil={false} offset={0.5} darkness={0.08} />
       </EffectComposer>
 
       <AdaptiveDpr pixelated={false} />
