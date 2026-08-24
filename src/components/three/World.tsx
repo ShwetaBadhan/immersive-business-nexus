@@ -93,12 +93,12 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
     <>
       <color attach="background" args={[COL.deep]} />
       <fogExp2 attach="fog" args={[COL.deep, quality === "high" ? 0.032 : 0.045]} />
-      <ambientLight intensity={1.15} color={COL.deep} />
+      <ambientLight intensity={0.9} color={COL.deep} />
       <hemisphereLight intensity={0.9} color={COL.deep} groundColor={COL.moss} />
       <pointLight ref={key} color={COL.neon} intensity={26} distance={30} decay={1.6} />
       <pointLight ref={rim} color={COL.glow} intensity={14} distance={24} decay={1.8} />
-      <directionalLight position={[4, 6, 6]} intensity={1.6} color={COL.text} />
-      <directionalLight position={[-5, -2, 3]} intensity={0.5} color={COL.brand} />
+      <directionalLight position={[4, 6, 6]} intensity={2.2} color="#ffffff" />
+      <directionalLight position={[-5, -2, 3]} intensity={0.8} color={COL.forest} />
     </>
   );
 }

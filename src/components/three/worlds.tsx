@@ -596,7 +596,7 @@ export function HeroCore({
       g.position.y = 0.85 + Math.sin(t * 0.35) * 0.1;
       g.position.x = 1.6;
       g.position.z = live.progress * 5.5;
-      const target = (hover ? 1.06 : 1) * 0.6;
+      const target = (hover ? 1.06 : 1) * 0.52;
       g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, target * (1 - live.progress * 0.12), 0.07));
     }
     if (core.current) core.current.rotation.y += dt * 0.16;
@@ -633,8 +633,8 @@ export function HeroCore({
         <icosahedronGeometry args={[1.26, 1]} />
         <meshPhysicalMaterial
           color={COL.brand}
-          metalness={0.42}
-          roughness={0.16}
+          metalness={0.28}
+          roughness={0.22}
           clearcoat={1}
           clearcoatRoughness={0.08}
           reflectivity={0.9}
