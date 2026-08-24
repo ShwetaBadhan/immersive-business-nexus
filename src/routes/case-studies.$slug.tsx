@@ -1,5 +1,4 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useReveal } from "@/hooks/use-reveal";
 import { Action, Overlay } from "@/components/site/ui";
 import { getProject, nextProject } from "@/lib/site-data";
 import { cursorProps } from "@/components/experience/Cursor";
@@ -51,7 +50,6 @@ function ProjectNotFound() {
 function CaseStudy() {
   const { project } = Route.useLoaderData();
   const next = nextProject(project.slug);
-  useReveal([project.slug]);
 
   const overview = [
     { k: "Client", v: project.client },
@@ -110,7 +108,7 @@ function CaseStudy() {
         <section className="px-6 py-16 md:px-14 md:py-20">
           <div className="grid grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
             {overview.map((o, i) => (
-              <div key={o.k} data-reveal data-reveal-delay={i * 80}>
+              <div key={o.k}>
                 <span className="label">{o.k}</span>
                 <p className="mt-3 text-sm leading-relaxed text-foreground">{o.v}</p>
               </div>
@@ -141,7 +139,7 @@ function CaseStudy() {
             <span className="label">04 — Results</span>
             <div className="mt-10 grid gap-10 md:grid-cols-3">
               {project.results.map((r, i) => (
-                <div key={r.label} data-reveal data-reveal-delay={i * 110}>
+                <div key={r.label}>
                   <div className="font-display text-5xl leading-none text-glow md:text-7xl">
                     {r.value}
                   </div>
