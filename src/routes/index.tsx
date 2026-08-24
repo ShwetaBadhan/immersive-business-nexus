@@ -42,18 +42,22 @@ function Home() {
             <HeroDiagram />
           </div>
 
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
+          {/* content layer — rendered above every environment/reflection pass so type stays crisp */}
+          <div className="relative z-[70] isolate flex flex-1 flex-col items-center justify-center text-center [transform:translateZ(0)] [text-rendering:geometricPrecision]">
             <div className="mb-7 flex items-center justify-center gap-4" data-reveal>
               <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
               <span className="h-px w-10 bg-neon/60" />
               <span className="label">Business × Creativity × Technology</span>
             </div>
-            <div className="mx-auto max-w-[22ch]">
-              <SplitHeading
-                text="Build what moves business forward."
-                className="display-xl text-foreground !text-[clamp(2.4rem,5.2vw,5.4rem)]"
-              />
-            </div>
+            <h1 className="display-xl mx-auto max-w-[30ch] text-foreground !text-[clamp(1.9rem,4vw,3.9rem)] !leading-[1.02]">
+              {["Build what moves", "business forward."].map((line, li) => (
+                <span key={line} className="block overflow-hidden">
+                  <span className="inline-block whitespace-nowrap" data-reveal data-reveal-delay={li * 140}>
+                    {line}
+                  </span>
+                </span>
+              ))}
+            </h1>
             <p
               className="mx-auto mt-8 max-w-[52ch] text-sm leading-relaxed text-muted-foreground md:text-base"
               data-reveal
