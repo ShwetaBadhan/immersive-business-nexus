@@ -48,7 +48,7 @@ export function Nav() {
           <span className="label hidden md:inline">The Business Developer LLP</span>
         </Link>
 
-        <nav className="pointer-events-auto hidden items-center gap-8 md:flex">
+        <nav className="pointer-events-auto hidden items-center gap-10 md:flex">
           {LINKS.map((l) => (
             <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
           ))}

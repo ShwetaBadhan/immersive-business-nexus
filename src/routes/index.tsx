@@ -150,7 +150,7 @@ function Home() {
           <div className="mx-auto max-w-6xl">
             <SectionMarker index="04" title="Selected case studies" />
             <p className="label mb-14 max-w-[40ch]" data-reveal>
-              Drag the world · click a panel to enter a project
+              Selected engagements across strategy, brand, digital and growth
             </p>
             <div className="grid gap-x-10 gap-y-16 md:grid-cols-2">
               {PROJECTS.slice(0, 4).map((p, i) => (
