@@ -21,7 +21,7 @@ export function SectionBackdrop({ label }: { label?: string }) {
       <span className="absolute left-[58%] top-[38%] h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/40" />
 
       {label && (
-        <span className="absolute -right-2 bottom-6 select-none font-display text-[22vw] leading-none text-foreground/[0.035] md:text-[14vw]">
+        <span className="absolute -left-3 bottom-2 select-none font-display text-[22vw] leading-none text-foreground/[0.035] md:text-[14vw]">
           {label}
         </span>
       )}
