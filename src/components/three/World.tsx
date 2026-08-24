@@ -95,64 +95,23 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
 /* ---------------- per-route scene ---------------- */
 
 function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | "low" }) {
-  const navigate = useNavigate();
   const focus = useWorld((s) => s.focus);
-  const contactBurst = useWorld((s) => s.veil > 0.9);
 
-  const count = quality === "high" ? 4600 : 1500;
+  const count = quality === "high" ? 2600 : 1100;
+  const ambient = variant === "home" || variant === "work";
 
   return (
     <>
       <Atmosphere quality={quality} />
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
+      {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
 
-      {variant === "home" && (
-        <>
-          <HeroCore
-            quality={quality}
-            onOpen={() => navigate({ to: "/case-studies" })}
-          />
-          <GlassForms specs={HOME_GLASS} quality={quality} />
-          <Monoliths count={quality === "high" ? 9 : 5} />
-        </>
-      )}
+      <EffectComposer enableNormalPass={false}>
+        <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
+        <Vignette eskil={false} offset={0.44} darkness={0.1} />
+      </EffectComposer>
 
-      {variant === "about" && (
-        <>
-          <NodeNetwork nodes={quality === "high" ? 30 : 18} />
-          <Monoliths count={quality === "high" ? 9 : 5} />
-        </>
-      )}
-
-      {variant === "services" && (
-        <>
-          <ServiceUniverse quality={quality} />
-          <OrganicCore detail={quality === "high" ? 30 : 16} scale={0.9} amp={0.26} position={[0, 0, -1]} />
-        </>
-      )}
-
-      {variant === "work" && (
-        <>
-          <ProjectRing onOpen={(slug) => navigate({ to: "/case-studies/$slug", params: { slug } })} />
-          <OrganicCore detail={quality === "high" ? 26 : 14} scale={0.62} amp={0.3} position={[0, 0, -1]} />
-        </>
-      )}
-
-      {variant === "project" && <CalmField />}
-      {variant === "contact" && <ContactWorld burst={contactBurst} />}
-
-      {quality === "high" ? (
-        <EffectComposer enableNormalPass={false}>
-          <Bloom intensity={0.22} luminanceThreshold={0.82} luminanceSmoothing={0.4} mipmapBlur radius={0.5} />
-          <Vignette eskil={false} offset={0.4} darkness={0.18} />
-        </EffectComposer>
-      ) : (
-        <EffectComposer enableNormalPass={false}>
-          <Bloom intensity={0.18} luminanceThreshold={0.85} luminanceSmoothing={0.4} mipmapBlur />
-          <Vignette offset={0.42} darkness={0.14} />
-        </EffectComposer>
-      )}
       <AdaptiveDpr pixelated={false} />
       <Preload all />
     </>
