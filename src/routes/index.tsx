@@ -3,6 +3,8 @@ import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { HeroBackdrop } from "@/components/site/HeroBackdrop";
+import { ScrollScene } from "@/components/site/ScrollScene";
+
 
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 
@@ -92,9 +94,11 @@ function Home() {
 
 
         {/* 02 — INTRODUCTION */}
-        <section className="min-h-svh px-5 py-32 md:px-10">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative min-h-svh px-5 py-32 md:px-10">
+          <ScrollScene kind="momentum" />
+          <div className="relative z-10 mx-auto max-w-6xl">
             <SectionMarker index="02" title="Introduction" />
+
             <SplitHeading
               as="h2"
               text="We turn ideas into business momentum."
@@ -124,8 +128,10 @@ function Home() {
         </section>
 
         {/* 03 — WHAT WE DO */}
-        <section className="px-5 py-24 md:px-10 md:py-32">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative px-5 py-24 md:px-10 md:py-32">
+          <ScrollScene kind="practices" />
+          <div className="relative z-10 mx-auto max-w-6xl">
+
             <SectionMarker index="03" title="What we do" />
             <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <SplitHeading
@@ -188,8 +194,10 @@ function Home() {
 
 
         {/* 04 — SELECTED CASE STUDIES */}
-        <section className="min-h-svh px-5 py-32 md:px-10">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative min-h-svh px-5 py-32 md:px-10">
+          <ScrollScene kind="trajectory" />
+          <div className="relative z-10 mx-auto max-w-6xl">
+
             <SectionMarker index="04" title="Selected case studies" />
             <p className="label mb-14 max-w-[40ch]" data-reveal>
               Selected engagements across strategy, brand, digital and growth
@@ -227,8 +235,10 @@ function Home() {
         </section>
 
         {/* 05 — PHILOSOPHY */}
-        <section className="flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
-          <div className="mx-auto w-full max-w-6xl">
+        <section className="relative flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
+          <ScrollScene kind="alignment" />
+          <div className="relative z-10 mx-auto w-full max-w-6xl">
+
             <SectionMarker index="05" title="239 Philosophy" />
             {["Think different.", "Build better.", "Move forward."].map((line, i) => (
               <h2
@@ -245,12 +255,15 @@ function Home() {
         </section>
 
         {/* 06 — FINAL CTA */}
-        <section className="flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+        <section className="relative flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+          <ScrollScene kind="arrival" />
+          <div className="relative z-10 flex w-full flex-col items-center">
           <SplitHeading
             as="h2"
             text="Let's build something that moves."
             className="display-lg max-w-[20ch] text-foreground"
           />
+
           <div className="mt-14" data-reveal data-reveal-delay={320}>
             <Action to="/contact" label="Start">
               Start a project
@@ -260,7 +273,9 @@ function Home() {
             <span className="label">239 The Business Developer LLP</span>
             <span className="label">India</span>
           </div>
+          </div>
         </section>
+
       </Overlay>
     </>
   );
