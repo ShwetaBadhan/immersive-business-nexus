@@ -2,19 +2,20 @@ import "./r3f-devtag-patch";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, Preload } from "@react-three/drei";
-import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
+import { EffectComposer, Bloom, Vignette, DepthOfField, Noise } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 import * as THREE from "three";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
 import { Monoliths } from "./worlds";
-import { GrowthNetwork } from "./GrowthNetwork";
+import { HeroEnvironment } from "./HeroEnvironment";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
 
 const RIGS: Record<WorldVariant, { from: THREE.Vector3Tuple; to: THREE.Vector3Tuple; fov: number }> = {
-  home: { from: [0, 0, 8.2], to: [0, 1.4, -9], fov: 42 },
+  home: { from: [0, 0.15, 9.2], to: [0, 1.6, -8.5], fov: 40 },
   about: { from: [0, 0.4, 9.4], to: [0, -1.2, -6.5], fov: 46 },
   services: { from: [0, 0.2, 10.5], to: [0, 0.8, 1.5], fov: 48 },
   work: { from: [0, 0.3, 11.5], to: [0, -0.6, 2.2], fov: 50 },
@@ -37,10 +38,10 @@ function Rig({ variant, focus }: { variant: WorldVariant; focus: number }) {
   }, [variant, camera]);
 
   useFrame((_, dt) => {
-    const k = Math.min(1, dt * 8);
-    live.smoothX += (live.pointerX - live.smoothX) * k * 0.9;
-    live.smoothY += (live.pointerY - live.smoothY) * k * 0.9;
-    live.dragX *= 0.9;
+    const k = Math.min(1, dt * 14);
+    live.smoothX += (live.pointerX - live.smoothX) * k;
+    live.smoothY += (live.pointerY - live.smoothY) * k;
+    live.dragX *= 0.88;
 
     smoothProgress.current += (live.progress - smoothProgress.current) * 0.11;
     const p = smoothProgress.current;
@@ -49,15 +50,15 @@ function Rig({ variant, focus }: { variant: WorldVariant; focus: number }) {
     // ease the flight path so the world opens up rather than sliding linearly
     const e = p * p * (3 - 2 * p);
     target.set(
-      THREE.MathUtils.lerp(rig.from[0], rig.to[0], e) + live.smoothX * 0.85,
-      THREE.MathUtils.lerp(rig.from[1], rig.to[1], e) + live.smoothY * 0.55,
+      THREE.MathUtils.lerp(rig.from[0], rig.to[0], e) + live.smoothX * 1.15 - live.orbitX * 0.9,
+      THREE.MathUtils.lerp(rig.from[1], rig.to[1], e) + live.smoothY * 0.7 + live.orbitY * 0.7,
       THREE.MathUtils.lerp(rig.from[2], rig.to[2], e) - (focus >= 0 ? 1.6 : 0),
     );
-    camera.position.lerp(target, 0.1);
+    camera.position.lerp(target, Math.min(1, dt * 6));
 
-    look.set(live.smoothX * 0.9, live.smoothY * 0.6 - p * 0.6, -4);
+    look.set(live.smoothX * 1.1 - live.orbitX * 0.5, live.smoothY * 0.7 - p * 0.6, -4);
     camera.lookAt(look);
-    camera.rotation.z = THREE.MathUtils.lerp(camera.rotation.z, live.smoothX * -0.035, 0.05);
+    camera.rotation.z = THREE.MathUtils.lerp(camera.rotation.z, live.smoothX * -0.03, 0.1);
   });
 
   return null;
@@ -108,11 +109,17 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
       {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
-      {variant === "home" && <GrowthNetwork quality={quality} />}
+      {variant === "home" && <HeroEnvironment quality={quality} />}
 
       <EffectComposer enableNormalPass={false}>
-        <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
-        <Vignette eskil={false} offset={0.44} darkness={0.1} />
+        <Bloom intensity={0.16} luminanceThreshold={0.86} luminanceSmoothing={0.4} mipmapBlur />
+        {variant === "home" && quality === "high" ? (
+          <DepthOfField focusDistance={0.012} focalLength={0.05} bokehScale={2.4} height={480} />
+        ) : (
+          <></>
+        )}
+        <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.16} />
+        <Vignette eskil={false} offset={0.42} darkness={0.12} />
       </EffectComposer>
 
       <AdaptiveDpr pixelated={false} />
