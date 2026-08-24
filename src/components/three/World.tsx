@@ -1,8 +1,7 @@
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, Preload } from "@react-three/drei";
-import { EffectComposer, Bloom, Noise, Vignette, DepthOfField } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
+import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { useNavigate } from "@tanstack/react-router";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
@@ -13,6 +12,8 @@ import {
   GlassForms,
   HOME_GLASS,
   Monoliths,
+  CalmField,
+  HeroCore,
   NodeNetwork,
   OrganicCore,
   ProjectRing,
@@ -82,7 +83,7 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
     const t = state.clock.elapsedTime;
     if (key.current) {
       key.current.position.set(Math.sin(t * 0.18) * 5 + live.smoothX * 2, 3.2, 4 + Math.cos(t * 0.14) * 2);
-      key.current.intensity = 42 + Math.sin(t * 0.5) * 6;
+      key.current.intensity = 26 + Math.sin(t * 0.5) * 4;
     }
     if (rim.current) {
       rim.current.position.set(-5 + live.smoothX * -2, -2.4 + live.smoothY * 2, -5);
@@ -92,12 +93,13 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
   return (
     <>
       <color attach="background" args={[COL.deep]} />
-      <fogExp2 attach="fog" args={[COL.deep, quality === "high" ? 0.055 : 0.07]} />
-      <ambientLight intensity={0.35} color={COL.forest} />
-      <hemisphereLight intensity={0.4} color={COL.neon} groundColor={COL.deep} />
-      <pointLight ref={key} color={COL.neon} intensity={42} distance={30} decay={1.6} />
-      <pointLight ref={rim} color={COL.glow} intensity={26} distance={24} decay={1.8} />
-      <directionalLight position={[4, 6, 6]} intensity={0.7} color={COL.glow} />
+      <fogExp2 attach="fog" args={[COL.deep, quality === "high" ? 0.032 : 0.045]} />
+      <ambientLight intensity={1.15} color={COL.deep} />
+      <hemisphereLight intensity={0.9} color={COL.deep} groundColor={COL.moss} />
+      <pointLight ref={key} color={COL.neon} intensity={26} distance={30} decay={1.6} />
+      <pointLight ref={rim} color={COL.glow} intensity={14} distance={24} decay={1.8} />
+      <directionalLight position={[4, 6, 6]} intensity={1.6} color={COL.text} />
+      <directionalLight position={[-5, -2, 3]} intensity={0.5} color={COL.brand} />
     </>
   );
 }
@@ -119,9 +121,12 @@ function Scene({ variant, quality, hue }: { variant: WorldVariant; quality: "hig
 
       {variant === "home" && (
         <>
-          <OrganicCore detail={quality === "high" ? 44 : 20} scale={1.15} amp={0.3} />
+          <HeroCore
+            quality={quality}
+            onOpen={() => navigate({ to: "/case-studies" })}
+          />
           <GlassForms specs={HOME_GLASS} quality={quality} />
-          <Monoliths count={quality === "high" ? 11 : 6} />
+          <Monoliths count={quality === "high" ? 9 : 5} />
         </>
       )}
 
@@ -146,20 +151,18 @@ function Scene({ variant, quality, hue }: { variant: WorldVariant; quality: "hig
         </>
       )}
 
-      {variant === "project" && <ProjectWorld hue={hue} />}
+      {variant === "project" && <CalmField />}
       {variant === "contact" && <ContactWorld burst={contactBurst} />}
 
       {quality === "high" ? (
         <EffectComposer enableNormalPass={false}>
-          <DepthOfField focusDistance={0.012} focalLength={0.05} bokehScale={2.2} height={480} />
-          <Bloom intensity={0.85} luminanceThreshold={0.24} luminanceSmoothing={0.5} mipmapBlur radius={0.72} />
-          <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.35} />
-          <Vignette eskil={false} offset={0.24} darkness={0.92} />
+          <Bloom intensity={0.22} luminanceThreshold={0.82} luminanceSmoothing={0.4} mipmapBlur radius={0.5} />
+          <Vignette eskil={false} offset={0.4} darkness={0.18} />
         </EffectComposer>
       ) : (
         <EffectComposer enableNormalPass={false}>
-          <Bloom intensity={0.6} luminanceThreshold={0.3} luminanceSmoothing={0.5} mipmapBlur />
-          <Vignette offset={0.28} darkness={0.9} />
+          <Bloom intensity={0.18} luminanceThreshold={0.85} luminanceSmoothing={0.4} mipmapBlur />
+          <Vignette offset={0.42} darkness={0.14} />
         </EffectComposer>
       )}
       <AdaptiveDpr pixelated={false} />
@@ -176,9 +179,9 @@ export default function World({ variant, hue = 0.45 }: { variant: WorldVariant; 
   return (
     <div className="fixed inset-0 z-0">
       <Canvas
-        dpr={quality === "high" ? [1, 1.75] : [0.75, 1.1]}
+        dpr={quality === "high" ? [1, 2] : [0.75, 1.2]}
         gl={{
-          antialias: false,
+          antialias: true,
           powerPreference: "high-performance",
           alpha: false,
           toneMapping: THREE.ACESFilmicToneMapping,

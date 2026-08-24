@@ -148,7 +148,7 @@ void main(){
   alpha *= vFade;
   if (alpha < 0.01) discard;
   vec3 col = mix(uNeon, uGlow, step(0.86, vSeed));
-  gl_FragColor = vec4(col, alpha * (0.32 + vSeed * 0.5));
+  gl_FragColor = vec4(col, alpha * (0.14 + vSeed * 0.26));
 }
 `;
 
