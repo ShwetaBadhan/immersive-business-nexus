@@ -107,6 +107,7 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
       <Atmosphere quality={quality} />
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
+      {variant !== "project" && <SectionForms quality={quality} />}
       {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
 
       <EffectComposer enableNormalPass={false}>
