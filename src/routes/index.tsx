@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
+import { HeroDiagram } from "@/components/site/HeroDiagram";
+
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 
 import { cursorProps } from "@/components/experience/Cursor";
@@ -32,23 +34,59 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="flex min-h-svh flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
-          <div className="max-w-[16ch]">
-            <SplitHeading text="Build what moves business forward." className="display-xl text-foreground" />
-          </div>
-          <div className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-[46ch] text-sm leading-relaxed text-muted-foreground md:text-base" data-reveal data-reveal-delay={500}>
-              239 The Business Developer LLP creates strategic, digital and creative solutions that help
-              ambitious businesses grow, connect and stand apart.
-            </p>
-            <div className="flex flex-col items-start gap-8 md:items-end" data-reveal data-reveal-delay={620}>
-              <Action to="/about" label="Explore">
-                Explore 239
-              </Action>
-              <ScrollHint />
+        <section className="relative flex min-h-svh flex-col justify-between px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
+          <div className="grid flex-1 items-center gap-12 md:grid-cols-12">
+            {/* headline column */}
+            <div className="md:col-span-7 lg:col-span-6">
+              <div className="mb-7 flex items-center gap-4" data-reveal>
+                <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
+                <span className="h-px w-10 bg-neon/60" />
+                <span className="label">Business × Creativity × Technology</span>
+              </div>
+              <div className="max-w-[15ch]">
+                <SplitHeading
+                  text="Build what moves business forward."
+                  className="display-xl text-foreground !text-[clamp(2.5rem,5.4vw,5.6rem)]"
+                />
+              </div>
+              <p
+                className="mt-8 max-w-[44ch] text-sm leading-relaxed text-muted-foreground md:text-base"
+                data-reveal
+                data-reveal-delay={500}
+              >
+                239 The Business Developer LLP creates strategic, digital and creative solutions that help
+                ambitious businesses grow, connect and stand apart.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6" data-reveal data-reveal-delay={620}>
+                <Action to="/about" label="Explore">
+                  Explore 239
+                </Action>
+                <ScrollHint />
+              </div>
+            </div>
+
+            {/* 3D composition column — labels only, the network lives in WebGL */}
+            <div className="relative hidden min-h-[30rem] md:col-span-5 md:block lg:col-span-6">
+              <HeroDiagram />
             </div>
           </div>
+
+          {/* hero footer strip — ties the composition to the page */}
+          <div className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
+            {[
+              { k: "Practices", v: "Six" },
+              { k: "Continents of work", v: "Three" },
+              { k: "Years of momentum", v: "Nine" },
+              { k: "Based in", v: "India" },
+            ].map((s) => (
+              <div key={s.k} className="flex flex-col gap-2">
+                <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
+                <span className="label !tracking-[0.18em]">{s.k}</span>
+              </div>
+            ))}
+          </div>
         </section>
+
 
         {/* 02 — INTRODUCTION */}
         <section className="min-h-svh px-5 py-32 md:px-10">

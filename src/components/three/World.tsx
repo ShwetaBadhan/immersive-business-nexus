@@ -7,6 +7,7 @@ import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
 import { Monoliths } from "./worlds";
+import { GrowthNetwork } from "./GrowthNetwork";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
@@ -98,7 +99,7 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
   const focus = useWorld((s) => s.focus);
 
   const count = quality === "high" ? 2600 : 1100;
-  const ambient = variant === "home" || variant === "work";
+  const ambient = variant === "work";
 
   return (
     <>
@@ -106,6 +107,7 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
       {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
+      {variant === "home" && <GrowthNetwork quality={quality} />}
 
       <EffectComposer enableNormalPass={false}>
         <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
