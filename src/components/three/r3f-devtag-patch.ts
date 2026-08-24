@@ -3,30 +3,39 @@ import * as THREE from "three";
 /**
  * The dev-time JSX source tagger injects `data-tsd-source` on every JSX element,
  * including react-three-fiber elements. R3F treats dashed props as nested paths
- * (`object.data.tsd.source`) and throws "Cannot set data-tsd-source" on update.
+ * (`object.data.tsd.source`) and throws "Cannot set data-tsd-source" unless the
+ * whole dashed key already exists on the target (`key in root`).
  *
- * Declaring the key on the three.js prototypes makes R3F resolve it as a plain
- * property assignment instead of a nested path, so the tag is harmlessly stored.
+ * So we declare those keys everywhere they could land: every three.js class
+ * prototype (Object3D, Material, Geometry, Color, Fog, Texture, ...) plus a
+ * final Object.prototype fallback for anything constructed elsewhere.
  */
-const DEV_TAGS = ["data-tsd-source"];
+const DEV_TAGS = ["data-tsd-source", "data-lov-id", "data-lov-name", "data-component-path"];
 
-const prototypes: object[] = [
-  THREE.Object3D.prototype,
-  THREE.Material.prototype,
-  THREE.BufferGeometry.prototype,
-  THREE.Texture.prototype,
-];
-
-for (const proto of prototypes) {
+function declare(target: object) {
   for (const tag of DEV_TAGS) {
-    if (tag in proto) continue;
-    Object.defineProperty(proto, tag, {
-      value: undefined,
-      writable: true,
-      configurable: true,
-      enumerable: false,
-    });
+    if (Object.prototype.hasOwnProperty.call(target, tag)) continue;
+    try {
+      Object.defineProperty(target, tag, {
+        value: undefined,
+        writable: true,
+        configurable: true,
+        enumerable: false,
+      });
+    } catch {
+      /* frozen prototype — ignore */
+    }
   }
 }
+
+// every three.js constructor prototype
+for (const value of Object.values(THREE as unknown as Record<string, unknown>)) {
+  if (typeof value === "function" && (value as { prototype?: object }).prototype) {
+    declare((value as { prototype: object }).prototype);
+  }
+}
+
+// catch-all for objects created outside the three namespace
+declare(Object.prototype);
 
 export {};
