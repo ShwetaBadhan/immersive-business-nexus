@@ -3,22 +3,11 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, Preload } from "@react-three/drei";
 import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
-import { useNavigate } from "@tanstack/react-router";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
-import {
-  ContactWorld,
-  GlassForms,
-  HOME_GLASS,
-  Monoliths,
-  CalmField,
-  HeroCore,
-  NodeNetwork,
-  OrganicCore,
-  ProjectRing,
-  ServiceUniverse,
-} from "./worlds";
+import { Monoliths } from "./worlds";
+
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
 
