@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 import { SectionBackdrop } from "@/components/site/SectionBackdrop";
+import { NetworkVisual } from "@/components/site/Visual3D";
 import { Action, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 
 const TITLE = "About 239 — We Build Momentum";
@@ -57,9 +58,29 @@ function About() {
           </div>
         </section>
 
+        <section className="px-5 py-32 md:px-10">
+          <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <SectionMarker index="01" title="How we connect" />
+              <SplitHeading
+                as="h2"
+                text="People, ideas and businesses, wired together."
+                className="display-md max-w-[20ch] text-foreground"
+              />
+              <p className="mt-8 max-w-[42ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={180}>
+                Every engagement is a network: the people who decide, the ideas that move them and the systems
+                that carry it. We design the whole structure, not a single node.
+              </p>
+            </div>
+            <div className="md:col-span-6 md:col-start-7" data-reveal data-reveal-delay={240}>
+              <NetworkVisual />
+            </div>
+          </div>
+        </section>
+
         <section className="min-h-svh px-5 py-32 md:px-10">
           <div className="mx-auto max-w-6xl">
-            <SectionMarker index="01" title="Our approach" />
+            <SectionMarker index="02" title="Our approach" />
             <div className="grid gap-px border border-border md:grid-cols-2">
               {APPROACH.map((a, i) => (
                 <div
@@ -88,7 +109,7 @@ function About() {
 
         <section className="flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
           <div className="mx-auto w-full max-w-6xl">
-            <SectionMarker index="02" title="Our mindset" />
+            <SectionMarker index="03" title="Our mindset" />
             {MINDSET.map((m, i) => (
               <h2
                 key={m}
@@ -105,7 +126,7 @@ function About() {
 
         <section className="min-h-svh px-5 py-32 md:px-10">
           <div className="mx-auto max-w-6xl">
-            <SectionMarker index="03" title="The journey" />
+            <SectionMarker index="04" title="The journey" />
             <ol className="relative ml-3 border-l border-neon/25 pl-8 md:ml-6 md:pl-14">
               {JOURNEY.map((j, i) => (
                 <li key={j.year} className="relative pb-16 last:pb-0" data-reveal data-reveal-delay={i * 110}>

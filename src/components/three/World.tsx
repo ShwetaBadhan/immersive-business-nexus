@@ -7,8 +7,6 @@ import * as THREE from "three";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
-import { Monoliths } from "./worlds";
-import { SectionForms } from "./SectionForms";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
@@ -100,15 +98,12 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
   const focus = useWorld((s) => s.focus);
 
   const count = quality === "high" ? 2600 : 1100;
-  const ambient = variant === "work";
 
   return (
     <>
       <Atmosphere quality={quality} />
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
-      {variant !== "project" && <SectionForms quality={quality} />}
-      {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
 
       <EffectComposer enableNormalPass={false}>
         <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
