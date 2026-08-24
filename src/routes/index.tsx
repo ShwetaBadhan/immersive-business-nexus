@@ -92,9 +92,11 @@ function Home() {
 
 
         {/* 02 — INTRODUCTION */}
-        <section className="min-h-svh px-5 py-32 md:px-10">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative min-h-svh px-5 py-32 md:px-10">
+          <ScrollScene kind="momentum" />
+          <div className="relative z-10 mx-auto max-w-6xl">
             <SectionMarker index="02" title="Introduction" />
+
             <SplitHeading
               as="h2"
               text="We turn ideas into business momentum."
