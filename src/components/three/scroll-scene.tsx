@@ -124,7 +124,7 @@ export function Flight({
     g.scale.lerp(target.set(s, s, s), k * 0.35);
 
     // fade at the edges of the travel so nothing ever pops in or out
-    const o = 0.15 + f * 0.85;
+    const o = 0.4 + f * 0.6;
     g.traverse((c) => {
       const m = (c as THREE.Mesh).material as THREE.Material & { opacity?: number };
       if (m && m.transparent) m.opacity = (m.userData["baseOpacity"] ?? 1) * o;
@@ -327,11 +327,11 @@ export function DepthDust({ count = 60, depth = 9 }: { count?: number; depth?: n
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.016}
+        size={0.026}
         sizeAttenuation
         color={COL.brand}
         transparent
-        opacity={0.3}
+        opacity={0.45}
         depthWrite={false}
       />
     </points>
