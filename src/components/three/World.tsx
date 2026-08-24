@@ -1,3 +1,4 @@
+import "./r3f-devtag-patch";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AdaptiveDpr, Preload } from "@react-three/drei";
