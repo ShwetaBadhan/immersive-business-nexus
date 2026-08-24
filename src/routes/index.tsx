@@ -3,6 +3,7 @@ import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { HeroDiagram } from "@/components/site/HeroDiagram";
+import { HeroBackground } from "@/components/site/HeroBackground";
 
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 
