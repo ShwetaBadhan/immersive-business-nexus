@@ -8,6 +8,7 @@ import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
 import { Monoliths } from "./worlds";
+import { SectionForms } from "./SectionForms";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
@@ -106,6 +107,7 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
       <Atmosphere quality={quality} />
       <Rig variant={variant} focus={focus} />
       <ParticleField count={count} />
+      {variant !== "project" && <SectionForms quality={quality} />}
       {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
 
       <EffectComposer enableNormalPass={false}>
