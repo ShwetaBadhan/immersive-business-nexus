@@ -164,10 +164,12 @@ export function Monoliths({ count = 9 }: { count?: number }) {
           <boxGeometry args={[0.14, s.h, 1.1]} />
           <meshStandardMaterial
             color={COL.moss}
-            metalness={0.92}
-            roughness={0.26}
+            metalness={0.55}
+            roughness={0.35}
+            transparent
+            opacity={0.5}
             emissive={COL.brand}
-            emissiveIntensity={0.22}
+            emissiveIntensity={0.06}
           />
         </mesh>
       ))}
@@ -593,10 +595,10 @@ export function HeroCore({
     if (g) {
       g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, live.smoothX * 0.5 + t * 0.06, 0.05);
       g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, live.smoothY * -0.28, 0.05);
-      g.position.y = 0.85 + Math.sin(t * 0.35) * 0.1;
-      g.position.x = 1.6;
+      g.position.y = 0.45 + Math.sin(t * 0.35) * 0.1;
+      g.position.x = 1.15;
       g.position.z = live.progress * 5.5;
-      const target = (hover ? 1.06 : 1) * 0.3;
+      const target = (hover ? 1.06 : 1) * 0.46;
       g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, target * (1 - live.progress * 0.12), 0.07));
     }
     if (core.current) core.current.rotation.y += dt * 0.16;
