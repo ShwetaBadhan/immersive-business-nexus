@@ -235,8 +235,10 @@ function Home() {
         </section>
 
         {/* 05 — PHILOSOPHY */}
-        <section className="flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
-          <div className="mx-auto w-full max-w-6xl">
+        <section className="relative flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
+          <ScrollScene kind="alignment" />
+          <div className="relative z-10 mx-auto w-full max-w-6xl">
+
             <SectionMarker index="05" title="239 Philosophy" />
             {["Think different.", "Build better.", "Move forward."].map((line, i) => (
               <h2
