@@ -130,7 +130,7 @@
   }
 
   ::selection {
-    background: oklch(0.7316 0.1714 156.53 / 30%);
+    background: oklch(0.6248 0.1268 157.8 / 26%);
   }
 
   h1,
@@ -220,8 +220,8 @@
   width: 100%;
   background: linear-gradient(
     to right,
-    oklch(0.7316 0.1714 156.53 / 45%),
-    oklch(0.9705 0.0082 157.09 / 0%)
+    oklch(0.4562 0.0975 159.2 / 45%),
+    oklch(0.2312 0.0344 165.2 / 0%)
   );
 }
 
@@ -255,7 +255,7 @@
     inset: -50%;
     pointer-events: none;
     z-index: 60;
-    opacity: 0.035;
+    opacity: 0.022;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 0.9s steps(3) infinite;
   }
