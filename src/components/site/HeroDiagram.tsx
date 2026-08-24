@@ -14,20 +14,16 @@ type Label = {
 };
 
 const LABELS: Label[] = [
-  { text: "Strategy", x: 6, y: 16, side: "right", delay: 700 },
-  { text: "Digital", x: 68, y: 26, side: "left", delay: 780 },
-  { text: "Connection", x: 4, y: 50, side: "right", delay: 860 },
-  { text: "Growth", x: 66, y: 74, side: "left", delay: 940 },
-  { text: "Business", x: 10, y: 86, side: "right", delay: 1020 },
+  { text: "Strategy", x: 3, y: 14, side: "right", delay: 560 },
+  { text: "Digital", x: 88, y: 22, side: "left", delay: 620 },
+  { text: "Connection", x: 2, y: 48, side: "right", delay: 680 },
+  { text: "Growth", x: 90, y: 62, side: "left", delay: 740 },
+  { text: "Business", x: 4, y: 84, side: "right", delay: 800 },
 ];
 
 export function HeroDiagram() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
-      {/* quiet framing lines */}
-      <span className="absolute left-1/2 top-6 h-[calc(100%-3rem)] w-px -translate-x-1/2 bg-border" />
-      <span className="absolute left-8 right-8 top-1/2 h-px bg-border" />
-
       {LABELS.map((l) => (
         <div
           key={l.text}

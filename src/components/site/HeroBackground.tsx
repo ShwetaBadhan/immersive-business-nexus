@@ -29,22 +29,22 @@ export function HeroBackground() {
 
     const tick = () => {
       // inertia
-      smooth.x += (target.x - smooth.x) * 0.045;
-      smooth.y += (target.y - smooth.y) * 0.045;
+      smooth.x += (target.x - smooth.x) * 0.16;
+      smooth.y += (target.y - smooth.y) * 0.16;
 
       // background shifts opposite the cursor, layers move at different depths
       if (back.current) {
-        back.current.style.transform = `scale(1.1) translate3d(${smooth.x * -26}px, ${smooth.y * -16}px, 0) rotateY(${smooth.x * -2}deg)`;
+        back.current.style.transform = `scale(1.08) translate3d(${smooth.x * -34}px, ${smooth.y * -20}px, 0)`;
       }
       if (mid.current) {
-        mid.current.style.transform = `translate3d(${smooth.x * -52}px, ${smooth.y * -28}px, 0)`;
+        mid.current.style.transform = `translate3d(${smooth.x * -60}px, ${smooth.y * -34}px, 0)`;
       }
       if (front.current) {
-        front.current.style.transform = `translate3d(${smooth.x * 74}px, ${smooth.y * 40}px, 0)`;
+        front.current.style.transform = `translate3d(${smooth.x * 52}px, ${smooth.y * 28}px, 0)`;
       }
       if (light.current) {
-        light.current.style.transform = `translate3d(${smooth.x * 160}px, ${smooth.y * 120}px, 0)`;
-        light.current.style.opacity = String(0.18 + Math.abs(smooth.x) * 0.22);
+        light.current.style.transform = `translate3d(${smooth.x * 200}px, ${smooth.y * 150}px, 0)`;
+        light.current.style.opacity = String(0.16 + Math.abs(smooth.x) * 0.18);
       }
       raf = requestAnimationFrame(tick);
     };
@@ -72,7 +72,7 @@ export function HeroBackground() {
           width={1920}
           height={1280}
           className="h-full w-full object-cover opacity-[0.95]"
-          style={{ filter: "saturate(1.05) contrast(1.06) blur(0.6px)", objectPosition: "34% center" }}
+          style={{ filter: "saturate(1.05) contrast(1.06)", objectPosition: "34% center" }}
         />
       </div>
 
@@ -121,7 +121,7 @@ export function HeroBackground() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 88%, transparent) 26%, color-mix(in oklab, var(--background) 40%, transparent) 55%, color-mix(in oklab, var(--background) 8%, transparent) 100%)",
+            "radial-gradient(58% 52% at 50% 50%, color-mix(in oklab, var(--background) 86%, transparent) 0%, color-mix(in oklab, var(--background) 60%, transparent) 48%, color-mix(in oklab, var(--background) 18%, transparent) 78%, transparent 100%)",
         }}
       />
       <div

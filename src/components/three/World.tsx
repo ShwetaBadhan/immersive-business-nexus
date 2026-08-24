@@ -37,12 +37,12 @@ function Rig({ variant, focus }: { variant: WorldVariant; focus: number }) {
   }, [variant, camera]);
 
   useFrame((_, dt) => {
-    const k = Math.min(1, dt * 3.4);
-    live.smoothX += (live.pointerX - live.smoothX) * k * 0.35;
-    live.smoothY += (live.pointerY - live.smoothY) * k * 0.35;
+    const k = Math.min(1, dt * 8);
+    live.smoothX += (live.pointerX - live.smoothX) * k * 0.9;
+    live.smoothY += (live.pointerY - live.smoothY) * k * 0.9;
     live.dragX *= 0.9;
 
-    smoothProgress.current += (live.progress - smoothProgress.current) * 0.06;
+    smoothProgress.current += (live.progress - smoothProgress.current) * 0.11;
     const p = smoothProgress.current;
     const rig = RIGS[variant];
 
@@ -53,7 +53,7 @@ function Rig({ variant, focus }: { variant: WorldVariant; focus: number }) {
       THREE.MathUtils.lerp(rig.from[1], rig.to[1], e) + live.smoothY * 0.55,
       THREE.MathUtils.lerp(rig.from[2], rig.to[2], e) - (focus >= 0 ? 1.6 : 0),
     );
-    camera.position.lerp(target, 0.055);
+    camera.position.lerp(target, 0.1);
 
     look.set(live.smoothX * 0.9, live.smoothY * 0.6 - p * 0.6, -4);
     camera.lookAt(look);
