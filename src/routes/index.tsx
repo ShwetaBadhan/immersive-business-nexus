@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
+import { ServiceCard } from "@/components/site/ServiceCard";
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
+
 import { cursorProps } from "@/components/experience/Cursor";
 import { Link } from "@tanstack/react-router";
 import { playCue } from "@/lib/audio";
@@ -81,48 +83,74 @@ function Home() {
         </section>
 
         {/* 03 — WHAT WE DO */}
-        <section className="min-h-svh px-5 py-32 md:px-10">
+        <section className="px-5 py-24 md:px-10 md:py-32">
           <div className="mx-auto max-w-6xl">
             <SectionMarker index="03" title="What we do" />
-            <ul className="border-t border-border">
+            <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <SplitHeading
+                as="h2"
+                text="Six practices, one team."
+                className="display-lg max-w-[16ch] text-foreground"
+              />
+              <p className="max-w-[38ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={220}>
+                Each practice stands on its own. Most engagements combine two or three, run by the same senior team.
+              </p>
+            </div>
+
+            <div className="grid gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
               {SERVICES.map((s, i) => (
-                <li key={s.id} data-reveal data-reveal-delay={i * 70}>
-                  <Link
-                    to="/services"
-                    {...cursorProps("Explore")}
-                    onPointerEnter={() => {
-                      cursorProps("Explore").onPointerEnter();
-                      playCue("hover");
-                    }}
-                    onClick={() => playCue("click")}
-                    className="pointer-events-auto group flex items-baseline gap-5 border-b border-border py-6 transition-colors duration-500 md:gap-10 md:py-8"
-                  >
-                    <span className="font-mono text-[0.6rem] text-neon">{s.index}</span>
-                    <span className="display-md flex-1 text-foreground transition-all duration-700 ease-out group-hover:translate-x-2 group-hover:text-glow">
-                      {s.title}
-                    </span>
-                    <span className="hidden max-w-[30ch] text-xs text-muted-foreground opacity-0 transition-opacity duration-700 group-hover:opacity-100 md:block">
-                      {s.short}
-                    </span>
-                    <span className="label opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100">
-                      Explore →
-                    </span>
-                  </Link>
-                </li>
+                <ServiceCard key={s.id} service={s} delay={i * 80} />
               ))}
-            </ul>
-            <div className="mt-16">
+            </div>
+
+            {/* approach / value */}
+            <div className="mt-32 grid gap-14 border-t border-border pt-16 md:grid-cols-12">
+              <div className="md:col-span-5">
+                <span className="label">Our approach</span>
+                <SplitHeading
+                  as="h2"
+                  text="Business logic first. Craft always."
+                  className="display-md mt-6 max-w-[18ch] text-foreground"
+                />
+              </div>
+              <div className="md:col-span-7">
+                <p className="text-base leading-relaxed text-foreground md:text-lg" data-reveal>
+                  239 works where commercial strategy and creative execution meet. We start with the maths of the
+                  business — where demand sits, what it is worth, what stands in the way — and only then design
+                  the brand, product or campaign that moves it.
+                </p>
+                <p className="mt-6 max-w-[58ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={140}>
+                  Small senior team. Direct access to decision-makers. Evidence over opinion, and work that holds
+                  up in the market long after the launch.
+                </p>
+                <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3">
+                  {[
+                    { t: "Evidence-led", d: "Interviews, data and category study before direction." },
+                    { t: "Senior only", d: "The people who pitch are the people who build." },
+                    { t: "Built to last", d: "Systems and playbooks that survive handover." },
+                  ].map((v, i) => (
+                    <div key={v.t} data-reveal data-reveal-delay={i * 110}>
+                      <h3 className="text-sm font-medium text-foreground">{v.t}</h3>
+                      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{v.d}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-24">
               <Marquee items={HOME_DISCIPLINES} />
             </div>
           </div>
         </section>
+
 
         {/* 04 — SELECTED CASE STUDIES */}
         <section className="min-h-svh px-5 py-32 md:px-10">
           <div className="mx-auto max-w-6xl">
             <SectionMarker index="04" title="Selected case studies" />
             <p className="label mb-14 max-w-[40ch]" data-reveal>
-              Drag the world · click a panel to enter a project
+              Selected engagements across strategy, brand, digital and growth
             </p>
             <div className="grid gap-x-10 gap-y-16 md:grid-cols-2">
               {PROJECTS.slice(0, 4).map((p, i) => (
