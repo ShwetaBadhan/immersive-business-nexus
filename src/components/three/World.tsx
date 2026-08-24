@@ -17,7 +17,6 @@ import {
   NodeNetwork,
   OrganicCore,
   ProjectRing,
-  ProjectWorld,
   ServiceUniverse,
 } from "./worlds";
 
@@ -106,7 +105,7 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
 
 /* ---------------- per-route scene ---------------- */
 
-function Scene({ variant, quality, hue }: { variant: WorldVariant; quality: "high" | "low"; hue: number }) {
+function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | "low" }) {
   const navigate = useNavigate();
   const focus = useWorld((s) => s.focus);
   const contactBurst = useWorld((s) => s.veil > 0.9);
@@ -173,7 +172,7 @@ function Scene({ variant, quality, hue }: { variant: WorldVariant; quality: "hig
 
 /* ---------------- canvas shell ---------------- */
 
-export default function World({ variant, hue = 0.45 }: { variant: WorldVariant; hue?: number }) {
+export default function World({ variant }: { variant: WorldVariant; hue?: number }) {
   const quality = useWorld((s) => s.quality);
 
   return (
@@ -192,7 +191,7 @@ export default function World({ variant, hue = 0.45 }: { variant: WorldVariant; 
         }}
       >
         <Suspense fallback={null}>
-          <Scene variant={variant} quality={quality} hue={hue} />
+          <Scene variant={variant} quality={quality} />
         </Suspense>
       </Canvas>
     </div>
