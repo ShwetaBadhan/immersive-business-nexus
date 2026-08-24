@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
-import { Action, Overlay, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
+import { Action, Overlay } from "@/components/site/ui";
 import { getProject, nextProject } from "@/lib/site-data";
 import { cursorProps } from "@/components/experience/Cursor";
 
@@ -25,6 +25,8 @@ export const Route = createFileRoute("/case-studies/$slug")({
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },
@@ -45,6 +47,7 @@ function ProjectNotFound() {
   );
 }
 
+/** Editorial case-study reader: quiet motion, strong type, content first. */
 function CaseStudy() {
   const { project } = Route.useLoaderData();
   const next = nextProject(project.slug);
@@ -64,89 +67,123 @@ function CaseStudy() {
   ];
 
   return (
-    <>
-      <Telemetry tag={`239 / ${project.index}`} />
-      <Overlay>
-        <section className="flex min-h-svh flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
-          <SectionMarker index={project.index} title={project.category} />
-          <SplitHeading text={project.title} className="display-xl max-w-[14ch] text-foreground" />
-          <p className="mt-8 max-w-[46ch] text-sm leading-relaxed text-muted-foreground md:text-base" data-reveal data-reveal-delay={420}>
+    <Overlay>
+      <article className="pointer-events-auto mx-auto mb-0 mt-24 max-w-5xl border border-border bg-card/90 backdrop-blur-xl md:mt-28">
+        {/* header */}
+        <header className="px-6 pb-14 pt-16 md:px-14 md:pb-20 md:pt-24">
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="label !text-glow">{project.index}</span>
+            <span className="h-px w-8 bg-border" />
+            <span className="label">{project.category}</span>
+          </div>
+          <h1
+            className="display-lg mt-8 max-w-[18ch] text-foreground"
+            data-reveal
+          >
+            {project.title}
+          </h1>
+          <p
+            className="mt-8 max-w-[54ch] text-base leading-relaxed text-muted-foreground md:text-lg"
+            data-reveal
+            data-reveal-delay={120}
+          >
             {project.kicker}
           </p>
-        </section>
+        </header>
 
-        <section className="px-5 py-24 md:px-10">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
+        {/* large visual */}
+        <div
+          className="mx-6 h-[42svh] border border-border md:mx-14 md:h-[52svh]"
+          data-reveal
+          data-reveal-delay={160}
+          style={{
+            background: `linear-gradient(135deg,
+              oklch(0.9445 0.0132 152.3),
+              oklch(0.8358 0.0281 158.2) 55%,
+              oklch(0.6248 0.1268 157.8 / 55%))`,
+          }}
+        >
+          <div className="flex h-full items-end justify-between p-6 md:p-10">
+            <span className="font-display text-6xl uppercase leading-none tracking-[-0.05em] text-foreground/70 md:text-8xl">
+              239
+            </span>
+            <span className="label">{project.client}</span>
+          </div>
+        </div>
+
+        {/* overview */}
+        <section className="px-6 py-16 md:px-14 md:py-20">
+          <div className="grid grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
             {overview.map((o, i) => (
-              <div key={o.k} data-reveal data-reveal-delay={i * 90}>
+              <div key={o.k} data-reveal data-reveal-delay={i * 80}>
                 <span className="label">{o.k}</span>
-                <p className="mt-3 text-sm text-foreground">{o.v}</p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground">{o.v}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {chapters.map((c) => (
-          <section key={c.n} className="min-h-[70svh] px-5 py-24 md:px-10">
-            <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-12">
+        {/* chapters */}
+        <div className="px-6 md:px-14">
+          {chapters.map((c) => (
+            <section key={c.n} className="grid gap-6 border-t border-border py-14 md:grid-cols-12 md:gap-10">
               <div className="md:col-span-4">
-                <SectionMarker index={c.n} title={c.t} />
+                <span className="label !text-glow">{c.n}</span>
+                <h2 className="display-md mt-4 text-foreground">{c.t}</h2>
               </div>
               <p
-                className="text-base leading-relaxed text-muted-foreground md:col-span-7 md:text-xl md:leading-relaxed"
+                className="text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed"
                 data-reveal
-                data-reveal-delay={120}
               >
                 {c.b}
               </p>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
+        </div>
 
-        <section className="min-h-svh px-5 py-24 md:px-10">
-          <div className="mx-auto max-w-6xl">
-            <SectionMarker index="04" title="Results" />
-            <div className="grid gap-10 border-t border-border pt-12 md:grid-cols-3">
+        {/* results */}
+        <section className="px-6 pb-16 md:px-14 md:pb-20">
+          <div className="border-t border-border pt-12">
+            <span className="label">04 — Results</span>
+            <div className="mt-10 grid gap-10 md:grid-cols-3">
               {project.results.map((r, i) => (
-                <div key={r.label} data-reveal data-reveal-delay={i * 140}>
-                  <div
-                    className="font-display text-6xl leading-none text-glow md:text-8xl"
-                    style={{ textShadow: "var(--glow-soft)" }}
-                  >
+                <div key={r.label} data-reveal data-reveal-delay={i * 110}>
+                  <div className="font-display text-5xl leading-none text-glow md:text-7xl">
                     {r.value}
                   </div>
-                  <p className="label mt-5">{r.label}</p>
+                  <p className="label mt-4">{r.label}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="flex min-h-svh flex-col justify-center px-5 py-24 md:px-10">
-          <div className="mx-auto w-full max-w-6xl">
-            <span className="label">Next project</span>
-            <Link
-              to="/case-studies/$slug"
-              params={{ slug: next.slug }}
-              {...cursorProps("Open")}
-              className="pointer-events-auto group mt-6 block border-t border-border pt-8"
-            >
-              <h2 className="display-xl text-foreground transition-all duration-700 ease-out group-hover:translate-x-3 group-hover:text-glow">
-                {next.title}
-              </h2>
-              <p className="mt-6 max-w-[40ch] text-xs text-muted-foreground">{next.kicker}</p>
-            </Link>
-            <div className="mt-16 flex flex-wrap gap-5">
-              <Action to="/case-studies" label="Index">
-                All case studies
-              </Action>
-              <Action to="/contact" label="Talk">
-                Start a project
-              </Action>
-            </div>
+        {/* next */}
+        <section className="border-t border-border px-6 py-14 md:px-14 md:py-16">
+          <span className="label">Next project</span>
+          <Link
+            to="/case-studies/$slug"
+            params={{ slug: next.slug }}
+            {...cursorProps("Open")}
+            className="group mt-6 block"
+          >
+            <h2 className="display-md text-foreground transition-colors duration-500 group-hover:text-glow">
+              {next.title}
+            </h2>
+            <p className="mt-4 max-w-[46ch] text-sm leading-relaxed text-muted-foreground">
+              {next.kicker}
+            </p>
+          </Link>
+          <div className="mt-12 flex flex-wrap gap-5">
+            <Action to="/case-studies" label="Index">
+              All case studies
+            </Action>
+            <Action to="/contact" label="Talk">
+              Start a project
+            </Action>
           </div>
         </section>
-      </Overlay>
-    </>
+      </article>
+    </Overlay>
   );
 }
