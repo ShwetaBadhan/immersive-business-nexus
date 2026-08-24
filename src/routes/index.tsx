@@ -128,8 +128,10 @@ function Home() {
         </section>
 
         {/* 03 — WHAT WE DO */}
-        <section className="px-5 py-24 md:px-10 md:py-32">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative px-5 py-24 md:px-10 md:py-32">
+          <ScrollScene kind="practices" />
+          <div className="relative z-10 mx-auto max-w-6xl">
+
             <SectionMarker index="03" title="What we do" />
             <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <SplitHeading
