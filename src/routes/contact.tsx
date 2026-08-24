@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useReveal } from "@/hooks/use-reveal";
+import { SectionBackdrop } from "@/components/site/SectionBackdrop";
 import { Action, Overlay, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { cursorProps } from "@/components/experience/Cursor";
 import { setWorld } from "@/lib/world-store";
@@ -60,7 +61,8 @@ function Contact() {
     <>
       <Telemetry tag="239 / Contact" />
       <Overlay>
-        <section className="flex min-h-svh flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+          <SectionBackdrop label="Talk" />
           <SectionMarker index="—" title="Contact" />
           <SplitHeading text="Let's make something move." className="display-xl max-w-[14ch] text-foreground" />
           <p className="mt-8 max-w-[40ch] text-sm leading-relaxed text-muted-foreground md:text-base" data-reveal data-reveal-delay={400}>

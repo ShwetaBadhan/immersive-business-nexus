@@ -1,10 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroEnv from "@/assets/hero-environment.jpg";
 
 /**
  * Cinematic hero environment: layered light architectural photograph with
  * inertial, inverse-direction pointer parallax, a cursor-following light,
  * subtle depth-of-field vignette and a fine film grain.
+ *
+ * On touch / small screens a dedicated composition is used: tighter framing,
+ * less blur, a slow ambient drift plus touch-driven parallax so the visual
+ * never looks like a cropped desktop version.
+ *
  * Purely presentational and pointer-transparent.
  */
 export function HeroBackdrop() {
@@ -12,40 +17,66 @@ export function HeroBackdrop() {
   const near = useRef<HTMLDivElement>(null);
   const lines = useRef<HTMLDivElement>(null);
   const light = useRef<HTMLDivElement>(null);
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const sync = () => setCompact(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!window.matchMedia("(pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const coarse = !window.matchMedia("(pointer: fine)").matches;
+    // gentler amplitudes on small screens so nothing drifts out of frame
+    const amp = compact ? 0.55 : 1;
 
     let tx = 0;
     let ty = 0;
     let x = 0;
     let y = 0;
     let raf = 0;
+    const start = performance.now();
 
     const onMove = (e: PointerEvent) => {
       tx = (e.clientX / window.innerWidth) * 2 - 1;
       ty = (e.clientY / window.innerHeight) * 2 - 1;
     };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      tx = (t.clientX / window.innerWidth) * 2 - 1;
+      ty = (t.clientY / window.innerHeight) * 2 - 1;
+    };
 
-    const tick = () => {
+    const tick = (now: number) => {
+      // slow ambient drift keeps the composition alive without input (touch)
+      if (coarse) {
+        const t = (now - start) / 1000;
+        tx += (Math.sin(t * 0.18) * 0.6 - tx) * 0.02;
+        ty += (Math.cos(t * 0.13) * 0.4 - ty) * 0.02;
+      }
+
       // inertia
       x += (tx - x) * 0.045;
       y += (ty - y) * 0.045;
 
       // background shifts opposite to the cursor, layers at different depths
       if (far.current) {
-        far.current.style.transform = `scale(1.05) translate3d(${-x * 22}px, ${-y * 14}px, 0)`;
+        far.current.style.transform = `scale(${compact ? 1.1 : 1.05}) translate3d(${-x * 22 * amp}px, ${-y * 14 * amp}px, 0)`;
       }
       if (near.current) {
-        near.current.style.transform = `scale(1.1) translate3d(${-x * 46}px, ${-y * 26}px, 0)`;
+        near.current.style.transform = `scale(${compact ? 1.16 : 1.1}) translate3d(${-x * 46 * amp}px, ${-y * 26 * amp}px, 0)`;
       }
       if (lines.current) {
-        lines.current.style.transform = `translate3d(${x * 30}px, ${y * 18}px, 0) rotateX(${-y * 2.2}deg) rotateY(${x * 2.8}deg)`;
+        lines.current.style.transform = `translate3d(${x * 30 * amp}px, ${y * 18 * amp}px, 0) rotateX(${-y * 2.2}deg) rotateY(${x * 2.8}deg)`;
       }
       if (light.current) {
-        light.current.style.transform = `translate3d(${x * 90}px, ${y * 60}px, 0)`;
+        light.current.style.transform = `translate3d(${x * 90 * amp}px, ${y * 60 * amp}px, 0)`;
         light.current.style.opacity = String(0.5 + Math.abs(x) * 0.25);
       }
       raf = requestAnimationFrame(tick);
@@ -53,11 +84,17 @@ export function HeroBackdrop() {
 
     raf = requestAnimationFrame(tick);
     window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("touchmove", onTouch, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("touchmove", onTouch);
     };
-  }, []);
+  }, [compact]);
+
+  const framing = compact
+    ? { backgroundSize: "cover", backgroundPosition: "52% 44%" }
+    : { backgroundSize: "cover", backgroundPosition: "50% 35%" };
 
   return (
     <div
@@ -71,10 +108,11 @@ export function HeroBackdrop() {
         className="absolute inset-0 will-change-transform"
         style={{
           backgroundImage: `url(${heroEnv})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50% 35%",
-          filter: "blur(4px) saturate(0.55) brightness(1.14) contrast(0.95)",
-          opacity: 0.8,
+          ...framing,
+          filter: compact
+            ? "blur(2px) saturate(0.62) brightness(1.08) contrast(1)"
+            : "blur(4px) saturate(0.55) brightness(1.14) contrast(0.95)",
+          opacity: compact ? 0.92 : 0.8,
         }}
       />
 
@@ -84,14 +122,15 @@ export function HeroBackdrop() {
         className="absolute inset-0 will-change-transform"
         style={{
           backgroundImage: `url(${heroEnv})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50% 35%",
+          ...framing,
           filter: "blur(1px) saturate(0.6) brightness(1.12)",
-          opacity: 0.45,
-          maskImage:
-            "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
-          WebkitMaskImage:
-            "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
+          opacity: compact ? 0.3 : 0.45,
+          maskImage: compact
+            ? "radial-gradient(120% 70% at 50% 66%, rgba(0,0,0,0.95), rgba(0,0,0,0) 74%)"
+            : "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
+          WebkitMaskImage: compact
+            ? "radial-gradient(120% 70% at 50% 66%, rgba(0,0,0,0.95), rgba(0,0,0,0) 74%)"
+            : "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
         }}
       />
 
@@ -121,8 +160,9 @@ export function HeroBackdrop() {
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(60% 50% at 50% 46%, oklch(0.99 0.004 150 / 88%), oklch(0.985 0.005 150 / 30%) 80%)",
+          background: compact
+            ? "radial-gradient(76% 40% at 50% 38%, oklch(0.99 0.004 150 / 78%), oklch(0.985 0.005 150 / 16%) 84%)"
+            : "radial-gradient(60% 50% at 50% 46%, oklch(0.99 0.004 150 / 88%), oklch(0.985 0.005 150 / 30%) 80%)",
         }}
       />
       <div

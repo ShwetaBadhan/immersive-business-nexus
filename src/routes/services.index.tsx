@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
+import { SectionBackdrop } from "@/components/site/SectionBackdrop";
 import { Action, Overlay, ScrollHint, SectionMarker, SplitHeading } from "@/components/site/ui";
 import { SERVICES } from "@/lib/site-data";
 import { ServiceCard } from "@/components/site/ServiceCard";
@@ -27,7 +28,8 @@ function Services() {
 
   return (
     <Overlay>
-      <section className="flex min-h-[70svh] flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
+      <section className="relative flex min-h-[70svh] flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <SectionBackdrop label="Six" />
         <SectionMarker index="—" title="Services" />
         <SplitHeading text="Six ways we move business." className="display-xl max-w-[14ch] text-foreground" />
         <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -40,7 +42,7 @@ function Services() {
       </section>
 
       <section className="px-5 py-24 md:px-10 md:py-32">
-        <div className="mx-auto grid max-w-6xl gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 md:gap-7 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <ServiceCard key={s.id} service={s} delay={i * 80} />
           ))}
