@@ -153,7 +153,7 @@ export function Monoliths({ count = 9 }: { count?: number }) {
   useFrame((_, dt) => {
     if (group.current) {
       group.current.rotation.y += dt * 0.012;
-      group.current.position.z = live.progress * 16;
+      group.current.position.z = live.progress * 8 - 2;
     }
   });
 
