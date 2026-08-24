@@ -59,9 +59,9 @@ export function GrowthNetwork({ quality }: { quality: "high" | "low" }) {
     // parallax + gentle drift away as the page scrolls
     const p = live.progress;
     g.position.x = (narrow ? 0 : 2.35) + live.smoothX * 0.45;
-    g.position.y = (narrow ? 1.05 : -0.3) + live.smoothY * 0.3 - p * 3.6;
-    g.position.z = -0.4 - p * 3;
-    g.scale.setScalar((narrow ? 0.72 : 0.92) * (1 - p * 0.15));
+    g.position.y = (narrow ? 0.2 : -0.3) + live.smoothY * 0.3 - p * 3.6;
+    g.position.z = (narrow ? -6 : -0.4) - p * 3;
+    g.scale.setScalar((narrow ? 0.6 : 0.92) * (1 - p * 0.15));
 
     if (inner.current) {
       inner.current.rotation.y += dt * 0.09;
