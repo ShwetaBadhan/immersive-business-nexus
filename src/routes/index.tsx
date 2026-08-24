@@ -255,12 +255,15 @@ function Home() {
         </section>
 
         {/* 06 — FINAL CTA */}
-        <section className="flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+        <section className="relative flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+          <ScrollScene kind="arrival" />
+          <div className="relative z-10 flex w-full flex-col items-center">
           <SplitHeading
             as="h2"
             text="Let's build something that moves."
             className="display-lg max-w-[20ch] text-foreground"
           />
+
           <div className="mt-14" data-reveal data-reveal-delay={320}>
             <Action to="/contact" label="Start">
               Start a project
