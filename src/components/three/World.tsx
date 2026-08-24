@@ -8,7 +8,6 @@ import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
 import { Monoliths } from "./worlds";
-import { GrowthNetwork } from "./GrowthNetwork";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
