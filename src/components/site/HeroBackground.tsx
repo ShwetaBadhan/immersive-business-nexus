@@ -61,7 +61,7 @@ export function HeroBackground() {
     <div
       ref={root}
       aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 isolate z-0 overflow-hidden"
       style={{ perspective: "1200px" }}
     >
       {/* deep environment */}
