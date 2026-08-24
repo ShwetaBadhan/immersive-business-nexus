@@ -41,10 +41,6 @@ export const live = {
   smoothY: 0,
   dragX: 0,
   dragVel: 0,
-  dragVelY: 0,
-  orbitX: 0,
-  orbitY: 0,
-  dragging: false,
   veil: 0,
 };
 

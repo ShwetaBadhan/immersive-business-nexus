@@ -6,13 +6,15 @@ import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
-import { HeroEnvironment } from "./HeroEnvironment";
+import { ParticleField } from "./ParticleField";
+import { Monoliths } from "./worlds";
+import { GrowthNetwork } from "./GrowthNetwork";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
 
 const RIGS: Record<WorldVariant, { from: THREE.Vector3Tuple; to: THREE.Vector3Tuple; fov: number }> = {
-  home: { from: [0, 0.15, 8.6], to: [0, 1.2, -3.5], fov: 42 },
+  home: { from: [0, 0, 8.2], to: [0, 1.4, -9], fov: 42 },
   about: { from: [0, 0.4, 9.4], to: [0, -1.2, -6.5], fov: 46 },
   services: { from: [0, 0.2, 10.5], to: [0, 0.8, 1.5], fov: 48 },
   work: { from: [0, 0.3, 11.5], to: [0, -0.6, 2.2], fov: 50 },
@@ -35,10 +37,10 @@ function Rig({ variant, focus }: { variant: WorldVariant; focus: number }) {
   }, [variant, camera]);
 
   useFrame((_, dt) => {
-    const k = Math.min(1, dt * 14);
-    live.smoothX += (live.pointerX - live.smoothX) * k;
-    live.smoothY += (live.pointerY - live.smoothY) * k;
-    live.dragX *= 0.88;
+    const k = Math.min(1, dt * 8);
+    live.smoothX += (live.pointerX - live.smoothX) * k * 0.9;
+    live.smoothY += (live.pointerY - live.smoothY) * k * 0.9;
+    live.dragX *= 0.9;
 
     smoothProgress.current += (live.progress - smoothProgress.current) * 0.11;
     const p = smoothProgress.current;
@@ -47,15 +49,15 @@ function Rig({ variant, focus }: { variant: WorldVariant; focus: number }) {
     // ease the flight path so the world opens up rather than sliding linearly
     const e = p * p * (3 - 2 * p);
     target.set(
-      THREE.MathUtils.lerp(rig.from[0], rig.to[0], e) + live.smoothX * 1.15 - live.orbitX * 0.9,
-      THREE.MathUtils.lerp(rig.from[1], rig.to[1], e) + live.smoothY * 0.7 + live.orbitY * 0.7,
+      THREE.MathUtils.lerp(rig.from[0], rig.to[0], e) + live.smoothX * 0.85,
+      THREE.MathUtils.lerp(rig.from[1], rig.to[1], e) + live.smoothY * 0.55,
       THREE.MathUtils.lerp(rig.from[2], rig.to[2], e) - (focus >= 0 ? 1.6 : 0),
     );
-    camera.position.lerp(target, Math.min(1, dt * 6));
+    camera.position.lerp(target, 0.1);
 
-    look.set(live.smoothX * 1.1 - live.orbitX * 0.5, live.smoothY * 0.7 - p * 0.6, -4);
+    look.set(live.smoothX * 0.9, live.smoothY * 0.6 - p * 0.6, -4);
     camera.lookAt(look);
-    camera.rotation.z = THREE.MathUtils.lerp(camera.rotation.z, live.smoothX * -0.03, 0.1);
+    camera.rotation.z = THREE.MathUtils.lerp(camera.rotation.z, live.smoothX * -0.035, 0.05);
   });
 
   return null;
@@ -71,7 +73,7 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
     const t = state.clock.elapsedTime;
     if (key.current) {
       key.current.position.set(Math.sin(t * 0.18) * 5 + live.smoothX * 2, 3.2, 4 + Math.cos(t * 0.14) * 2);
-      key.current.intensity = 9 + Math.sin(t * 0.5) * 1.5;
+      key.current.intensity = 26 + Math.sin(t * 0.5) * 4;
     }
     if (rim.current) {
       rim.current.position.set(-5 + live.smoothX * -2, -2.4 + live.smoothY * 2, -5);
@@ -81,11 +83,11 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
   return (
     <>
       <color attach="background" args={[COL.deep]} />
-      <fogExp2 attach="fog" args={[COL.deep, 0.026]} />
+      <fogExp2 attach="fog" args={[COL.deep, quality === "high" ? 0.032 : 0.045]} />
       <ambientLight intensity={0.9} color={COL.deep} />
       <hemisphereLight intensity={0.9} color={COL.deep} groundColor={COL.moss} />
-      <pointLight ref={key} color={COL.neon} intensity={9} distance={26} decay={2} />
-      <pointLight ref={rim} color={COL.moss} intensity={2.5} distance={16} decay={2} />
+      <pointLight ref={key} color={COL.neon} intensity={26} distance={30} decay={1.6} />
+      <pointLight ref={rim} color={COL.glow} intensity={14} distance={24} decay={1.8} />
       <directionalLight position={[4, 6, 6]} intensity={2.2} color="#ffffff" />
       <directionalLight position={[-5, -2, 3]} intensity={0.8} color={COL.forest} />
     </>
@@ -97,15 +99,20 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
 function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | "low" }) {
   const focus = useWorld((s) => s.focus);
 
+  const count = quality === "high" ? 2600 : 1100;
+  const ambient = variant === "work";
+
   return (
     <>
       <Atmosphere quality={quality} />
       <Rig variant={variant} focus={focus} />
-      {variant === "home" && <HeroEnvironment quality={quality} />}
+      <ParticleField count={count} />
+      {ambient && <Monoliths count={quality === "high" ? 5 : 3} />}
+      {variant === "home" && <GrowthNetwork quality={quality} />}
 
       <EffectComposer enableNormalPass={false}>
         <Bloom intensity={0.12} luminanceThreshold={0.9} luminanceSmoothing={0.4} mipmapBlur />
-        <Vignette eskil={false} offset={0.5} darkness={0.08} />
+        <Vignette eskil={false} offset={0.44} darkness={0.1} />
       </EffectComposer>
 
       <AdaptiveDpr pixelated={false} />

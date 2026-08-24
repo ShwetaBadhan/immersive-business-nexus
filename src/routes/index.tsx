@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
+import { HeroDiagram } from "@/components/site/HeroDiagram";
 import { HeroBackground } from "@/components/site/HeroBackground";
 
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
@@ -36,22 +37,23 @@ function Home() {
         {/* 01 — HERO */}
         <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
           <HeroBackground />
-          {/* content layer — rendered above every environment/reflection pass so type stays crisp */}
-          <div className="relative z-[70] isolate flex flex-1 flex-col items-center justify-center text-center [transform:translateZ(0)] [text-rendering:geometricPrecision]">
+          {/* editorial labels frame the centred content */}
+          <div className="pointer-events-none absolute inset-x-0 top-24 z-10 hidden h-[calc(100%-12rem)] lg:block">
+            <HeroDiagram />
+          </div>
+
+          <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
             <div className="mb-7 flex items-center justify-center gap-4" data-reveal>
               <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
               <span className="h-px w-10 bg-neon/60" />
               <span className="label">Business × Creativity × Technology</span>
             </div>
-            <h1 className="display-xl mx-auto max-w-[30ch] text-foreground !text-[clamp(1.9rem,4vw,3.9rem)] !leading-[1.02]">
-              {["Build what moves", "business forward."].map((line, li) => (
-                <span key={line} className="block overflow-hidden">
-                  <span className="inline-block whitespace-nowrap" data-reveal data-reveal-delay={li * 140}>
-                    {line}
-                  </span>
-                </span>
-              ))}
-            </h1>
+            <div className="mx-auto max-w-[22ch]">
+              <SplitHeading
+                text="Build what moves business forward."
+                className="display-xl text-foreground !text-[clamp(2.4rem,5.2vw,5.4rem)]"
+              />
+            </div>
             <p
               className="mx-auto mt-8 max-w-[52ch] text-sm leading-relaxed text-muted-foreground md:text-base"
               data-reveal

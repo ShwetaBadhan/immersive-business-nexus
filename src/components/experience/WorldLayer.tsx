@@ -39,9 +39,6 @@ function WorldInner() {
   useEffect(() => {
     setWorld({ focus: -1 });
     live.dragVel = 0;
-    live.dragVelY = 0;
-    live.orbitX = 0;
-    live.orbitY = 0;
   }, [pathname]);
 
   // device capability detection
@@ -52,34 +49,28 @@ function WorldInner() {
     setWorld({ quality: weak ? "low" : "high" });
   }, []);
 
-  // drag the world (mouse + touch) with inertia — two axes, physical feel
+  // drag the world (mouse + touch) with inertia
   useEffect(() => {
     let dragging = false;
     let lastX = 0;
-    let lastY = 0;
     const down = (e: PointerEvent) => {
       const el = e.target as HTMLElement | null;
       if (el?.closest("a,button,input,textarea,select,[data-no-drag]")) return;
       dragging = true;
-      live.dragging = true;
       lastX = e.clientX;
-      lastY = e.clientY;
-      setWorld({ cursorMode: "label", cursorLabel: "Explore" });
+      setWorld({ cursorMode: "label", cursorLabel: "Drag" });
     };
     const move = (e: PointerEvent) => {
       if (!dragging) return;
       const dx = (e.clientX - lastX) / window.innerWidth;
-      const dy = (e.clientY - lastY) / window.innerHeight;
       lastX = e.clientX;
-      lastY = e.clientY;
       live.dragX = dx;
-      live.dragVel = Math.max(-0.09, Math.min(0.09, live.dragVel + dx * 0.22));
-      live.dragVelY = Math.max(-0.07, Math.min(0.07, live.dragVelY + dy * 0.18));
+      live.dragVel += dx * 0.09;
+      live.dragVel = Math.max(-0.06, Math.min(0.06, live.dragVel));
     };
     const up = () => {
       if (!dragging) return;
       dragging = false;
-      live.dragging = false;
       setWorld({ cursorMode: "dot", cursorLabel: null });
     };
     window.addEventListener("pointerdown", down);
@@ -108,7 +99,7 @@ function WorldInner() {
   return (
     <>
       <Suspense fallback={<div className="fixed inset-0 z-0 bg-background" />}>
-        {ready && variant === "home" && (
+        {ready && (
         <div
           className="transition-opacity duration-[1600ms] ease-out"
           style={{ opacity: entered ? 1 : 0.55 }}

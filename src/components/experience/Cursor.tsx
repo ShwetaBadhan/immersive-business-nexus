@@ -61,7 +61,7 @@ export function Cursor() {
           backgroundColor: expanded
             ? "oklch(0.9445 0.0132 152.3 / 72%)"
             : "transparent",
-          mixBlendMode: "normal",
+          backdropFilter: expanded ? "blur(3px)" : "none",
           boxShadow: expanded ? "var(--glow-soft)" : "none",
         }}
       >
