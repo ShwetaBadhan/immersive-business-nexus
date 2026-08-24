@@ -337,3 +337,171 @@ export function DepthDust({ count = 60, depth = 9 }: { count?: number; depth?: n
     </points>
   );
 }
+
+/* ------------------------- midground secondaries ------------------------- *
+ * Slightly smaller companions that share the same material language and
+ * ride a different flight path, giving each section a second depth level.
+ * ----------------------------------------------------------------------- */
+
+/** thin metallic wireframe cage */
+export function WireCage() {
+  const g = useRef<THREE.Group>(null);
+  useFrame((s) => {
+    if (g.current) {
+      g.current.rotation.y = s.clock.elapsedTime * 0.12;
+      g.current.rotation.x = Math.sin(s.clock.elapsedTime * 0.09) * 0.25;
+    }
+  });
+  return (
+    <group ref={g}>
+      <mesh>
+        <icosahedronGeometry args={[0.62, 1]} />
+        <meshStandardMaterial {...CHROME} wireframe {...base(0.5)} />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[0.1, 18, 18]} />
+        <meshStandardMaterial {...EMERALD} {...base(0.8)} />
+      </mesh>
+    </group>
+  );
+}
+
+/** transparent crystal shard */
+export function CrystalShard() {
+  const m = useRef<THREE.Mesh>(null);
+  useFrame((s) => {
+    if (m.current) {
+      m.current.rotation.z = s.clock.elapsedTime * 0.1;
+      m.current.rotation.y = s.clock.elapsedTime * 0.16;
+    }
+  });
+  return (
+    <group>
+      <mesh ref={m}>
+        <octahedronGeometry args={[0.6, 0]} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.9} roughness={0.14} color="#f1faf6" {...base(0.92)} />
+      </mesh>
+      <mesh rotation={[Math.PI / 2.6, 0.4, 0]}>
+        <torusGeometry args={[0.9, 0.008, 8, 96]} />
+        <meshStandardMaterial {...CHROME} {...base(0.45)} />
+      </mesh>
+    </group>
+  );
+}
+
+/** curved 3D ribbon */
+export function RibbonArc() {
+  const curve = useMemo(
+    () =>
+      new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-0.95, -0.7, 0),
+        new THREE.Vector3(-0.2, 0.1, 0.35),
+        new THREE.Vector3(0.55, 0.35, -0.2),
+        new THREE.Vector3(0.95, -0.4, 0.1),
+      ]),
+    [],
+  );
+  const g = useRef<THREE.Group>(null);
+  useFrame((s) => {
+    if (g.current) g.current.rotation.y = Math.sin(s.clock.elapsedTime * 0.13) * 0.5;
+  });
+  return (
+    <group ref={g}>
+      <mesh>
+        <tubeGeometry args={[curve, 110, 0.028, 10, false]} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.6} roughness={0.16} color="#eff9f4" {...base(0.88)} />
+      </mesh>
+      <mesh>
+        <tubeGeometry args={[curve, 110, 0.005, 8, false]} />
+        <meshStandardMaterial {...EMERALD} {...base(0.55)} />
+      </mesh>
+    </group>
+  );
+}
+
+/** stacked hairline rings, architectural */
+export function RingStack() {
+  const g = useRef<THREE.Group>(null);
+  useFrame((s) => {
+    if (!g.current) return;
+    const t = s.clock.elapsedTime;
+    g.current.children.forEach((c, i) => {
+      c.rotation.z = t * (0.07 + i * 0.02) * (i % 2 ? -1 : 1);
+      c.position.y = (i - 1) * 0.22 + Math.sin(t * 0.4 + i) * 0.02;
+    });
+  });
+  return (
+    <group ref={g}>
+      {[0, 1, 2].map((i) => (
+        <mesh key={i} rotation={[Math.PI / 2.1, 0, 0]}>
+          <torusGeometry args={[0.7 - i * 0.16, i === 1 ? 0.016 : 0.007, 10, 96]} />
+          {i === 1 ? (
+            <meshStandardMaterial {...DEEP} {...base(0.6)} />
+          ) : (
+            <meshStandardMaterial {...CHROME} {...base(0.5)} />
+          )}
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/** small architectural stack of glass slabs */
+export function GlassMonolith() {
+  const g = useRef<THREE.Group>(null);
+  useFrame((s) => {
+    if (g.current) g.current.rotation.y = s.clock.elapsedTime * 0.1;
+  });
+  return (
+    <group ref={g}>
+      {[0, 1, 2].map((i) => (
+        <mesh key={i} position={[0, (i - 1) * 0.36, 0]} rotation={[0, i * 0.35, 0]}>
+          <boxGeometry args={[0.7 - i * 0.12, 0.28, 0.7 - i * 0.12]} />
+          <meshPhysicalMaterial {...GLASS} thickness={0.8} roughness={0.18} color="#f2faf6" {...base(0.86)} />
+        </mesh>
+      ))}
+      <mesh position={[0, 0.78, 0]}>
+        <sphereGeometry args={[0.07, 16, 16]} />
+        <meshStandardMaterial {...EMERALD} {...base(0.85)} />
+      </mesh>
+    </group>
+  );
+}
+
+/** controlled cluster of small spheres */
+export function NodeCluster() {
+  const g = useRef<THREE.Group>(null);
+  const seeds = useMemo(
+    () =>
+      Array.from({ length: 7 }, (_, i) => {
+        const a = (i / 7) * Math.PI * 2;
+        const r = 0.5 + (i % 3) * 0.18;
+        return [Math.cos(a) * r, Math.sin(a * 1.3) * 0.4, Math.sin(a) * r * 0.6] as THREE.Vector3Tuple;
+      }),
+    [],
+  );
+  useFrame((s) => {
+    if (g.current) {
+      g.current.rotation.y = s.clock.elapsedTime * 0.14;
+      g.current.rotation.x = Math.sin(s.clock.elapsedTime * 0.1) * 0.18;
+    }
+  });
+  return (
+    <group ref={g}>
+      {seeds.map((p, i) => (
+        <mesh key={i} position={p}>
+          <sphereGeometry args={[i % 3 === 0 ? 0.075 : 0.045, 16, 16]} />
+          {i % 3 === 0 ? (
+            <meshStandardMaterial {...EMERALD} {...base(0.8)} />
+          ) : (
+            <meshPhysicalMaterial {...GLASS} thickness={0.4} color="#f2faf6" {...base(0.8)} />
+          )}
+        </mesh>
+      ))}
+      <mesh rotation={[Math.PI / 2.4, 0, 0]}>
+        <torusGeometry args={[0.72, 0.005, 8, 96]} />
+        <meshStandardMaterial {...CHROME} {...base(0.4)} />
+      </mesh>
+    </group>
+  );
+}
