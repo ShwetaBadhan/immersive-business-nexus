@@ -107,7 +107,7 @@ function CaseStudy() {
         {/* overview */}
         <section className="px-6 py-16 md:px-14 md:py-20">
           <div className="grid grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
-            {overview.map((o, i) => (
+            {overview.map((o) => (
               <div key={o.k}>
                 <span className="label">{o.k}</span>
                 <p className="mt-3 text-sm leading-relaxed text-foreground">{o.v}</p>
@@ -138,7 +138,7 @@ function CaseStudy() {
           <div className="border-t border-border pt-12">
             <span className="label">04 — Results</span>
             <div className="mt-10 grid gap-10 md:grid-cols-3">
-              {project.results.map((r, i) => (
+              {project.results.map((r) => (
                 <div key={r.label}>
                   <div className="font-display text-5xl leading-none text-glow md:text-7xl">
                     {r.value}
