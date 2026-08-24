@@ -73,8 +73,8 @@ export function HeroBackdrop() {
           backgroundImage: `url(${heroEnv})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "blur(7px) saturate(0.72) brightness(1.1)",
-          opacity: 0.6,
+          filter: "blur(6px) saturate(0.8) brightness(1.04)",
+          opacity: 0.95,
         }}
       />
 
@@ -87,7 +87,7 @@ export function HeroBackdrop() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(1.5px) saturate(0.8) brightness(1.06)",
-          opacity: 0.42,
+          opacity: 0.62,
           maskImage:
             "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
           WebkitMaskImage:
@@ -107,11 +107,11 @@ export function HeroBackdrop() {
 
       {/* thin green structural lines with subtle 3D tilt */}
       <div ref={lines} className="absolute inset-0 will-change-transform">
-        <span className="absolute left-[14%] top-0 h-full w-px bg-neon/15" />
-        <span className="absolute left-[52%] top-0 h-full w-px bg-neon/10" />
-        <span className="absolute left-[84%] top-0 h-full w-px bg-neon/15" />
-        <span className="absolute left-0 top-[32%] h-px w-full bg-foreground/[0.06]" />
-        <span className="absolute left-0 top-[74%] h-px w-full bg-foreground/[0.06]" />
+        <span className="absolute left-[14%] top-0 h-full w-px bg-neon/25" />
+        <span className="absolute left-[52%] top-0 h-full w-px bg-neon/18" />
+        <span className="absolute left-[84%] top-0 h-full w-px bg-neon/25" />
+        <span className="absolute left-0 top-[32%] h-px w-full bg-foreground/[0.1]" />
+        <span className="absolute left-0 top-[74%] h-px w-full bg-foreground/[0.1]" />
         <span className="absolute left-[52%] top-[32%] h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/50" />
         <span className="absolute left-[84%] top-[74%] h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/40" />
         <span className="absolute left-[14%] top-[74%] h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/30" />
@@ -122,7 +122,7 @@ export function HeroBackdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(75% 65% at 50% 45%, oklch(0.985 0.004 150 / 72%), oklch(0.97 0.006 150 / 92%) 78%)",
+            "radial-gradient(58% 52% at 50% 46%, oklch(0.985 0.004 150 / 82%), oklch(0.97 0.006 150 / 34%) 76%)",
         }}
       />
       <div
