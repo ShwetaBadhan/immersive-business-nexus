@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useReveal } from "@/hooks/use-reveal";
+import { SectionBackdrop } from "@/components/site/SectionBackdrop";
 import { Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { CATEGORIES, PROJECTS } from "@/lib/site-data";
 import { cursorProps } from "@/components/experience/Cursor";
@@ -34,14 +35,15 @@ function CaseStudies() {
     <>
       <Telemetry tag="239 / Case studies" />
       <Overlay>
-        <section className="flex min-h-svh flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+          <SectionBackdrop label="Work" />
           <SectionMarker index="—" title="Selected work" />
           <SplitHeading text="Work that moved something." className="display-xl max-w-[14ch] text-foreground" />
           <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-[44ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={380}>
-              Drag horizontally to rotate the project ring. Click a panel to enter the case study.
+              Brand transformations, digital platforms and growth programmes. Filter the index below, then open a case study.
             </p>
-            <ScrollHint text="Or read the index" />
+            <ScrollHint text="Read the index" />
           </div>
         </section>
 

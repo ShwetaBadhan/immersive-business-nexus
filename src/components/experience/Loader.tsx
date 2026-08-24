@@ -118,7 +118,7 @@ export function Loader() {
       </div>
 
       <div
-        className="absolute bottom-10 flex flex-col items-center gap-5 transition-all duration-1000"
+        className="absolute bottom-20 flex flex-col items-center gap-5 transition-all duration-1000 md:bottom-10"
         style={{ opacity: ready ? 1 : 0, transform: ready ? "none" : "translateY(1rem)" }}
       >
         <button
@@ -144,10 +144,10 @@ export function Loader() {
 
       </div>
 
-      <div className="absolute bottom-10 left-6 md:left-10">
+      <div className="absolute bottom-5 left-6 md:bottom-10 md:left-10">
         <span className="label">{String(count).padStart(3, "0")}</span>
       </div>
-      <div className="absolute bottom-10 right-6 md:right-10">
+      <div className="absolute bottom-5 right-6 md:bottom-10 md:right-10">
         <span className="label">{ready ? "World ready" : "Building world"}</span>
       </div>
     </div>

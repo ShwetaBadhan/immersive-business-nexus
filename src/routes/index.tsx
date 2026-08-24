@@ -38,10 +38,10 @@ function Home() {
           <HeroBackdrop />
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
-            <div className="mb-7 flex items-center justify-center gap-4" data-reveal>
+            <div className="mb-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2" data-reveal>
               <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
               <span className="h-px w-10 bg-neon/60" />
-              <span className="label">Business × Creativity × Technology</span>
+              <span className="label whitespace-nowrap !text-[0.6rem] md:!text-[0.65rem]">Business × Creativity × Technology</span>
             </div>
 
             <SplitHeading
@@ -138,11 +138,12 @@ function Home() {
               </p>
             </div>
 
-            <div className="grid gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:grid-cols-2 md:gap-7 lg:grid-cols-3">
               {SERVICES.map((s, i) => (
                 <ServiceCard key={s.id} service={s} delay={i * 80} />
               ))}
             </div>
+
 
             {/* approach / value */}
             <div className="mt-32 grid gap-14 border-t border-border pt-16 md:grid-cols-12">

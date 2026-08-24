@@ -4,7 +4,11 @@ import { playCue } from "@/lib/audio";
 import { SERVICE_IMAGES } from "@/lib/service-images";
 import type { Service } from "@/lib/site-data";
 
-/** Editorial service card — links straight to the service detail page. */
+/**
+ * Compact, clearly bounded service card: own surface, border, soft shadow and
+ * a distinct image area. Hover is intentionally minimal — a border tint, a
+ * whisper of lift and a slow image scale.
+ */
 export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: number }) {
   const image = SERVICE_IMAGES[service.id];
 
@@ -19,16 +23,11 @@ export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: 
       }}
       onPointerLeave={() => cursorProps().onPointerLeave()}
       onClick={() => playCue("click")}
-      className="pointer-events-auto group flex flex-col border-t border-border pt-6 transition-colors duration-700 hover:border-neon"
+      className="pointer-events-auto group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-[0_1px_2px_oklch(0.23_0.03_165/6%)] transition-[border-color,box-shadow,transform] duration-500 ease-out hover:-translate-y-0.5 hover:border-neon/45 hover:shadow-[var(--glow-soft)]"
       data-reveal
       data-reveal-delay={delay}
     >
-      <div className="flex items-baseline justify-between">
-        <span className="font-mono text-[0.62rem] tracking-[0.2em] text-neon">{service.index}</span>
-        <span className="label opacity-0 transition-opacity duration-500 group-hover:opacity-100">View →</span>
-      </div>
-
-      <div className="mt-6 overflow-hidden bg-muted/40">
+      <div className="relative overflow-hidden border-b border-border bg-muted/40">
         {image && (
           <img
             src={image}
@@ -36,15 +35,24 @@ export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: 
             loading="lazy"
             width={1200}
             height={900}
-            className="aspect-[4/3] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
+            className="aspect-[16/10] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
           />
         )}
+        <span className="absolute left-3 top-3 rounded-sm bg-background/85 px-2 py-1 font-mono text-[0.58rem] tracking-[0.2em] text-neon backdrop-blur-sm">
+          {service.index}
+        </span>
       </div>
 
-      <h3 className="display-md mt-7 text-foreground transition-colors duration-700 group-hover:text-glow">
-        {service.title}
-      </h3>
-      <p className="mt-3 max-w-[36ch] text-sm leading-relaxed text-muted-foreground">{service.short}</p>
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <h3 className="font-display text-[1.05rem] uppercase leading-tight tracking-tight text-foreground transition-colors duration-500 group-hover:text-glow md:text-[1.2rem]">
+          {service.title}
+        </h3>
+        <p className="mt-2.5 text-[0.8rem] leading-relaxed text-muted-foreground">{service.short}</p>
+        <span className="label mt-5 inline-flex items-center gap-2 !tracking-[0.18em] text-muted-foreground transition-colors duration-500 group-hover:!text-glow">
+          View practice
+          <span className="h-px w-5 bg-current transition-all duration-500 group-hover:w-8" />
+        </span>
+      </div>
     </Link>
   );
 }

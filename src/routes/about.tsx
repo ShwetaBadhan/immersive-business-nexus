@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
+import { SectionBackdrop } from "@/components/site/SectionBackdrop";
 import { Action, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 
 const TITLE = "About 239 — We Build Momentum";
@@ -42,7 +43,8 @@ function About() {
     <>
       <Telemetry tag="239 / About" />
       <Overlay>
-        <section className="flex min-h-svh flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+          <SectionBackdrop label="239" />
           <SectionMarker index="—" title="About 239" />
           <SplitHeading text="We build momentum." className="display-xl text-foreground" />
           <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
