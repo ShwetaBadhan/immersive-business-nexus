@@ -118,7 +118,7 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
         ) : (
           <></>
         )}
-        <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.16} />
+        <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.09} />
         <Vignette eskil={false} offset={0.42} darkness={0.12} />
       </EffectComposer>
 
