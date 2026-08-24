@@ -194,8 +194,10 @@ function Home() {
 
 
         {/* 04 — SELECTED CASE STUDIES */}
-        <section className="min-h-svh px-5 py-32 md:px-10">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative min-h-svh px-5 py-32 md:px-10">
+          <ScrollScene kind="trajectory" />
+          <div className="relative z-10 mx-auto max-w-6xl">
+
             <SectionMarker index="04" title="Selected case studies" />
             <p className="label mb-14 max-w-[40ch]" data-reveal>
               Selected engagements across strategy, brand, digital and growth
