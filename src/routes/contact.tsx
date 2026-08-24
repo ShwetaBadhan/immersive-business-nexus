@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useReveal } from "@/hooks/use-reveal";
 import { SectionBackdrop } from "@/components/site/SectionBackdrop";
 import { Action, Overlay, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
+import { ConnectionVisual } from "@/components/site/Visual3D";
 import { cursorProps } from "@/components/experience/Cursor";
 import { setWorld } from "@/lib/world-store";
 import { playCue } from "@/lib/audio";
@@ -73,6 +74,7 @@ function Contact() {
         <section className="px-5 py-24 md:px-10">
           <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-12">
             <div className="md:col-span-4">
+              <ConnectionVisual className="mb-14 !h-[260px] md:!h-[320px]" />
               <div className="space-y-10">
                 {[
                   { k: "Email", v: "hello@239business.com", href: "mailto:hello@239business.com" },
