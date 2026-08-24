@@ -593,9 +593,10 @@ export function HeroCore({
     if (g) {
       g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, live.smoothX * 0.5 + t * 0.06, 0.05);
       g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, live.smoothY * -0.28, 0.05);
-      g.position.y = Math.sin(t * 0.35) * 0.12;
+      g.position.y = 0.85 + Math.sin(t * 0.35) * 0.1;
+      g.position.x = 1.6;
       g.position.z = live.progress * 5.5;
-      const target = hover ? 1.08 : 1;
+      const target = (hover ? 1.06 : 1) * 0.6;
       g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, target * (1 - live.progress * 0.12), 0.07));
     }
     if (core.current) core.current.rotation.y += dt * 0.16;
@@ -644,12 +645,12 @@ export function HeroCore({
       </mesh>
 
       {/* glass outer shell for depth */}
-      <mesh ref={shell} scale={1.62}>
+      <mesh ref={shell} scale={1.34}>
         <icosahedronGeometry args={[1.1, quality === "high" ? 2 : 1]} />
         <meshPhysicalMaterial
           color={COL.moss}
           transparent
-          opacity={0.26}
+          opacity={0.12}
           roughness={0.08}
           metalness={0}
           transmission={quality === "high" ? 0.86 : 0}
@@ -660,7 +661,7 @@ export function HeroCore({
       </mesh>
 
       {/* precise wireframe cage */}
-      <mesh scale={1.98}>
+      <mesh scale={1.7}>
         <icosahedronGeometry args={[1.1, 1]} />
         <meshBasicMaterial color={COL.brand} wireframe transparent opacity={0.14} />
       </mesh>
