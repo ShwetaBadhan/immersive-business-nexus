@@ -211,13 +211,13 @@ export function TrajectoryWorld({ compact = false }: { compact?: boolean }) {
         <meshPhysicalMaterial {...GLASS} thickness={1} roughness={0.16} color="#eff8f2" {...base(0.8)} />
       </mesh>
       <mesh ref={shell}>
-        <icosahedronGeometry args={[1.35, 1]} />
-        <meshStandardMaterial {...DEEP} wireframe {...base(0.28)} />
+        <icosahedronGeometry args={[1.15, 1]} />
+        <meshStandardMaterial {...DEEP} wireframe {...base(0.12)} />
       </mesh>
       {[-1.6, 0.2, 1.8].map((x, i) => (
         <mesh key={i} position={[x, i % 2 ? 0.75 : -0.7, 0.35]}>
-          <sphereGeometry args={[0.07, 18, 18]} />
-          <meshStandardMaterial {...EMERALD} {...base(0.6)} />
+          <sphereGeometry args={[0.05, 18, 18]} />
+          <meshStandardMaterial {...EMERALD} {...base(0.4)} />
         </mesh>
       ))}
     </group>
