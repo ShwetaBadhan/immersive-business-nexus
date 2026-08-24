@@ -44,7 +44,7 @@ export function HeroBackground() {
       }
       if (light.current) {
         light.current.style.transform = `translate3d(${smooth.x * 160}px, ${smooth.y * 120}px, 0)`;
-        light.current.style.opacity = String(0.35 + Math.abs(smooth.x) * 0.3);
+        light.current.style.opacity = String(0.18 + Math.abs(smooth.x) * 0.22);
       }
       raf = requestAnimationFrame(tick);
     };
@@ -72,7 +72,7 @@ export function HeroBackground() {
           width={1920}
           height={1280}
           className="h-full w-full object-cover opacity-[0.95]"
-          style={{ filter: "saturate(0.95) contrast(1.02) blur(0.6px)" }}
+          style={{ filter: "saturate(1.05) contrast(1.06) blur(0.6px)", objectPosition: "34% center" }}
         />
       </div>
 
@@ -82,7 +82,7 @@ export function HeroBackground() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(60% 55% at 30% 30%, color-mix(in oklab, var(--color-neon) 12%, transparent) 0%, transparent 65%)",
+              "radial-gradient(60% 55% at 30% 30%, color-mix(in oklab, var(--color-neon) 8%, transparent) 0%, transparent 65%)",
           }}
         />
         <div
@@ -121,7 +121,7 @@ export function HeroBackground() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 88%, transparent) 26%, color-mix(in oklab, var(--background) 40%, transparent) 55%, color-mix(in oklab, var(--background) 20%, transparent) 100%)",
+            "linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 88%, transparent) 26%, color-mix(in oklab, var(--background) 40%, transparent) 55%, color-mix(in oklab, var(--background) 8%, transparent) 100%)",
         }}
       />
       <div
