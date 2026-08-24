@@ -5,6 +5,9 @@ export type Service = {
   short: string;
   body: string;
   glyph: "2" | "3" | "9";
+  lede: string;
+  capabilities: string[];
+  process: { step: string; title: string; detail: string }[];
 };
 
 export const SERVICES: Service[] = [
@@ -15,6 +18,19 @@ export const SERVICES: Service[] = [
     short: "Opportunities, partnerships, pathways.",
     body: "Helping businesses identify opportunities, partnerships and growth pathways.",
     glyph: "2",
+    lede: "We find the routes to revenue that already exist inside your business — then build the structure to walk them.",
+    capabilities: [
+      "Market and opportunity mapping",
+      "Partnership and channel development",
+      "Commercial model design",
+      "Pipeline and forecasting systems",
+      "Sales enablement",
+    ],
+    process: [
+      { step: "01", title: "Diagnose", detail: "We audit demand, pricing and pipeline to see where value actually leaks." },
+      { step: "02", title: "Design", detail: "Offers, partners and commercial models are shaped around real willingness to pay." },
+      { step: "03", title: "Deploy", detail: "We build the operating rhythm — targets, materials, reporting — and hand it over working." },
+    ],
   },
   {
     id: "brand-strategy",
@@ -23,6 +39,19 @@ export const SERVICES: Service[] = [
     short: "Distinctive identity and positioning.",
     body: "Building distinctive brand identities and positioning.",
     glyph: "3",
+    lede: "A brand is a decision, not a decoration. We make the decision clear and make it look inevitable.",
+    capabilities: [
+      "Positioning and narrative",
+      "Naming and verbal identity",
+      "Visual identity systems",
+      "Brand architecture",
+      "Guidelines and rollout",
+    ],
+    process: [
+      { step: "01", title: "Listen", detail: "Interviews, category study and evidence gathering before a single word is written." },
+      { step: "02", title: "Define", detail: "One territory, one idea, one sentence the whole business can repeat." },
+      { step: "03", title: "Build", detail: "A modular identity and system designed to survive every real-world surface." },
+    ],
   },
   {
     id: "digital-experiences",
@@ -31,6 +60,19 @@ export const SERVICES: Service[] = [
     short: "Platforms that connect.",
     body: "Creating modern websites and digital platforms that connect businesses with their audiences.",
     glyph: "9",
+    lede: "Websites and platforms designed around perceived speed, clarity and craft — not template convenience.",
+    capabilities: [
+      "Product and UX design",
+      "Design systems",
+      "Web and platform engineering",
+      "Motion and interaction design",
+      "Performance and accessibility",
+    ],
+    process: [
+      { step: "01", title: "Frame", detail: "We define the one job the experience must do and cut everything else." },
+      { step: "02", title: "Prototype", detail: "Interfaces are tested in motion, not in static mockups." },
+      { step: "03", title: "Ship", detail: "Built, measured and refined against real usage after launch." },
+    ],
   },
   {
     id: "creative-solutions",
@@ -39,6 +81,19 @@ export const SERVICES: Service[] = [
     short: "Campaigns and visual systems.",
     body: "Campaigns, visual systems and creative experiences designed to create impact.",
     glyph: "2",
+    lede: "Work made to be remembered, not merely seen. One message, held with discipline across every surface.",
+    capabilities: [
+      "Campaign concepting",
+      "Art direction",
+      "Film and photography",
+      "Content systems",
+      "Packaging and retail",
+    ],
+    process: [
+      { step: "01", title: "Find the truth", detail: "The single honest thing worth saying about the product." },
+      { step: "02", title: "Build the device", detail: "A creative mechanic that scales across channels without diluting." },
+      { step: "03", title: "Produce", detail: "Art-directed execution, end to end, with quality control at every step." },
+    ],
   },
   {
     id: "growth-strategy",
@@ -47,6 +102,19 @@ export const SERVICES: Service[] = [
     short: "Ideas into sustainable growth.",
     body: "Turning ideas and opportunities into sustainable business growth.",
     glyph: "3",
+    lede: "Growth that compounds instead of spikes — built on unit economics, not campaigns alone.",
+    capabilities: [
+      "Growth modelling",
+      "Pricing and packaging",
+      "Acquisition and retention design",
+      "Analytics and measurement",
+      "Experiment roadmaps",
+    ],
+    process: [
+      { step: "01", title: "Model", detail: "We build the maths of the business before we build the plan." },
+      { step: "02", title: "Prioritise", detail: "A ranked roadmap of moves by impact, confidence and effort." },
+      { step: "03", title: "Compound", detail: "Continuous experimentation with clear reporting to the board." },
+    ],
   },
   {
     id: "digital-transformation",
@@ -55,8 +123,26 @@ export const SERVICES: Service[] = [
     short: "Modern processes and platforms.",
     body: "Helping businesses modernize processes, platforms and customer experiences.",
     glyph: "9",
+    lede: "Modernisation without disruption — process, platform and people moved together, in the right order.",
+    capabilities: [
+      "Process and systems audit",
+      "Platform selection and architecture",
+      "Automation and integration",
+      "Data foundations",
+      "Change enablement",
+    ],
+    process: [
+      { step: "01", title: "Map", detail: "Current processes documented as they truly run, not as the manual claims." },
+      { step: "02", title: "Sequence", detail: "A phased plan that delivers value in months, not years." },
+      { step: "03", title: "Embed", detail: "Training, documentation and ownership so the change survives us." },
+    ],
   },
 ];
+
+export function getService(id: string) {
+  return SERVICES.find((s) => s.id === id);
+}
+
 
 export const HOME_DISCIPLINES = [
   "Strategy",
