@@ -97,7 +97,7 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
 function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | "low" }) {
   const focus = useWorld((s) => s.focus);
 
-  const count = quality === "high" ? 2600 : 1100;
+  const count = quality === "high" ? 1200 : 480;
 
   return (
     <>
