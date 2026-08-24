@@ -73,8 +73,8 @@ export function HeroBackdrop() {
           backgroundImage: `url(${heroEnv})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "blur(3px) saturate(0.9) contrast(1.05) brightness(1.0)",
-          opacity: 1,
+          filter: "blur(4px) saturate(0.55) brightness(1.14) contrast(0.95)",
+          opacity: 0.8,
         }}
       />
 
@@ -86,8 +86,8 @@ export function HeroBackdrop() {
           backgroundImage: `url(${heroEnv})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          filter: "blur(0.4px) saturate(0.95) contrast(1.08)",
-          opacity: 0.85,
+          filter: "blur(1px) saturate(0.6) brightness(1.12)",
+          opacity: 0.45,
           maskImage:
             "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
           WebkitMaskImage:
@@ -122,7 +122,7 @@ export function HeroBackdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(52% 44% at 50% 46%, oklch(0.985 0.004 150 / 74%), oklch(0.98 0.005 150 / 10%) 78%)",
+            "radial-gradient(60% 50% at 50% 46%, oklch(0.99 0.004 150 / 88%), oklch(0.985 0.005 150 / 30%) 80%)",
         }}
       />
       <div
