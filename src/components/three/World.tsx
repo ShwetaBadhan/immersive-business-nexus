@@ -85,7 +85,7 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
       <ambientLight intensity={0.9} color={COL.deep} />
       <hemisphereLight intensity={0.9} color={COL.deep} groundColor={COL.moss} />
       <pointLight ref={key} color={COL.neon} intensity={9} distance={26} decay={2} />
-      <pointLight ref={rim} color={COL.glow} intensity={5} distance={20} decay={2} />
+      <pointLight ref={rim} color={COL.moss} intensity={2.5} distance={16} decay={2} />
       <directionalLight position={[4, 6, 6]} intensity={2.2} color="#ffffff" />
       <directionalLight position={[-5, -2, 3]} intensity={0.8} color={COL.forest} />
     </>
