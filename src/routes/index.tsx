@@ -3,7 +3,6 @@ import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { HeroDiagram } from "@/components/site/HeroDiagram";
-import { HeroBackground } from "@/components/site/HeroBackground";
 
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 
@@ -35,47 +34,45 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
-          <HeroBackground />
-          {/* editorial labels frame the centred content */}
-          <div className="pointer-events-none absolute inset-x-0 top-24 z-10 hidden h-[calc(100%-12rem)] lg:block">
-            <HeroDiagram />
-          </div>
+        <section className="relative flex min-h-svh flex-col justify-between px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
+          <div className="grid flex-1 items-center gap-12 md:grid-cols-12">
+            {/* headline column */}
+            <div className="md:col-span-7 lg:col-span-6">
+              <div className="mb-7 flex items-center gap-4" data-reveal>
+                <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
+                <span className="h-px w-10 bg-neon/60" />
+                <span className="label">Business × Creativity × Technology</span>
+              </div>
+              <div className="max-w-[15ch]">
+                <SplitHeading
+                  text="Build what moves business forward."
+                  className="display-xl text-foreground !text-[clamp(2.5rem,5.4vw,5.6rem)]"
+                />
+              </div>
+              <p
+                className="mt-8 max-w-[44ch] text-sm leading-relaxed text-muted-foreground md:text-base"
+                data-reveal
+                data-reveal-delay={500}
+              >
+                239 The Business Developer LLP creates strategic, digital and creative solutions that help
+                ambitious businesses grow, connect and stand apart.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6" data-reveal data-reveal-delay={620}>
+                <Action to="/about" label="Explore">
+                  Explore 239
+                </Action>
+                <ScrollHint />
+              </div>
+            </div>
 
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
-            <div className="mb-7 flex items-center justify-center gap-4" data-reveal>
-              <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
-              <span className="h-px w-10 bg-neon/60" />
-              <span className="label">Business × Creativity × Technology</span>
-            </div>
-            <div className="mx-auto max-w-[22ch]">
-              <SplitHeading
-                text="Build what moves business forward."
-                className="display-xl text-foreground !text-[clamp(2.4rem,5.2vw,5.4rem)]"
-              />
-            </div>
-            <p
-              className="mx-auto mt-8 max-w-[52ch] text-sm leading-relaxed text-muted-foreground md:text-base"
-              data-reveal
-              data-reveal-delay={420}
-            >
-              239 The Business Developer LLP creates strategic, digital and creative solutions that help
-              ambitious businesses grow, connect and stand apart.
-            </p>
-            <div
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6"
-              data-reveal
-              data-reveal-delay={520}
-            >
-              <Action to="/about" label="Explore">
-                Explore 239
-              </Action>
-              <ScrollHint />
+            {/* 3D composition column — labels only, the network lives in WebGL */}
+            <div className="relative hidden min-h-[30rem] md:col-span-5 md:block lg:col-span-6">
+              <HeroDiagram />
             </div>
           </div>
 
           {/* hero footer strip — ties the composition to the page */}
-          <div className="relative z-10 mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
+          <div className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
             {[
               { k: "Practices", v: "Six" },
               { k: "Continents of work", v: "Three" },

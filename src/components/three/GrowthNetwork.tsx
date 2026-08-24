@@ -26,7 +26,7 @@ function buildNodes(): Node[] {
     const r = 1.85 - t * 0.75 + (i % 3) * 0.12;
     nodes.push({
       base: new THREE.Vector3(Math.cos(a) * r, t * 3.5 - 1.75, Math.sin(a) * r * 0.72),
-      speed: 0.26 + (i % 4) * 0.07,
+      speed: 0.16 + (i % 4) * 0.05,
       phase: i * 0.7,
       key: i % 6 === 0,
     });
@@ -61,15 +61,15 @@ export function GrowthNetwork({ quality }: { quality: "high" | "low" }) {
 
     // parallax + gentle drift away as the page scrolls
     const p = live.progress;
-    g.position.x = live.smoothX * 0.5;
-    g.position.y = (narrow ? 0.2 : -0.15) + live.smoothY * 0.3 - p * 3.6;
-    g.position.z = (narrow ? -6 : -2.6) - p * 3;
+    g.position.x = (narrow ? 0 : 2.35) + live.smoothX * 0.45;
+    g.position.y = (narrow ? 0.2 : -0.3) + live.smoothY * 0.3 - p * 3.6;
+    g.position.z = (narrow ? -6 : -0.4) - p * 3;
     g.scale.setScalar((narrow ? 0.6 : 0.92) * (1 - p * 0.15));
 
     if (inner.current) {
-      inner.current.rotation.y += dt * 0.16;
-      inner.current.rotation.x = THREE.MathUtils.lerp(inner.current.rotation.x, live.smoothY * -0.18, 0.09);
-      inner.current.rotation.z = THREE.MathUtils.lerp(inner.current.rotation.z, live.smoothX * 0.08, 0.09);
+      inner.current.rotation.y += dt * 0.09;
+      inner.current.rotation.x = THREE.MathUtils.lerp(inner.current.rotation.x, live.smoothY * -0.18, 0.04);
+      inner.current.rotation.z = THREE.MathUtils.lerp(inner.current.rotation.z, live.smoothX * 0.08, 0.04);
     }
 
     // nodes climb slowly and wrap — an evolving, growing structure
