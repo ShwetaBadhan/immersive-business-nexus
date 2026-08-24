@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
+import { ServiceCard } from "@/components/site/ServiceCard";
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
+
 import { cursorProps } from "@/components/experience/Cursor";
 import { Link } from "@tanstack/react-router";
 import { playCue } from "@/lib/audio";
