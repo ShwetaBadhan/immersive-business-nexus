@@ -55,6 +55,9 @@ export function GrowthNetwork({ quality }: { quality: "high" | "low" }) {
     const t = state.clock.elapsedTime;
     const g = group.current;
     if (!g) return;
+    // the composition is a desktop feature — on phones the hero stays typographic
+    g.visible = !narrow;
+    if (narrow) return;
 
     // parallax + gentle drift away as the page scrolls
     const p = live.progress;
