@@ -44,7 +44,7 @@ export function HeroBackground() {
       }
       if (light.current) {
         light.current.style.transform = `translate3d(${smooth.x * 160}px, ${smooth.y * 120}px, 0)`;
-        light.current.style.opacity = String(0.5 + Math.abs(smooth.x) * 0.5);
+        light.current.style.opacity = String(0.35 + Math.abs(smooth.x) * 0.3);
       }
       raf = requestAnimationFrame(tick);
     };
@@ -71,8 +71,8 @@ export function HeroBackground() {
           alt=""
           width={1920}
           height={1280}
-          className="h-full w-full object-cover opacity-[0.55]"
-          style={{ filter: "saturate(0.85) contrast(0.96) blur(1.5px)" }}
+          className="h-full w-full object-cover opacity-[0.95]"
+          style={{ filter: "saturate(0.95) contrast(1.02) blur(0.6px)" }}
         />
       </div>
 
@@ -109,9 +109,9 @@ export function HeroBackground() {
       {/* cursor light */}
       <div
         ref={light}
-        className="absolute left-1/2 top-1/2 h-[70vh] w-[70vh] -translate-x-1/2 -translate-y-1/2 will-change-transform"
+        className="absolute left-1/2 top-1/2 h-[55vh] w-[55vh] -translate-x-1/2 -translate-y-1/2 will-change-transform"
         style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 68%)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 68%)",
           mixBlendMode: "screen",
         }}
       />
@@ -121,7 +121,7 @@ export function HeroBackground() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 78%, transparent) 34%, color-mix(in oklab, var(--background) 34%, transparent) 62%, color-mix(in oklab, var(--background) 70%, transparent) 100%)",
+            "linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 88%, transparent) 26%, color-mix(in oklab, var(--background) 40%, transparent) 55%, color-mix(in oklab, var(--background) 20%, transparent) 100%)",
         }}
       />
       <div
