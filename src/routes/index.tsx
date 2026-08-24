@@ -3,6 +3,7 @@ import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { HeroDiagram } from "@/components/site/HeroDiagram";
+import { HeroBackground } from "@/components/site/HeroBackground";
 
 import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 
@@ -34,8 +35,9 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="relative flex min-h-svh flex-col justify-between px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
-          <div className="grid flex-1 items-center gap-12 md:grid-cols-12">
+        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
+          <HeroBackground />
+          <div className="relative z-10 grid flex-1 items-center gap-12 md:grid-cols-12">
             {/* headline column */}
             <div className="md:col-span-7 lg:col-span-6">
               <div className="mb-7 flex items-center gap-4" data-reveal>
@@ -72,7 +74,7 @@ function Home() {
           </div>
 
           {/* hero footer strip — ties the composition to the page */}
-          <div className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
+          <div className="relative z-10 mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
             {[
               { k: "Practices", v: "Six" },
               { k: "Continents of work", v: "Three" },
