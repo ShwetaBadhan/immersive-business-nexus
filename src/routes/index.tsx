@@ -74,7 +74,7 @@ function Home() {
           </div>
 
           {/* hero footer strip — ties the composition to the page */}
-          <div className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
+          <div className="relative z-10 mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
             {[
               { k: "Practices", v: "Six" },
               { k: "Continents of work", v: "Three" },
