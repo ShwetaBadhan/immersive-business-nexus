@@ -59,7 +59,7 @@ export function GrowthNetwork({ quality }: { quality: "high" | "low" }) {
     // parallax + gentle drift away as the page scrolls
     const p = live.progress;
     g.position.x = (narrow ? 0 : 2.35) + live.smoothX * 0.45;
-    g.position.y = (narrow ? 1.1 : -0.15) + live.smoothY * 0.3 - p * 3.6;
+    g.position.y = (narrow ? 1.05 : -0.3) + live.smoothY * 0.3 - p * 3.6;
     g.position.z = -0.4 - p * 3;
     g.scale.setScalar((narrow ? 0.72 : 0.92) * (1 - p * 0.15));
 
@@ -199,12 +199,12 @@ function StrategyPrism() {
     if (!m) return;
     m.rotation.y += dt * 0.22;
     m.rotation.x += dt * 0.1;
-    m.position.y = 1.6 + Math.sin(state.clock.elapsedTime * 0.42) * 0.08;
+    m.position.y = 1.42 + Math.sin(state.clock.elapsedTime * 0.42) * 0.08;
     m.scale.setScalar(THREE.MathUtils.lerp(m.scale.x, hovered ? 1.2 : 1, 0.08));
   });
 
   return (
-    <mesh ref={ref} position={[-1.5, 1.6, 0.6]} {...bind}>
+    <mesh ref={ref} position={[-1.5, 1.42, 0.6]} {...bind}>
       <octahedronGeometry args={[0.32, 0]} />
       <meshStandardMaterial color={COL.brand} roughness={0.18} metalness={0.5} flatShading />
     </mesh>
