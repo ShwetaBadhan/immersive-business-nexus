@@ -12,4 +12,5 @@ export const SERVICE_IMAGES: Record<string, string> = {
   "creative-solutions": creativeSolutions,
   "growth-strategy": growthStrategy,
   "digital-transformation": digitalTransformation,
+  "website-&-technology-solutions": digitalTransformation,
 };

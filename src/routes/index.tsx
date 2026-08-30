@@ -43,7 +43,7 @@ function Home() {
             <div className="mb-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2" data-reveal>
               <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
               <span className="h-px w-10 bg-neon/60" />
-              <span className="label whitespace-nowrap !text-[0.6rem] md:!text-[0.65rem]">Business × Creativity × Technology</span>
+              <span className="label whitespace-nowrap !text-[0.6rem] md:!text-[0.65rem]">Research × Strategize × Execute × Scale</span>
             </div>
 
             <SplitHeading
@@ -60,8 +60,7 @@ function Home() {
               data-reveal
               data-reveal-delay={500}
             >
-              239 The Business Developer LLP creates strategic, digital and creative solutions that help
-              ambitious businesses grow, connect and stand apart.
+              239 The Business Developers LLP is one of the oldest and most trusted business growth consulting and e-commerce solutions companies, helping brands establish, expand, and scale their business operations across online and offline channels.
             </p>
 
             <div
@@ -79,9 +78,9 @@ function Home() {
           {/* hero footer strip — ties the composition to the page */}
           <div className="relative z-10 mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
             {[
-              { k: "Practices", v: "Six" },
-              { k: "Continents of work", v: "Three" },
-              { k: "Years of momentum", v: "Nine" },
+              { k: "Practices", v: "Thirteen" },
+              { k: "Growth Ecosystem", v: "360*" },
+              { k: "Years of momentum", v: "Ten" },
               { k: "Based in", v: "India" },
             ].map((s) => (
               <div key={s.k} className="flex flex-col gap-2">
@@ -106,15 +105,14 @@ function Home() {
             />
             <div className="mt-16 grid gap-12 md:grid-cols-12">
               <p className="text-sm leading-relaxed text-muted-foreground md:col-span-5 md:col-start-7 md:text-base" data-reveal data-reveal-delay={200}>
-                From strategy and digital experiences to brand development and growth solutions, 239 brings
-                business thinking and creative execution together.
+                Our approach begins with understanding the client's business, industry, objectives, competition, available resources, and growth potential. We identify the most profitable and sustainable path for growth before recommending any service or investment.
               </p>
             </div>
             <div className="mt-24 grid grid-cols-3 gap-6 border-t border-border pt-10" data-reveal data-reveal-delay={280}>
               {[
                 { n: "2", l: "Disciplines fused — business & creative" },
-                { n: "3", l: "Continents of client work" },
-                { n: "9", l: "Years building momentum" },
+                { n: "13", l: "Continents of client work" },
+                { n: "10", l: "Years building momentum" },
               ].map((s) => (
                 <div key={s.n}>
                   <div className="font-display text-5xl leading-none text-glow md:text-7xl" style={{ textShadow: "var(--glow-soft)" }}>
@@ -136,7 +134,7 @@ function Home() {
             <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <SplitHeading
                 as="h2"
-                text="Six practices, one team."
+                text="Thirteen practices, one team."
                 className="display-lg max-w-[16ch] text-foreground"
               />
               <p className="max-w-[38ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={220}>

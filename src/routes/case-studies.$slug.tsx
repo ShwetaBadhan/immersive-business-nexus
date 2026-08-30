@@ -59,10 +59,9 @@ function CaseStudy() {
   ];
 
   const chapters = [
-    { n: "01", t: "The challenge", b: project.challenge },
-    { n: "02", t: "The approach", b: project.approach },
-    { n: "03", t: "The solution", b: project.solution },
-  ];
+  { n: "01", t: "The challenge", b: project.challenge },
+  { n: "02", t: "The approach", b: project.approach },
+];
 
   return (
     <Overlay>
@@ -116,39 +115,61 @@ function CaseStudy() {
           </div>
         </section>
 
-        {/* chapters */}
-        <div className="px-6 md:px-14">
-          {chapters.map((c) => (
-            <section key={c.n} className="grid gap-6 border-t border-border py-14 md:grid-cols-12 md:gap-10">
-              <div className="md:col-span-4">
-                <span className="label !text-glow">{c.n}</span>
-                <h2 className="display-md mt-4 text-foreground">{c.t}</h2>
-              </div>
-              <p
-                className="text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed"
-              >
-                {c.b}
-              </p>
-            </section>
-          ))}
-        </div>
+       {/* chapters */}
+<div className="px-6 md:px-14">
+  {chapters.map((c) => (
+    <section
+      key={c.n}
+      className="grid gap-6 border-t border-border py-14 md:grid-cols-12 md:gap-10"
+    >
+      <div className="md:col-span-4">
+        <span className="label !text-glow">{c.n}</span>
+        <h2 className="display-md mt-4 text-foreground">{c.t}</h2>
+      </div>
 
-        {/* results */}
-        <section className="px-6 pb-16 md:px-14 md:pb-20">
-          <div className="border-t border-border pt-12">
-            <span className="label">04 — Results</span>
-            <div className="mt-10 grid gap-10 md:grid-cols-3">
-              {project.results.map((r) => (
-                <div key={r.label}>
-                  <div className="font-display text-5xl leading-none text-glow md:text-7xl">
-                    {r.value}
-                  </div>
-                  <p className="label mt-4">{r.label}</p>
-                </div>
-              ))}
-            </div>
+      <p className="whitespace-pre-line text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed">
+        {c.b}
+      </p>
+    </section>
+  ))}
+</div>
+
+{/* results */}
+<section className="px-6 pb-16 md:px-14 md:pb-20">
+  <div className="border-t border-border pt-12">
+    <span className="label">03 — Results</span>
+
+    <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
+      {project.results.map((r) => (
+        <div key={r.label} className="min-w-0">
+          <div className="font-display text-4xl leading-[0.95] tracking-[-0.04em] text-glow sm:text-5xl md:text-[3.5rem] lg:text-[4rem]">
+            {r.value}
           </div>
-        </section>
+
+          <p className="label mt-4 max-w-[24ch] leading-relaxed">
+            {r.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* impact */}
+<section className="px-6 md:px-14">
+  <section className="grid gap-6 border-t border-border py-14 md:grid-cols-12 md:gap-10">
+    <div className="md:col-span-4">
+      <span className="label !text-glow">04</span>
+      <h2 className="display-md mt-4 text-foreground">
+        Our impact
+      </h2>
+    </div>
+
+    <p className="whitespace-pre-line text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed">
+      {project.impact}
+    </p>
+  </section>
+</section>
 
         {/* next */}
         <section className="border-t border-border px-6 py-14 md:px-14 md:py-16">

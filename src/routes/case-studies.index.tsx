@@ -39,7 +39,7 @@ function CaseStudies() {
       <Overlay>
         <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
           <SectionBackdrop label="Work" />
-          <SectionMarker index="—" title="Selected work" />
+          <SectionMarker index="—" title="" />
           <SplitHeading text="Work that moved something." className="display-xl max-w-[14ch] text-foreground" />
           <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-[44ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={380}>
