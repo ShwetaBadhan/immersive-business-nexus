@@ -110,9 +110,9 @@ export function HeroBackdrop() {
           backgroundImage: `url(${heroEnv})`,
           ...framing,
           filter: compact
-            ? "blur(2px) saturate(0.62) brightness(1.08) contrast(1)"
-            : "blur(4px) saturate(0.55) brightness(1.14) contrast(0.95)",
-          opacity: compact ? 0.92 : 0.8,
+            ? "blur(1.5px) saturate(0.62) brightness(1.1)"
+            : "blur(2.5px) saturate(0.58) brightness(1.16)",
+          opacity: compact ? 0.82 : 0.7,
         }}
       />
 
@@ -124,7 +124,7 @@ export function HeroBackdrop() {
           backgroundImage: `url(${heroEnv})`,
           ...framing,
           filter: "blur(1px) saturate(0.6) brightness(1.12)",
-          opacity: compact ? 0.3 : 0.45,
+          opacity: compact ? 0.24 : 0.34,
           maskImage: compact
             ? "radial-gradient(120% 70% at 50% 66%, rgba(0,0,0,0.95), rgba(0,0,0,0) 74%)"
             : "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
@@ -150,10 +150,7 @@ export function HeroBackdrop() {
         <span className="absolute left-[52%] top-0 h-full w-px bg-neon/18" />
         <span className="absolute left-[84%] top-0 h-full w-px bg-neon/25" />
         <span className="absolute left-0 top-[32%] h-px w-full bg-foreground/[0.1]" />
-        <span className="absolute left-0 top-[74%] h-px w-full bg-foreground/[0.1]" />
         <span className="absolute left-[52%] top-[32%] h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/50" />
-        <span className="absolute left-[84%] top-[74%] h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/40" />
-        <span className="absolute left-[14%] top-[74%] h-[5px] w-[5px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-neon/30" />
       </div>
 
       {/* paper wash keeps typography legible + depth-of-field falloff */}
@@ -175,7 +172,7 @@ export function HeroBackdrop() {
 
       {/* film grain */}
       <div
-        className="absolute inset-0 opacity-[0.05] mix-blend-multiply"
+        className="absolute inset-0 opacity-[0.035] mix-blend-multiply"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E\")",
