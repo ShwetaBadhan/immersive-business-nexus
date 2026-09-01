@@ -126,7 +126,7 @@ export function Nav() {
               to={l.to}
               onClick={() => playCue("click")}
               className={cn(
-                "display-lg block border-b border-border/20 py-5 text-foreground transition-all duration-700 last:border-b-0",
+                "display-lg block border-b border-border/20 py-6 text-foreground transition-all duration-700 last:border-b-0",
                 active && "text-glow"
               )}
               style={{
