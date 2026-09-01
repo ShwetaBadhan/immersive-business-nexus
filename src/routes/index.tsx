@@ -58,7 +58,7 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(5rem,11vh,7rem)] sm:pb-10 sm:pt-28 md:px-10 md:pb-12 md:pt-32">
+        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-3 min-[360px]:px-4 min-[420px]:px-5 sm:px-5 md:px-10 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(5rem,11vh,7rem)] sm:pb-10 sm:pt-28 md:pb-12 md:pt-32">
           <HeroBackdrop />
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
