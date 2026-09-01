@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Fragment } from "react";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
@@ -12,6 +13,22 @@ import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 import { cursorProps } from "@/components/experience/Cursor";
 import { Link } from "@tanstack/react-router";
 import { playCue } from "@/lib/audio";
+
+const HERO_STATS = [
+  { k: "Practices", v: "Thirteen" },
+  { k: "Growth Ecosystem", v: "360*" },
+  { k: "Years of momentum", v: "Ten" },
+  { k: "Based in", v: "India" },
+];
+
+function StatBlock({ s }: { s: typeof HERO_STATS[0] }) {
+  return (
+    <div className="flex flex-col gap-2 text-center sm:text-left">
+      <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
+      <span className="label !tracking-[0.18em]">{s.k}</span>
+    </div>
+  );
+}
 
 const TITLE = "239 The Business Developer LLP — Build What Moves Business Forward";
 const DESC =
