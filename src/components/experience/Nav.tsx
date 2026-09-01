@@ -17,9 +17,17 @@ export function Nav() {
   const entered = useWorld((s) => s.entered);
   const sound = useWorld((s) => s.sound);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const toggleSound = () => {
     const next = !sound;
@@ -28,12 +36,21 @@ export function Nav() {
     if (next) playCue("open");
   };
 
+  const glass = scrolled || open;
+
   return (
     <header
       className="pointer-events-none fixed inset-x-0 top-0 z-50 transition-opacity duration-1000"
       style={{ opacity: entered ? 1 : 0 }}
     >
-      <div className="flex items-start justify-between px-5 py-5 md:px-10 md:py-8">
+      <div
+        className={cn(
+          "transition-all duration-300 ease-out",
+          glass &&
+            "border-b border-border/30 bg-deep/85 shadow-[0_1px_0_rgba(0,0,0,0.04)] backdrop-blur-[16px]"
+        )}
+      >
+        <div className="flex items-start justify-between px-5 py-5 md:px-10 md:py-8">
         <Link
           to="/"
           {...cursorProps("Home")}
