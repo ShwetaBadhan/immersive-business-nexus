@@ -144,8 +144,8 @@ function Home() {
             <div className="mt-24 grid grid-cols-3 gap-6 border-t border-border pt-10" data-reveal data-reveal-delay={280}>
               {[
                 { n: "2", l: "Disciplines fused — business & creative" },
-                { n: "13", l: "Continents of client work" },
-                { n: "10", l: "Years building momentum" },
+                { n: "3", l: "Continents of client work" },
+                { n: "9", l: "Years building momentum" },
               ].map((s) => (
                 <div key={s.n}>
                   <div className="font-display text-5xl leading-none text-glow md:text-7xl" style={{ textShadow: "var(--glow-soft)" }}>
