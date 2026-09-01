@@ -124,18 +124,17 @@ function Home() {
               <StatBlock s={HERO_STATS[3]} />
             </div>
 
-            {/* Mobile: editorial 2×2 metric strip with hairline flow connectors */}
+            {/* Mobile: Thirteen → 360° ← Ten on one line, India centered below */}
             <div className="sm:hidden">
-              <div className="grid grid-cols-[minmax(0,1fr)_3.25rem_minmax(0,1fr)] items-center gap-y-[clamp(0.7rem,1.8vh,1rem)]">
-                <MobileStat s={HERO_STATS[0]} delay={80} />
-                <MobileFlowLine delay={520} />
-                <MobileStat s={HERO_STATS[1]} align="right" delay={160} />
-
-                <span className="col-span-3 h-px w-full bg-border" />
-
-                <MobileStat s={HERO_STATS[2]} delay={240} />
-                <MobileFlowLine reverse delay={1040} />
-                <MobileStat s={HERO_STATS[3]} align="right" delay={320} />
+              <div className="flex items-center justify-center gap-2 xs:gap-3 sm:gap-4">
+                <StatBlock s={HERO_STATS[0]} compact />
+                <FlowArrow compact delay={520} />
+                <StatBlock s={HERO_STATS[1]} compact />
+                <FlowArrow compact reverse delay={1040} />
+                <StatBlock s={HERO_STATS[2]} compact />
+              </div>
+              <div className="mt-5 flex justify-center xs:mt-6" data-reveal data-reveal-delay={320}>
+                <StatBlock s={HERO_STATS[3]} compact />
               </div>
             </div>
           </div>
