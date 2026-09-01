@@ -29,6 +29,58 @@ function StatBlock({ s }: { s: (typeof HERO_STATS)[number] }) {
   );
 }
 
+/** Mobile-only editorial metric: large value, hairline label. */
+function MobileStat({
+  s,
+  align = "left",
+  delay = 0,
+}: {
+  s: (typeof HERO_STATS)[number];
+  align?: "left" | "right";
+  delay?: number;
+}) {
+  return (
+    <div
+      className={`flex min-w-0 flex-col gap-1.5 ${align === "right" ? "items-end text-right" : "items-start text-left"}`}
+      data-reveal
+      data-reveal-delay={delay}
+    >
+      <span className="font-display text-[clamp(1.5rem,7vw,2rem)] leading-[0.9] text-foreground">
+        {s.v}
+      </span>
+      <span className="label !text-[0.5rem] !tracking-[0.22em] text-muted-foreground">{s.k}</span>
+    </div>
+  );
+}
+
+/** Hairline decorative connector for the mobile metric grid. */
+function MobileFlowLine({ reverse = false, delay = 0 }: { reverse?: boolean; delay?: number }) {
+  return (
+    <span
+      aria-hidden
+      className="flow-arrow flex items-center justify-center text-glow"
+      style={{ transform: reverse ? "scaleX(-1)" : undefined, animationDelay: `${delay}ms` }}
+    >
+      <svg width="100%" height="10" viewBox="0 0 120 10" fill="none" preserveAspectRatio="none">
+        <line x1="0" y1="5" x2="110" y2="5" stroke="currentColor" strokeWidth="1" opacity="0.28" />
+        <line
+          x1="0"
+          y1="5"
+          x2="110"
+          y2="5"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="16 104"
+          className="flow-arrow-dash"
+          style={{ animationDelay: `${delay}ms` }}
+        />
+        <path d="M109 1.5 L118 5 L109 8.5 Z" fill="currentColor" opacity="0.8" />
+      </svg>
+    </span>
+  );
+}
+
+
 const TITLE = "239 The Business Developer LLP — Build What Moves Business Forward";
 const DESC =
   "239 The Business Developer LLP creates strategic, digital and creative solutions that help ambitious businesses grow, connect and stand apart.";
@@ -53,37 +105,37 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-10 pt-28 md:px-10 md:pb-12 md:pt-32">
+        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(6rem,16vh,7rem)] sm:pb-10 sm:pt-28 md:px-10 md:pb-12 md:pt-32">
           <HeroBackdrop />
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
-            <div className="mb-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2" data-reveal>
-              <span className="font-mono text-[0.6rem] tracking-[0.3em] text-glow">01</span>
-              <span className="h-px w-10 bg-neon/60" />
-              <span className="label whitespace-nowrap !text-[0.6rem] md:!text-[0.65rem]">Research × Strategize × Execute × Scale</span>
+            <div className="mb-[clamp(1.25rem,4vh,1.75rem)] flex w-full max-w-full items-center justify-center gap-2 sm:mb-7 sm:flex-wrap sm:gap-x-4 sm:gap-y-2" data-reveal>
+              <span className="shrink-0 font-mono text-[0.55rem] tracking-[0.3em] text-glow sm:text-[0.6rem]">01</span>
+              <span className="h-px w-6 shrink-0 bg-neon/50 sm:w-10 sm:bg-neon/60" />
+              <span className="label whitespace-nowrap !text-[clamp(0.44rem,2.1vw,0.6rem)] !tracking-[0.24em] sm:!text-[0.6rem] md:!text-[0.65rem]">Research × Strategize × Execute × Scale</span>
             </div>
 
             <SplitHeading
               text="Build what moves"
-              className="display-xl text-foreground !text-[clamp(2.4rem,6vw,5.4rem)]"
+              className="display-xl hero-title-mobile text-foreground"
             />
             <SplitHeading
               text="business forward."
-              className="display-xl text-foreground !text-[clamp(2.4rem,6vw,5.4rem)]"
+              className="display-xl hero-title-mobile text-foreground"
             />
 
             <p
-              className="mt-8 max-w-[48ch] text-sm leading-relaxed text-muted-foreground md:text-base"
+              className="mt-[clamp(1.25rem,3.5vh,2rem)] max-w-[34ch] text-sm !leading-[1.65] text-muted-foreground sm:mt-8 sm:max-w-[48ch] sm:!leading-relaxed md:text-base"
               data-reveal
-              data-reveal-delay={500}
+              data-reveal-delay={360}
             >
               239 The Business Developers LLP is one of the oldest and most trusted business growth consulting and e-commerce solutions companies, helping brands establish, expand, and scale their business operations across online and offline channels.
             </p>
 
             <div
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6"
+              className="mt-[clamp(1.75rem,4.5vh,2.5rem)] flex flex-col items-center gap-5 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-6"
               data-reveal
-              data-reveal-delay={620}
+              data-reveal-delay={460}
             >
               <Action to="/about" label="Explore">
                 Explore 239
@@ -94,9 +146,9 @@ function Home() {
 
           {/* hero footer strip — statistics connected by flowing arrows */}
           <div
-            className="relative z-10 mt-10 border-t border-border pt-8"
+            className="relative z-10 mt-[clamp(1.5rem,4vh,2.5rem)] border-t border-border pt-[clamp(1.25rem,3.5vh,2rem)] sm:mt-10 sm:pt-8"
             data-reveal
-            data-reveal-delay={760}
+            data-reveal-delay={620}
           >
             {/* Desktop: Thirteen → 360° ← Ten  (India has no arrow) */}
             <div className="hidden items-center justify-between gap-4 sm:flex">
@@ -108,17 +160,22 @@ function Home() {
               <StatBlock s={HERO_STATS[3]} />
             </div>
 
-            {/* Mobile: same logical flow, vertical */}
-            <div className="flex flex-col gap-6 sm:hidden">
-              {HERO_STATS.map((s, i) => (
-                <div key={s.k} className="flex items-center gap-4">
-                  {i === 1 && <FlowArrow vertical delay={520} />}
-                  {i === 2 && <FlowArrow vertical reverse delay={1040} />}
-                  <StatBlock s={s} />
-                </div>
-              ))}
+            {/* Mobile: editorial 2×2 metric strip with hairline flow connectors */}
+            <div className="sm:hidden">
+              <div className="grid grid-cols-[minmax(0,1fr)_3.25rem_minmax(0,1fr)] items-center gap-y-[clamp(0.85rem,2.5vh,1.25rem)]">
+                <MobileStat s={HERO_STATS[0]} delay={80} />
+                <MobileFlowLine delay={520} />
+                <MobileStat s={HERO_STATS[1]} align="right" delay={160} />
+
+                <span className="col-span-3 h-px w-full bg-border" />
+
+                <MobileStat s={HERO_STATS[2]} delay={240} />
+                <MobileFlowLine reverse delay={1040} />
+                <MobileStat s={HERO_STATS[3]} align="right" delay={320} />
+              </div>
             </div>
           </div>
+
 
         </section>
 
