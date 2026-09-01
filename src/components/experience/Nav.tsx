@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { cursorProps } from "./Cursor";
 import { live, setWorld, useWorld } from "@/lib/world-store";
 import { playCue, setAudioEnabled } from "@/lib/audio";
+import { cn } from "@/lib/utils";
 
 const LINKS = [
   { to: "/", label: "Home" },
@@ -16,9 +17,17 @@ export function Nav() {
   const entered = useWorld((s) => s.entered);
   const sound = useWorld((s) => s.sound);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const toggleSound = () => {
     const next = !sound;
@@ -27,33 +36,42 @@ export function Nav() {
     if (next) playCue("open");
   };
 
+  const glass = scrolled || open;
+
   return (
     <header
       className="pointer-events-none fixed inset-x-0 top-0 z-50 transition-opacity duration-1000"
       style={{ opacity: entered ? 1 : 0 }}
     >
-      <div className="flex items-start justify-between px-5 py-5 md:px-10 md:py-8">
-        <Link
-          to="/"
-          {...cursorProps("Home")}
-          onClick={() => playCue("click")}
-          className="pointer-events-auto flex items-baseline gap-2"
-        >
-          <span
-            className="font-display text-2xl leading-none tracking-[-0.06em] text-foreground md:text-3xl"
-            style={{ textShadow: "var(--glow-soft)" }}
+      <div
+        className={cn(
+          "transition-all duration-300 ease-out",
+          glass &&
+            "border-b border-border/30 bg-deep/85 shadow-[0_1px_0_rgba(0,0,0,0.04)] backdrop-blur-[16px]"
+        )}
+      >
+        <div className="flex items-start justify-between px-5 py-5 md:px-10 md:py-8">
+          <Link
+            to="/"
+            {...cursorProps("Home")}
+            onClick={() => playCue("click")}
+            className="pointer-events-auto flex items-baseline gap-2"
           >
-            239
-          </span>
-          <span className="label hidden md:inline">The Business Developer LLP</span>
-        </Link>
+            <span
+              className="font-display text-2xl leading-none tracking-[-0.06em] text-foreground md:text-3xl"
+              style={{ textShadow: "var(--glow-soft)" }}
+            >
+              239
+            </span>
+            <span className="label hidden md:inline">The Business Developer LLP</span>
+          </Link>
 
-        <nav className="pointer-events-auto hidden items-center gap-10 md:flex">
-          {LINKS.map((l) => (
-            <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
-          ))}
-          <SoundToggle sound={sound} onToggle={toggleSound} />
-        </nav>
+          <nav className="pointer-events-auto hidden items-center gap-10 md:flex">
+            {LINKS.map((l) => (
+              <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
+            ))}
+            <SoundToggle sound={sound} onToggle={toggleSound} />
+          </nav>
 
         <button
           {...cursorProps(open ? "Close" : "Menu")}
@@ -61,49 +79,69 @@ export function Nav() {
             setOpen((v) => !v);
             playCue("click");
           }}
-          className="pointer-events-auto flex flex-col items-end gap-[5px] py-2 md:hidden"
+          className={cn(
+            "pointer-events-auto relative flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
+            open && "bg-foreground/10"
+          )}
           aria-label="Toggle menu"
           aria-expanded={open}
         >
-          <span
-            className="block h-px bg-foreground transition-all duration-500"
-            style={{ width: 26, transform: open ? "translateY(6px) rotate(45deg)" : "none" }}
-          />
-          <span
-            className="block h-px bg-foreground transition-all duration-500"
-            style={{ width: open ? 26 : 16, transform: open ? "translateY(-1px) rotate(-45deg)" : "none" }}
-          />
+          <span className="relative flex h-3.5 w-[26px] items-center justify-center">
+            <span
+              className="absolute block transition-all duration-500"
+              style={{
+                width: 26,
+                height: open ? 2.5 : 1.5,
+                transform: open ? "rotate(45deg)" : "translateY(-3px)",
+                backgroundColor: open ? "var(--color-foreground)" : "var(--color-foreground)",
+              }}
+            />
+            <span
+              className="absolute block transition-all duration-500"
+              style={{
+                width: open ? 26 : 16,
+                height: open ? 2.5 : 1.5,
+                transform: open ? "rotate(-45deg)" : "translateY(3px)",
+                backgroundColor: "var(--color-foreground)",
+              }}
+            />
+          </span>
         </button>
+        </div>
       </div>
 
       {/* mobile sheet */}
       <div
-        className="pointer-events-auto fixed inset-0 z-40 flex flex-col justify-center gap-2 px-6 backdrop-blur-xl transition-all duration-700 md:hidden"
+        className="pointer-events-auto fixed inset-0 z-40 flex flex-col justify-center gap-1 bg-deep/97 px-6 pt-28 transition-all duration-500 ease-out md:hidden"
         style={{
-          backgroundColor: "oklch(0.1735 0.0272 173.04 / 92%)",
           opacity: open ? 1 : 0,
           pointerEvents: open ? "auto" : "none",
         }}
       >
-        {LINKS.map((l, i) => (
-          <Link
-            key={l.to}
-            to={l.to}
-            onClick={() => playCue("click")}
-            className="display-lg block py-1 text-foreground transition-all duration-700"
-            style={{
-              opacity: open ? 1 : 0,
-              transform: open ? "none" : "translateY(1.5rem)",
-              transitionDelay: `${i * 60 + 90}ms`,
-              color: isActive(pathname, l.to) ? "var(--color-glow)" : undefined,
-            }}
-          >
-            {l.label}
-          </Link>
-        ))}
+        {LINKS.map((l, i) => {
+          const active = isActive(pathname, l.to);
+          return (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => playCue("click")}
+              className={cn(
+                "display-lg block border-b border-border/20 py-6 text-foreground transition-all duration-700 last:border-b-0",
+                active && "text-glow"
+              )}
+              style={{
+                opacity: open ? 1 : 0,
+                transform: open ? "none" : "translateY(1.25rem)",
+                transitionDelay: `${i * 60 + 90}ms`,
+              }}
+            >
+              {l.label}
+            </Link>
+          );
+        })}
         <button
           onClick={toggleSound}
-          className="label mt-8 self-start !text-glow"
+          className="label mt-10 self-start text-foreground/80 transition-colors duration-500 hover:text-glow"
         >
           Sound {sound ? "on" : "off"}
         </button>
