@@ -20,39 +20,40 @@ export function FlowArrow({
       }}
     >
       <svg
-        width="56"
-        height="16"
-        viewBox="0 0 56 16"
+        width="104"
+        height="20"
+        viewBox="0 0 104 20"
         fill="none"
         className="overflow-visible"
       >
         <line
-          x1="0"
-          y1="8"
-          x2="40"
-          y2="8"
+          x1="2"
+          y1="10"
+          x2="86"
+          y2="10"
           stroke="currentColor"
-          strokeWidth="1.5"
-          opacity="0.28"
+          strokeWidth="3"
+          strokeLinecap="round"
         />
         <line
-          x1="0"
-          y1="8"
-          x2="40"
-          y2="8"
+          x1="2"
+          y1="10"
+          x2="86"
+          y2="10"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="10 34"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeDasharray="18 70"
           className="flow-arrow-dash"
           style={{ animationDelay: `${delay}ms` }}
+          opacity="0.5"
         />
         <path
-          d="M40 3 L48 8 L40 13"
+          d="M84 3 L98 10 L84 17 Z"
+          fill="currentColor"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
+          strokeWidth="2"
           strokeLinejoin="round"
-          opacity="0.6"
         />
       </svg>
     </span>
