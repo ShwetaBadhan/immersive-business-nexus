@@ -126,7 +126,7 @@ function Home() {
 
             {/* Mobile: Thirteen → 360° ← Ten on one line, India centered below */}
             <div className="sm:hidden">
-              <div className="flex items-center justify-center gap-1 min-[360px]:gap-2 min-[420px]:gap-3">
+              <div className="flex items-center justify-center gap-0 min-[360px]:gap-1 min-[420px]:gap-2">
                 <StatBlock s={HERO_STATS[0]} compact />
                 <FlowArrow compact delay={520} />
                 <StatBlock s={HERO_STATS[1]} compact />
