@@ -107,31 +107,36 @@ export function Nav() {
 
       {/* mobile sheet */}
       <div
-        className="pointer-events-auto fixed inset-0 z-40 flex flex-col justify-center gap-3 bg-deep/96 px-6 pt-28 transition-all duration-500 ease-out md:hidden"
+        className="pointer-events-auto fixed inset-0 z-40 flex flex-col justify-center gap-1 bg-deep/97 px-6 pt-28 transition-all duration-500 ease-out md:hidden"
         style={{
           opacity: open ? 1 : 0,
           pointerEvents: open ? "auto" : "none",
         }}
       >
-        {LINKS.map((l, i) => (
-          <Link
-            key={l.to}
-            to={l.to}
-            onClick={() => playCue("click")}
-            className="display-lg block py-1 text-foreground transition-all duration-700"
-            style={{
-              opacity: open ? 1 : 0,
-              transform: open ? "none" : "translateY(1.5rem)",
-              transitionDelay: `${i * 60 + 90}ms`,
-              color: isActive(pathname, l.to) ? "var(--color-glow)" : undefined,
-            }}
-          >
-            {l.label}
-          </Link>
-        ))}
+        {LINKS.map((l, i) => {
+          const active = isActive(pathname, l.to);
+          return (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => playCue("click")}
+              className={cn(
+                "display-lg block border-b border-border/20 py-5 text-foreground transition-all duration-700 last:border-b-0",
+                active && "text-glow"
+              )}
+              style={{
+                opacity: open ? 1 : 0,
+                transform: open ? "none" : "translateY(1.25rem)",
+                transitionDelay: `${i * 60 + 90}ms`,
+              }}
+            >
+              {l.label}
+            </Link>
+          );
+        })}
         <button
           onClick={toggleSound}
-          className="label mt-8 self-start !text-glow"
+          className="label mt-10 self-start text-foreground/80 transition-colors duration-500 hover:text-glow"
         >
           Sound {sound ? "on" : "off"}
         </button>
