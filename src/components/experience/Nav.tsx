@@ -51,57 +51,57 @@ export function Nav() {
         )}
       >
         <div className="flex items-start justify-between px-5 py-5 md:px-10 md:py-8">
-        <Link
-          to="/"
-          {...cursorProps("Home")}
-          onClick={() => playCue("click")}
-          className="pointer-events-auto flex items-baseline gap-2"
-        >
-          <span
-            className="font-display text-2xl leading-none tracking-[-0.06em] text-foreground md:text-3xl"
-            style={{ textShadow: "var(--glow-soft)" }}
+          <Link
+            to="/"
+            {...cursorProps("Home")}
+            onClick={() => playCue("click")}
+            className="pointer-events-auto flex items-baseline gap-2"
           >
-            239
-          </span>
-          <span className="label hidden md:inline">The Business Developer LLP</span>
-        </Link>
-
-        <nav className="pointer-events-auto hidden items-center gap-10 md:flex">
-          {LINKS.map((l) => (
-            <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
-          ))}
-          <SoundToggle sound={sound} onToggle={toggleSound} />
-        </nav>
-
-        <button
-          {...cursorProps(open ? "Close" : "Menu")}
-          onClick={() => {
-            setOpen((v) => !v);
-            playCue("click");
-          }}
-          className="pointer-events-auto flex min-h-11 min-w-11 items-center justify-center md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span className="relative flex h-3.5 w-[26px] items-center justify-center">
             <span
-              className="absolute block bg-foreground transition-all duration-500"
-              style={{
-                width: 26,
-                height: open ? 2 : 1,
-                transform: open ? "rotate(45deg)" : "translateY(-3px)",
-              }}
-            />
-            <span
-              className="absolute block bg-foreground transition-all duration-500"
-              style={{
-                width: open ? 26 : 16,
-                height: open ? 2 : 1,
-                transform: open ? "rotate(-45deg)" : "translateY(3px)",
-              }}
-            />
-          </span>
-        </button>
+              className="font-display text-2xl leading-none tracking-[-0.06em] text-foreground md:text-3xl"
+              style={{ textShadow: "var(--glow-soft)" }}
+            >
+              239
+            </span>
+            <span className="label hidden md:inline">The Business Developer LLP</span>
+          </Link>
+
+          <nav className="pointer-events-auto hidden items-center gap-10 md:flex">
+            {LINKS.map((l) => (
+              <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
+            ))}
+            <SoundToggle sound={sound} onToggle={toggleSound} />
+          </nav>
+
+          <button
+            {...cursorProps(open ? "Close" : "Menu")}
+            onClick={() => {
+              setOpen((v) => !v);
+              playCue("click");
+            }}
+            className="pointer-events-auto flex min-h-11 min-w-11 items-center justify-center md:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span className="relative flex h-3.5 w-[26px] items-center justify-center">
+              <span
+                className="absolute block bg-foreground transition-all duration-500"
+                style={{
+                  width: 26,
+                  height: open ? 2 : 1,
+                  transform: open ? "rotate(45deg)" : "translateY(-3px)",
+                }}
+              />
+              <span
+                className="absolute block bg-foreground transition-all duration-500"
+                style={{
+                  width: open ? 26 : 16,
+                  height: open ? 2 : 1,
+                  transform: open ? "rotate(-45deg)" : "translateY(3px)",
+                }}
+              />
+            </span>
+          </button>
         </div>
       </div>
 
