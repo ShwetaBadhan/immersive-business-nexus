@@ -344,17 +344,17 @@
 .hero-title-mobile {
   font-size: clamp(2.4rem, 6vw, 5.4rem);
 }
-@media (max-width: 360px) {
-  .hero-title-mobile {
-    font-size: 1.5rem;
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-}
 @media (max-width: 639px) {
   .hero-title-mobile {
     font-size: clamp(1.9rem, 8.6vw, 3.2rem);
     line-height: 0.98;
     letter-spacing: -0.03em;
+  }
+}
+@media (max-width: 360px) {
+  .hero-title-mobile {
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 }
