@@ -4,6 +4,7 @@ import { setWorld, useWorld } from "@/lib/world-store";
 import { playCue, setAudioEnabled } from "@/lib/audio";
 
 const GLYPHS = ["2", "3", "9"] as const;
+const ENTERED_KEY = "239:entered";
 
 /**
  * Cinematic entry: 239 forms out of noise and distortion, the digits count in,
@@ -60,6 +61,11 @@ export function Loader() {
   const enter = (withSound: boolean) => {
     if (leaving) return;
     setLeaving(true);
+    try {
+      window.sessionStorage.setItem(ENTERED_KEY, "1");
+    } catch {
+      /* storage unavailable — intro simply shows again next load */
+    }
     if (withSound) {
       setAudioEnabled(true);
       setWorld({ sound: true });
@@ -69,11 +75,11 @@ export function Loader() {
   };
 
   useEffect(() => {
-    if (!entered) document.body.style.overflow = "hidden";
+    if (session === "fresh" && !entered) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
-  }, [entered]);
+  }, [entered, session]);
 
-  if (entered) return null;
+  if (entered || session !== "fresh") return null;
 
   const blur = ready ? 0 : Math.max(0, 26 - count * 0.26);
 
