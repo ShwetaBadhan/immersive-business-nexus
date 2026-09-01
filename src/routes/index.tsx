@@ -126,14 +126,14 @@ function Home() {
 
             {/* Mobile: Thirteen → 360° ← Ten on one line, India centered below */}
             <div className="sm:hidden">
-              <div className="flex items-center justify-center gap-2 xs:gap-3 sm:gap-4">
+              <div className="flex items-center justify-center gap-2 min-[400px]:gap-3">
                 <StatBlock s={HERO_STATS[0]} compact />
                 <FlowArrow compact delay={520} />
                 <StatBlock s={HERO_STATS[1]} compact />
                 <FlowArrow compact reverse delay={1040} />
                 <StatBlock s={HERO_STATS[2]} compact />
               </div>
-              <div className="mt-5 flex justify-center xs:mt-6" data-reveal data-reveal-delay={320}>
+              <div className="mt-5 flex justify-center min-[400px]:mt-6" data-reveal data-reveal-delay={320}>
                 <StatBlock s={HERO_STATS[3]} compact />
               </div>
             </div>
