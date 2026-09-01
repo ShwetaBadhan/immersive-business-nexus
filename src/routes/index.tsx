@@ -75,20 +75,37 @@ function Home() {
             </div>
           </div>
 
-          {/* hero footer strip — ties the composition to the page */}
-          <div className="relative z-10 mt-10 grid grid-cols-2 gap-6 border-t border-border pt-6 md:grid-cols-4" data-reveal data-reveal-delay={760}>
+          {/* hero footer strip — statistics connected by flowing arrows */}
+          <div
+            className="relative z-10 mt-10 flex flex-col gap-6 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+            data-reveal
+            data-reveal-delay={760}
+          >
             {[
               { k: "Practices", v: "Thirteen" },
               { k: "Growth Ecosystem", v: "360*" },
               { k: "Years of momentum", v: "Ten" },
               { k: "Based in", v: "India" },
-            ].map((s) => (
-              <div key={s.k} className="flex flex-col gap-2">
-                <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
-                <span className="label !tracking-[0.18em]">{s.k}</span>
+            ].map((s, i) => (
+              <div key={s.k} className="flex items-center gap-4 sm:gap-4">
+                {i > 0 && (
+                  <>
+                    <span className="hidden sm:flex">
+                      <FlowArrow delay={i * 520} />
+                    </span>
+                    <span className="flex sm:hidden">
+                      <FlowArrow vertical delay={i * 520} />
+                    </span>
+                  </>
+                )}
+                <div className="flex flex-col gap-2">
+                  <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
+                  <span className="label !tracking-[0.18em]">{s.k}</span>
+                </div>
               </div>
             ))}
           </div>
+
         </section>
 
 
