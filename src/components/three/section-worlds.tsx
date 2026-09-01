@@ -98,7 +98,7 @@ export function Drift({
     g.scale.lerp(tmp.set(s, s, s), k * 0.3);
 
     // depth-based opacity: deepest = faintest, never fights the text
-    const o = (0.42 + f * 0.58) * fade;
+    const o = (0.3 + f * 0.5) * fade;
     g.traverse((c) => {
       const m = (c as THREE.Mesh).material as THREE.Material & { opacity?: number };
       if (m && m.transparent) m.opacity = (m.userData["baseOpacity"] ?? 1) * o;
@@ -118,28 +118,28 @@ export function MomentumWorld({ compact = false }: { compact?: boolean }) {
   return (
     <group>
       <mesh>
-        <torusKnotGeometry args={[0.72, 0.2, compact ? 120 : 220, 28, 2, 3]} />
+        <torusKnotGeometry args={[0.72, 0.2, compact ? 64 : 120, 16, 2, 3]} />
         <meshPhysicalMaterial
           {...GLASS}
           thickness={1.4}
           roughness={0.22}
           color="#eef7f1"
-          {...base(0.82)}
+          {...base(0.66)}
         />
       </mesh>
       <group ref={halo}>
         <mesh rotation={[Math.PI / 2.4, 0.25, 0]}>
-          <torusGeometry args={[1.55, 0.012, 8, 160]} />
+          <torusGeometry args={[1.55, 0.012, 6, 96]} />
           <meshStandardMaterial {...CHROME} {...base(0.45)} />
         </mesh>
         <mesh rotation={[Math.PI / 1.9, -0.4, 0.3]}>
-          <torusGeometry args={[1.9, 0.008, 8, 160]} />
+          <torusGeometry args={[1.9, 0.008, 6, 96]} />
           <meshStandardMaterial {...EMERALD} {...base(0.3)} />
         </mesh>
       </group>
       {!compact && (
         <mesh position={[1.3, 0.7, 0.4]}>
-          <sphereGeometry args={[0.075, 18, 18]} />
+          <sphereGeometry args={[0.075, 12, 12]} />
           <meshStandardMaterial {...EMERALD} {...base(0.7)} />
         </mesh>
       )}
@@ -154,7 +154,7 @@ export function PracticeWorld({ compact = false }: { compact?: boolean }) {
   useFrame((s) => {
     if (g.current) g.current.rotation.y = Math.sin(s.clock.elapsedTime * 0.11) * 0.3;
   });
-  const n = compact ? 3 : 5;
+  const n = compact ? 3 : 4;
   return (
     <group ref={g}>
       {Array.from({ length: n }, (_, i) => {
@@ -173,11 +173,11 @@ export function PracticeWorld({ compact = false }: { compact?: boolean }) {
         );
       })}
       <mesh rotation={[0.1, 0, 0.06]}>
-        <cylinderGeometry args={[0.014, 0.014, 3.6, 10]} />
+        <cylinderGeometry args={[0.014, 0.014, 3.6, 8]} />
         <meshStandardMaterial {...CHROME} {...base(0.5)} />
       </mesh>
       <mesh position={[0.9, -1.1, 0.5]} rotation={[0.4, 0.3, 0]}>
-        <torusGeometry args={[0.5, 0.02, 8, 96]} />
+        <torusGeometry args={[0.5, 0.02, 6, 64]} />
         <meshStandardMaterial {...EMERALD} {...base(0.42)} />
       </mesh>
     </group>
@@ -207,8 +207,8 @@ export function TrajectoryWorld({ compact = false }: { compact?: boolean }) {
   return (
     <group>
       <mesh>
-        <tubeGeometry args={[curve, compact ? 90 : 190, 0.055, 18, false]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1} roughness={0.16} color="#eff8f2" {...base(0.8)} />
+        <tubeGeometry args={[curve, compact ? 60 : 110, 0.055, 10, false]} />
+        <meshPhysicalMaterial {...GLASS} thickness={1} roughness={0.16} color="#eff8f2" {...base(0.64)} />
       </mesh>
       <mesh ref={shell}>
         <icosahedronGeometry args={[1.15, 1]} />
@@ -216,7 +216,7 @@ export function TrajectoryWorld({ compact = false }: { compact?: boolean }) {
       </mesh>
       {[-1.6, 0.2, 1.8].map((x, i) => (
         <mesh key={i} position={[x, i % 2 ? 0.75 : -0.7, 0.35]}>
-          <sphereGeometry args={[0.05, 18, 18]} />
+          <sphereGeometry args={[0.05, 12, 12]} />
           <meshStandardMaterial {...EMERALD} {...base(0.4)} />
         </mesh>
       ))}
@@ -231,17 +231,17 @@ export function AlignmentWorld({ compact = false }: { compact?: boolean }) {
   useFrame((s) => {
     if (g.current) g.current.rotation.z = Math.sin(s.clock.elapsedTime * 0.08) * 0.24;
   });
-  const rings = compact ? 3 : 5;
+  const rings = compact ? 2 : 4;
   return (
     <group ref={g} rotation={[0.3, 0.4, 0]}>
       {Array.from({ length: rings }, (_, i) => (
         <mesh key={i} rotation={[Math.PI / 2, 0, i * 0.16]} position={[0, i * 0.26 - rings * 0.13, 0]}>
-          <torusGeometry args={[1.1 + i * 0.34, 0.02 - i * 0.002, 8, 150]} />
+          <torusGeometry args={[1.1 + i * 0.34, 0.02 - i * 0.002, 6, 90]} />
           <meshStandardMaterial {...(i % 2 ? EMERALD : CHROME)} {...base(0.52 - i * 0.06)} />
         </mesh>
       ))}
       <mesh>
-        <sphereGeometry args={[0.55, 40, 40]} />
+        <sphereGeometry args={[0.55, 24, 24]} />
         <meshPhysicalMaterial {...GLASS} thickness={1.6} roughness={0.28} color="#f2faf6" {...base(0.62)} />
       </mesh>
     </group>
@@ -262,19 +262,19 @@ export function ArrivalWorld({ compact = false }: { compact?: boolean }) {
     <group>
       <mesh>
         <dodecahedronGeometry args={[1.1, 0]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1.8} roughness={0.2} color="#eef7f1" {...base(0.85)} />
+        <meshPhysicalMaterial {...GLASS} thickness={1.8} roughness={0.2} color="#eef7f1" {...base(0.68)} />
       </mesh>
       <group ref={frame}>
         {[0, 1, 2].map((i) => (
           <mesh key={i} rotation={[i * 1.05, i * 0.7, i * 0.4]}>
-            <torusGeometry args={[1.75 + i * 0.2, 0.014, 8, 160]} />
+            <torusGeometry args={[1.75 + i * 0.2, 0.014, 6, 96]} />
             <meshStandardMaterial {...(i === 1 ? EMERALD : CHROME)} {...base(0.45 - i * 0.08)} />
           </mesh>
         ))}
       </group>
       {!compact && (
         <mesh position={[-1.5, -1.1, 0.6]} rotation={[0.5, 0.2, 0.3]}>
-          <torusKnotGeometry args={[0.32, 0.08, 120, 20]} />
+          <torusKnotGeometry args={[0.32, 0.08, 64, 12]} />
           <meshStandardMaterial {...CHROME} {...base(0.4)} />
         </mesh>
       )}
@@ -319,11 +319,11 @@ export function DepthHaze({ count = 90, depth = 16 }: { count?: number; depth?: 
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
+        size={0.042}
         sizeAttenuation
         color={COL.brand}
         transparent
-        opacity={0.34}
+        opacity={0.22}
         depthWrite={false}
       />
     </points>

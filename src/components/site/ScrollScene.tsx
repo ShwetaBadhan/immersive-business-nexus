@@ -49,9 +49,9 @@ const CONFIG: Record<SceneKind, Cfg> = {
     far: -13,
     spin: 0.05,
     tilt: 0.14,
-    fade: 0.9,
-    haze: 90,
-    m: { offsetX: 1.9, offsetY: 0.6, scale: 2.3, fade: 0.7 },
+    fade: 0.62,
+    haze: 46,
+    m: { offsetX: 1.9, offsetY: 0.6, scale: 2.3, fade: 0.48 },
   },
   practices: {
     world: (c) => <PracticeWorld compact={c} />,
@@ -63,9 +63,9 @@ const CONFIG: Record<SceneKind, Cfg> = {
     far: -14,
     spin: 0.04,
     tilt: 0.1,
-    fade: 0.8,
-    haze: 80,
-    m: { offsetX: 2.2, offsetY: -0.4, scale: 2, fade: 0.62 },
+    fade: 0.56,
+    haze: 40,
+    m: { offsetX: 2.2, offsetY: -0.4, scale: 2, fade: 0.44 },
   },
   trajectory: {
     world: (c) => <TrajectoryWorld compact={c} />,
@@ -77,9 +77,9 @@ const CONFIG: Record<SceneKind, Cfg> = {
     far: -14,
     spin: 0.045,
     tilt: 0.12,
-    fade: 0.85,
-    haze: 86,
-    m: { offsetX: 2, offsetY: 0.5, scale: 2.2, fade: 0.66 },
+    fade: 0.58,
+    haze: 42,
+    m: { offsetX: 2, offsetY: 0.5, scale: 2.2, fade: 0.46 },
   },
   alignment: {
     world: (c) => <AlignmentWorld compact={c} />,
@@ -91,9 +91,9 @@ const CONFIG: Record<SceneKind, Cfg> = {
     far: -13.5,
     spin: 0.035,
     tilt: 0.16,
-    fade: 0.85,
-    haze: 76,
-    m: { offsetX: 2.4, offsetY: -0.5, scale: 2.4, fade: 0.62 },
+    fade: 0.58,
+    haze: 36,
+    m: { offsetX: 2.4, offsetY: -0.5, scale: 2.4, fade: 0.44 },
   },
   arrival: {
     world: (c) => <ArrivalWorld compact={c} />,
@@ -105,16 +105,16 @@ const CONFIG: Record<SceneKind, Cfg> = {
     far: -14,
     spin: 0.05,
     tilt: 0.1,
-    fade: 0.8,
-    haze: 96,
-    m: { offsetX: 0, offsetY: 0.2, scale: 2.5, fade: 0.6 },
+    fade: 0.56,
+    haze: 48,
+    m: { offsetX: 0, offsetY: 0.2, scale: 2.5, fade: 0.42 },
   },
 };
 
 export function ScrollScene({ kind }: { kind: SceneKind }) {
   const mobile = useIsMobile();
   const cfg = CONFIG[kind];
-  const intensity = mobile ? 0.66 : 1;
+  const intensity = mobile ? 0.6 : 0.88;
 
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -124,7 +124,7 @@ export function ScrollScene({ kind }: { kind: SceneKind }) {
         fov={mobile ? 46 : 40}
         tint={0.9}
       >
-        <DepthHaze count={mobile ? Math.round(cfg.haze * 0.4) : cfg.haze} depth={16} />
+        <DepthHaze count={mobile ? Math.round(cfg.haze * 0.35) : cfg.haze} depth={16} />
         <Drift
           side={cfg.side}
           offsetX={mobile ? cfg.m.offsetX : cfg.offsetX}
