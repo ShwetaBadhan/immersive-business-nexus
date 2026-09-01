@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Fragment } from "react";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { HeroBackdrop } from "@/components/site/HeroBackdrop";
-import { FlowArrow, FlowReturnArrow } from "@/components/site/FlowArrow";
+import { FlowArrow } from "@/components/site/FlowArrow";
 import { ScrollScene } from "@/components/site/ScrollScene";
 
 
@@ -19,9 +18,9 @@ const HERO_STATS = [
   { k: "Growth Ecosystem", v: "360*" },
   { k: "Years of momentum", v: "Ten" },
   { k: "Based in", v: "India" },
-];
+] as const;
 
-function StatBlock({ s }: { s: typeof HERO_STATS[0] }) {
+function StatBlock({ s }: { s: (typeof HERO_STATS)[number] }) {
   return (
     <div className="flex flex-col gap-2 text-center sm:text-left">
       <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
@@ -99,28 +98,22 @@ function Home() {
             data-reveal
             data-reveal-delay={760}
           >
-            {/* curved return path: Ten → 360° */}
-            <FlowReturnArrow delay={1560} />
-
-            {/* Desktop: arrows as separate flex items so they sit centered in the gaps */}
+            {/* Desktop: Thirteen → 360° ← Ten  (India has no arrow) */}
             <div className="hidden items-center justify-between gap-4 sm:flex">
-              {HERO_STATS.map((s, i) => (
-                <Fragment key={s.k}>
-                  <StatBlock s={s} />
-                  {i < HERO_STATS.length - 2 && (
-                    <FlowArrow delay={(i + 1) * 520} />
-                  )}
-                </Fragment>
-              ))}
+              <StatBlock s={HERO_STATS[0]} />
+              <FlowArrow delay={520} />
+              <StatBlock s={HERO_STATS[1]} />
+              <FlowArrow reverse delay={1040} />
+              <StatBlock s={HERO_STATS[2]} />
+              <StatBlock s={HERO_STATS[3]} />
             </div>
 
-            {/* Mobile: keep the existing compact attached layout */}
+            {/* Mobile: same logical flow, vertical */}
             <div className="flex flex-col gap-6 sm:hidden">
               {HERO_STATS.map((s, i) => (
                 <div key={s.k} className="flex items-center gap-4">
-                  {i > 0 && i < HERO_STATS.length - 1 && (
-                    <FlowArrow vertical delay={i * 520} />
-                  )}
+                  {i === 1 && <FlowArrow vertical delay={520} />}
+                  {i === 2 && <FlowArrow vertical reverse delay={1040} />}
                   <StatBlock s={s} />
                 </div>
               ))}
