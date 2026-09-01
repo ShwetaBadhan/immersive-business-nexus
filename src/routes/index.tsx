@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Fragment } from "react";
 import { useReveal } from "@/hooks/use-reveal";
 import { Action, Marquee, Overlay, ScrollHint, SectionMarker, SplitHeading, Telemetry } from "@/components/site/ui";
 import { ServiceCard } from "@/components/site/ServiceCard";
@@ -12,6 +13,22 @@ import { HOME_DISCIPLINES, PROJECTS, SERVICES } from "@/lib/site-data";
 import { cursorProps } from "@/components/experience/Cursor";
 import { Link } from "@tanstack/react-router";
 import { playCue } from "@/lib/audio";
+
+const HERO_STATS = [
+  { k: "Practices", v: "Thirteen" },
+  { k: "Growth Ecosystem", v: "360*" },
+  { k: "Years of momentum", v: "Ten" },
+  { k: "Based in", v: "India" },
+];
+
+function StatBlock({ s }: { s: typeof HERO_STATS[0] }) {
+  return (
+    <div className="flex flex-col gap-2 text-center sm:text-left">
+      <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
+      <span className="label !tracking-[0.18em]">{s.k}</span>
+    </div>
+  );
+}
 
 const TITLE = "239 The Business Developer LLP — Build What Moves Business Forward";
 const DESC =
@@ -78,33 +95,31 @@ function Home() {
 
           {/* hero footer strip — statistics connected by flowing arrows */}
           <div
-            className="relative z-10 mt-10 flex flex-col gap-6 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+            className="relative z-10 mt-10 border-t border-border pt-6"
             data-reveal
             data-reveal-delay={760}
           >
-            {[
-              { k: "Practices", v: "Thirteen" },
-              { k: "Growth Ecosystem", v: "360*" },
-              { k: "Years of momentum", v: "Ten" },
-              { k: "Based in", v: "India" },
-            ].map((s, i) => (
-              <div key={s.k} className="flex items-center gap-4 sm:gap-4">
-                {i > 0 && (
-                  <>
-                    <span className="hidden sm:flex">
-                      <FlowArrow delay={i * 520} />
-                    </span>
-                    <span className="flex sm:hidden">
-                      <FlowArrow vertical delay={i * 520} />
-                    </span>
-                  </>
-                )}
-                <div className="flex flex-col gap-2">
-                  <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
-                  <span className="label !tracking-[0.18em]">{s.k}</span>
+            {/* Desktop: arrows as separate flex items so they sit centered in the gaps */}
+            <div className="hidden items-center justify-between gap-4 sm:flex">
+              {HERO_STATS.map((s, i) => (
+                <Fragment key={s.k}>
+                  <StatBlock s={s} />
+                  {i < HERO_STATS.length - 1 && (
+                    <FlowArrow delay={(i + 1) * 520} />
+                  )}
+                </Fragment>
+              ))}
+            </div>
+
+            {/* Mobile: keep the existing compact attached layout */}
+            <div className="flex flex-col gap-6 sm:hidden">
+              {HERO_STATS.map((s, i) => (
+                <div key={s.k} className="flex items-center gap-4">
+                  {i > 0 && <FlowArrow vertical delay={i * 520} />}
+                  <StatBlock s={s} />
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
         </section>

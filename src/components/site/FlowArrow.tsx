@@ -1,7 +1,7 @@
 /**
- * Thin editorial connector arrow used between the hero statistics.
- * A hairline rule with a slow flowing highlight and a fine chevron head —
- * it reads as part of the type system rather than an HTML glyph.
+ * Elegant connector arrow used between the hero statistics.
+ * A refined horizontal rule with a clean chevron head and a slow
+ * traveling highlight — sized to sit confidently between blocks.
  */
 export function FlowArrow({
   vertical = false,
@@ -13,38 +13,46 @@ export function FlowArrow({
   return (
     <span
       aria-hidden
-      className="flow-arrow flex shrink-0 items-center justify-center"
+      className="flow-arrow inline-flex shrink-0 items-center justify-center"
       style={{
         transform: vertical ? "rotate(90deg)" : undefined,
         animationDelay: `${delay}ms`,
       }}
     >
       <svg
-        width="46"
-        height="8"
-        viewBox="0 0 46 8"
+        width="56"
+        height="16"
+        viewBox="0 0 56 16"
         fill="none"
         className="overflow-visible"
       >
-        <line x1="0" y1="4" x2="38" y2="4" stroke="currentColor" strokeWidth="1" opacity="0.28" />
         <line
           x1="0"
-          y1="4"
-          x2="38"
-          y2="4"
+          y1="8"
+          x2="40"
+          y2="8"
           stroke="currentColor"
-          strokeWidth="1"
-          strokeDasharray="9 29"
+          strokeWidth="1.5"
+          opacity="0.28"
+        />
+        <line
+          x1="0"
+          y1="8"
+          x2="40"
+          y2="8"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="10 34"
           className="flow-arrow-dash"
           style={{ animationDelay: `${delay}ms` }}
         />
         <path
-          d="M34.5 0.9 L38.6 4 L34.5 7.1"
+          d="M40 3 L48 8 L40 13"
           stroke="currentColor"
-          strokeWidth="1"
+          strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity="0.55"
+          opacity="0.6"
         />
       </svg>
     </span>
