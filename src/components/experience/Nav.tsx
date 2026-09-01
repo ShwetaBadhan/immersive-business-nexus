@@ -92,13 +92,13 @@ export function Nav() {
             style={{ width: open ? 26 : 16, transform: open ? "translateY(-1px) rotate(-45deg)" : "none" }}
           />
         </button>
+        </div>
       </div>
 
       {/* mobile sheet */}
       <div
-        className="pointer-events-auto fixed inset-0 z-40 flex flex-col justify-center gap-2 px-6 backdrop-blur-xl transition-all duration-700 md:hidden"
+        className="pointer-events-auto fixed inset-0 z-40 flex flex-col justify-center gap-3 bg-deep/96 px-6 pt-28 transition-all duration-500 ease-out md:hidden"
         style={{
-          backgroundColor: "oklch(0.1735 0.0272 173.04 / 92%)",
           opacity: open ? 1 : 0,
           pointerEvents: open ? "auto" : "none",
         }}
