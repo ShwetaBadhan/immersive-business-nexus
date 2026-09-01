@@ -16,9 +16,29 @@ export function Loader() {
   const [ready, setReady] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const [glyph, setGlyph] = useState(0);
+  /** null until we know whether this session already entered */
+  const [session, setSession] = useState<"unknown" | "fresh" | "returning">("unknown");
   const shell = useRef<HTMLDivElement>(null);
 
+  // the intro belongs to a session, not to a page load: a refresh (on any
+  // route) keeps the visitor exactly where they were
   useEffect(() => {
+    let seen = false;
+    try {
+      seen = window.sessionStorage.getItem(ENTERED_KEY) === "1";
+    } catch {
+      seen = false;
+    }
+    if (seen) {
+      setWorld({ entered: true, sound: false });
+      setSession("returning");
+    } else {
+      setSession("fresh");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (session !== "fresh") return;
     const timers: number[] = [];
     let n = 0;
     const id = window.setInterval(() => {
@@ -34,7 +54,8 @@ export function Loader() {
       window.clearInterval(id);
       timers.forEach(window.clearTimeout);
     };
-  }, []);
+  }, [session]);
+
 
   const enter = (withSound: boolean) => {
     if (leaving) return;
