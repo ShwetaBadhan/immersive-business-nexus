@@ -24,7 +24,7 @@ function StatBlock({ s, compact = false }: { s: (typeof HERO_STATS)[number]; com
   return (
     <div className="flex flex-col gap-2 whitespace-nowrap text-center sm:text-left">
       <span
-        className={`font-display leading-none text-foreground ${compact ? "text-[clamp(0.7rem,4.2vw,1.05rem)] sm:text-lg md:text-2xl" : "text-lg md:text-2xl"}`}
+        className={`font-display leading-none text-foreground ${compact ? "text-[clamp(0.65rem,4vw,1rem)] sm:text-lg md:text-2xl" : "text-lg md:text-2xl"}`}
       >
         {s.v}
       </span>
