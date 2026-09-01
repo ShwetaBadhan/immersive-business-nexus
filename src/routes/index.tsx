@@ -18,7 +18,7 @@ const HERO_STATS = [
   { k: "Growth Ecosystem", v: "360*" },
   { k: "Years of momentum", v: "Ten" },
   { k: "Based in", v: "India" },
-];
+] as const;
 
 function StatBlock({ s }: { s: typeof HERO_STATS[0] }) {
   return (
