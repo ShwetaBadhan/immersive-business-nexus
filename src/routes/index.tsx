@@ -95,20 +95,21 @@ function Home() {
 
           {/* hero footer strip — statistics connected by flowing arrows */}
           <div
-            className="relative z-10 mt-10 border-t border-border pt-6"
+            className="relative z-10 mt-10 border-t border-border pt-8"
             data-reveal
             data-reveal-delay={760}
           >
+            {/* curved return path: Ten → 360° */}
+            <FlowReturnArrow delay={1560} />
+
             {/* Desktop: arrows as separate flex items so they sit centered in the gaps */}
             <div className="hidden items-center justify-between gap-4 sm:flex">
               {HERO_STATS.map((s, i) => (
                 <Fragment key={s.k}>
                   <StatBlock s={s} />
-                  {i < HERO_STATS.length - 2 ? (
+                  {i < HERO_STATS.length - 1 && (
                     <FlowArrow delay={(i + 1) * 520} />
-                  ) : i === HERO_STATS.length - 2 ? (
-                    <FlowArrow reverse delay={(i + 1) * 520} />
-                  ) : null}
+                  )}
                 </Fragment>
               ))}
             </div>
@@ -117,11 +118,9 @@ function Home() {
             <div className="flex flex-col gap-6 sm:hidden">
               {HERO_STATS.map((s, i) => (
                 <div key={s.k} className="flex items-center gap-4">
-                  {i > 0 && i < HERO_STATS.length - 1 ? (
+                  {i > 0 && (
                     <FlowArrow vertical delay={i * 520} />
-                  ) : i === HERO_STATS.length - 1 ? (
-                    <FlowArrow vertical reverse delay={i * 520} />
-                  ) : null}
+                  )}
                   <StatBlock s={s} />
                 </div>
               ))}
