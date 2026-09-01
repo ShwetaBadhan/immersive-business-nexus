@@ -22,16 +22,16 @@ export function FlowArrow({
     .filter(Boolean)
     .join(" ");
 
-  const width = compact ? 30 : 84;
-  const height = compact ? 7 : 16;
-  const viewBox = compact ? "0 0 30 7" : "0 0 84 16";
-  const stemEnd = compact ? 20 : 68;
-  const headX = compact ? 18 : 66;
-  const headTipX = compact ? 27 : 79;
+  const width = compact ? 24 : 84;
+  const height = compact ? 6 : 16;
+  const viewBox = compact ? "0 0 24 6" : "0 0 84 16";
+  const stemEnd = compact ? 16 : 68;
+  const headX = compact ? 14 : 66;
+  const headTipX = compact ? 22 : 79;
   const headY1 = compact ? 0.5 : 2;
-  const headY2 = compact ? 6.5 : 14;
-  const midY = compact ? 3.5 : 8;
-  const strokeMain = compact ? 1 : 1.5;
+  const headY2 = compact ? 5.5 : 14;
+  const midY = compact ? 3 : 8;
+  const strokeMain = compact ? 0.75 : 1.5;
   const strokeGlow = compact ? 1 : 2;
 
   return (
