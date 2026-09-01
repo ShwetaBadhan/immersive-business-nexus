@@ -80,7 +80,7 @@ export function Nav() {
             playCue("click");
           }}
           className={cn(
-            "pointer-events-auto relative flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
+            "pointer-events-auto relative z-50 flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
             open && "bg-foreground/10"
           )}
           aria-label="Toggle menu"
