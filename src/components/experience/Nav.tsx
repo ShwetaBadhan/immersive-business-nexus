@@ -73,35 +73,40 @@ export function Nav() {
             <SoundToggle sound={sound} onToggle={toggleSound} />
           </nav>
 
-          <button
-            {...cursorProps(open ? "Close" : "Menu")}
-            onClick={() => {
-              setOpen((v) => !v);
-              playCue("click");
-            }}
-            className="pointer-events-auto flex min-h-11 min-w-11 items-center justify-center md:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            <span className="relative flex h-3.5 w-[26px] items-center justify-center">
-              <span
-                className="absolute block bg-foreground transition-all duration-500"
-                style={{
-                  width: 26,
-                  height: open ? 2 : 1,
-                  transform: open ? "rotate(45deg)" : "translateY(-3px)",
-                }}
-              />
-              <span
-                className="absolute block bg-foreground transition-all duration-500"
-                style={{
-                  width: open ? 26 : 16,
-                  height: open ? 2 : 1,
-                  transform: open ? "rotate(-45deg)" : "translateY(3px)",
-                }}
-              />
-            </span>
-          </button>
+        <button
+          {...cursorProps(open ? "Close" : "Menu")}
+          onClick={() => {
+            setOpen((v) => !v);
+            playCue("click");
+          }}
+          className={cn(
+            "pointer-events-auto relative flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
+            open && "bg-foreground/10"
+          )}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+        >
+          <span className="relative flex h-3.5 w-[26px] items-center justify-center">
+            <span
+              className="absolute block transition-all duration-500"
+              style={{
+                width: 26,
+                height: open ? 2.5 : 1.5,
+                transform: open ? "rotate(45deg)" : "translateY(-3px)",
+                backgroundColor: open ? "var(--color-foreground)" : "var(--color-foreground)",
+              }}
+            />
+            <span
+              className="absolute block transition-all duration-500"
+              style={{
+                width: open ? 26 : 16,
+                height: open ? 2.5 : 1.5,
+                transform: open ? "rotate(-45deg)" : "translateY(3px)",
+                backgroundColor: "var(--color-foreground)",
+              }}
+            />
+          </span>
+        </button>
         </div>
       </div>
 
