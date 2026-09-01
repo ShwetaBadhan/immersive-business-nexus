@@ -124,13 +124,24 @@ function Home() {
               className="display-xl hero-title-mobile text-foreground"
             />
 
+            {/* Mobile: tightened editorial standfirst */}
             <p
-              className="mt-[clamp(1.25rem,3.5vh,2rem)] max-w-[34ch] text-sm !leading-[1.65] text-muted-foreground sm:mt-8 sm:max-w-[48ch] sm:!leading-relaxed md:text-base"
+              className="mt-[clamp(1rem,3vh,1.5rem)] max-w-[33ch] text-sm !leading-[1.65] text-muted-foreground sm:hidden"
               data-reveal
               data-reveal-delay={360}
             >
+              One of India's most trusted business growth consulting and e-commerce partners — helping brands
+              establish, expand and scale.
+            </p>
+
+            <p
+              className="mt-8 hidden max-w-[48ch] text-sm leading-relaxed text-muted-foreground sm:block md:text-base"
+              data-reveal
+              data-reveal-delay={500}
+            >
               239 The Business Developers LLP is one of the oldest and most trusted business growth consulting and e-commerce solutions companies, helping brands establish, expand, and scale their business operations across online and offline channels.
             </p>
+
 
             <div
               className="mt-[clamp(1.75rem,4.5vh,2.5rem)] flex flex-col items-center gap-5 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-6"
