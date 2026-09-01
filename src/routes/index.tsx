@@ -20,62 +20,16 @@ const HERO_STATS = [
   { k: "Based in", v: "India" },
 ] as const;
 
-function StatBlock({ s }: { s: (typeof HERO_STATS)[number] }) {
+function StatBlock({ s, compact = false }: { s: (typeof HERO_STATS)[number]; compact?: boolean }) {
   return (
     <div className="flex flex-col gap-2 text-center sm:text-left">
-      <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
-      <span className="label !tracking-[0.18em]">{s.k}</span>
-    </div>
-  );
-}
-
-/** Mobile-only editorial metric: large value, hairline label. */
-function MobileStat({
-  s,
-  align = "left",
-  delay = 0,
-}: {
-  s: (typeof HERO_STATS)[number];
-  align?: "left" | "right";
-  delay?: number;
-}) {
-  return (
-    <div
-      className={`flex min-w-0 flex-col gap-1.5 ${align === "right" ? "items-end text-right" : "items-start text-left"}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <span className="font-display text-[clamp(1.35rem,6vw,1.75rem)] leading-[0.9] text-foreground">
+      <span
+        className={`whitespace-nowrap font-display leading-none text-foreground ${compact ? "text-[clamp(0.62rem,3.8vw,1rem)] sm:text-lg md:text-2xl" : "text-lg md:text-2xl"}`}
+      >
         {s.v}
       </span>
-      <span className="label !text-[0.5rem] !tracking-[0.22em] text-muted-foreground">{s.k}</span>
+      <span className={`label !tracking-[0.18em] ${compact ? "!text-[0.45rem] !leading-tight sm:!text-[0.65rem]" : ""}`}>{s.k}</span>
     </div>
-  );
-}
-
-/** Hairline decorative connector for the mobile metric grid. */
-function MobileFlowLine({ reverse = false, delay = 0 }: { reverse?: boolean; delay?: number }) {
-  return (
-    <span
-      aria-hidden
-      className="flow-arrow flex items-center justify-center text-glow"
-      style={{ transform: reverse ? "scaleX(-1)" : undefined, animationDelay: `${delay}ms` }}
-    >
-      <svg width="100%" height="10" viewBox="0 0 120 10" fill="none" preserveAspectRatio="none">
-        <line x1="0" y1="5" x2="110" y2="5" stroke="currentColor" strokeWidth="1" opacity="0.28" />
-        <line
-          x1="0"
-          y1="5"
-          x2="110"
-          y2="5"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeDasharray="16 104"
-          className="flow-arrow-dash"
-          style={{ animationDelay: `${delay}ms` }}
-        />
-        <path d="M109 1.5 L118 5 L109 8.5 Z" fill="currentColor" opacity="0.8" />
-      </svg>
-    </span>
   );
 }
 
@@ -104,7 +58,7 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(5rem,11vh,7rem)] sm:pb-10 sm:pt-28 md:px-10 md:pb-12 md:pt-32">
+        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-3 min-[360px]:px-4 min-[420px]:px-5 sm:px-5 md:px-10 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(5rem,11vh,7rem)] sm:pb-10 sm:pt-28 md:pb-12 md:pt-32">
           <HeroBackdrop />
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
@@ -170,18 +124,17 @@ function Home() {
               <StatBlock s={HERO_STATS[3]} />
             </div>
 
-            {/* Mobile: editorial 2×2 metric strip with hairline flow connectors */}
+            {/* Mobile: Thirteen → 360° ← Ten on one line, India centered below */}
             <div className="sm:hidden">
-              <div className="grid grid-cols-[minmax(0,1fr)_3.25rem_minmax(0,1fr)] items-center gap-y-[clamp(0.7rem,1.8vh,1rem)]">
-                <MobileStat s={HERO_STATS[0]} delay={80} />
-                <MobileFlowLine delay={520} />
-                <MobileStat s={HERO_STATS[1]} align="right" delay={160} />
-
-                <span className="col-span-3 h-px w-full bg-border" />
-
-                <MobileStat s={HERO_STATS[2]} delay={240} />
-                <MobileFlowLine reverse delay={1040} />
-                <MobileStat s={HERO_STATS[3]} align="right" delay={320} />
+              <div className="flex items-center justify-center gap-0 min-[360px]:gap-1 min-[420px]:gap-2">
+                <StatBlock s={HERO_STATS[0]} compact />
+                <FlowArrow compact delay={520} />
+                <StatBlock s={HERO_STATS[1]} compact />
+                <FlowArrow compact reverse delay={1040} />
+                <StatBlock s={HERO_STATS[2]} compact />
+              </div>
+              <div className="mt-4 flex justify-center min-[360px]:mt-5" data-reveal data-reveal-delay={320}>
+                <StatBlock s={HERO_STATS[3]} compact />
               </div>
             </div>
           </div>
