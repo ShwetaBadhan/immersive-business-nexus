@@ -40,7 +40,7 @@ export function Nav() {
 
   return (
     <header
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 transition-opacity duration-1000"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[70] transition-opacity duration-1000"
       style={{ opacity: entered ? 1 : 0 }}
     >
       <div
@@ -80,8 +80,10 @@ export function Nav() {
             playCue("click");
           }}
           className={cn(
-            "pointer-events-auto relative z-50 flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
-            open && "bg-foreground/10"
+            "pointer-events-auto fixed right-4 top-4 z-[100] flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 md:hidden",
+            open
+              ? "border-foreground bg-foreground text-background shadow-lg"
+              : "border-transparent text-foreground"
           )}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -93,7 +95,7 @@ export function Nav() {
                 width: 26,
                 height: open ? 2.5 : 1.5,
                 transform: open ? "rotate(45deg)" : "translateY(-3px)",
-                backgroundColor: open ? "var(--color-foreground)" : "var(--color-foreground)",
+                 backgroundColor: open ? "var(--color-background)" : "var(--color-foreground)",
               }}
             />
             <span
@@ -102,7 +104,7 @@ export function Nav() {
                 width: open ? 26 : 16,
                 height: open ? 2.5 : 1.5,
                 transform: open ? "rotate(-45deg)" : "translateY(3px)",
-                backgroundColor: "var(--color-foreground)",
+                 backgroundColor: open ? "var(--color-background)" : "var(--color-foreground)",
               }}
             />
           </span>
