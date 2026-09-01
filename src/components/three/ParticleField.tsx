@@ -5,7 +5,7 @@ import { live } from "@/lib/world-store";
 import { PARTICLE_FRAG, PARTICLE_VERT } from "./shaders";
 import { COL } from "./palette";
 
-export function ParticleField({ count = 4200, spread = 34 }: { count?: number; spread?: number }) {
+export function ParticleField({ count = 2200, spread = 30 }: { count?: number; spread?: number }) {
   const mat = useRef<THREE.ShaderMaterial>(null);
   const dpr = useThree((s) => s.viewport.dpr);
 
@@ -35,7 +35,7 @@ export function ParticleField({ count = 4200, spread = 34 }: { count?: number; s
       uTime: { value: 0 },
       uProgress: { value: 0 },
       uPointer: { value: new THREE.Vector2() },
-      uSize: { value: 3.1 },
+      uSize: { value: 2.4 },
       uPixelRatio: { value: dpr },
       uSpread: { value: spread },
       uNeon: { value: new THREE.Color(COL.brand) },

@@ -4,6 +4,7 @@ import { setWorld, useWorld } from "@/lib/world-store";
 import { playCue, setAudioEnabled } from "@/lib/audio";
 
 const GLYPHS = ["2", "3", "9"] as const;
+const ENTERED_KEY = "239:entered";
 
 /**
  * Cinematic entry: 239 forms out of noise and distortion, the digits count in,
@@ -16,9 +17,29 @@ export function Loader() {
   const [ready, setReady] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const [glyph, setGlyph] = useState(0);
+  /** null until we know whether this session already entered */
+  const [session, setSession] = useState<"unknown" | "fresh" | "returning">("unknown");
   const shell = useRef<HTMLDivElement>(null);
 
+  // the intro belongs to a session, not to a page load: a refresh (on any
+  // route) keeps the visitor exactly where they were
   useEffect(() => {
+    let seen = false;
+    try {
+      seen = window.sessionStorage.getItem(ENTERED_KEY) === "1";
+    } catch {
+      seen = false;
+    }
+    if (seen) {
+      setWorld({ entered: true, sound: false });
+      setSession("returning");
+    } else {
+      setSession("fresh");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (session !== "fresh") return;
     const timers: number[] = [];
     let n = 0;
     const id = window.setInterval(() => {
@@ -34,11 +55,17 @@ export function Loader() {
       window.clearInterval(id);
       timers.forEach(window.clearTimeout);
     };
-  }, []);
+  }, [session]);
+
 
   const enter = (withSound: boolean) => {
     if (leaving) return;
     setLeaving(true);
+    try {
+      window.sessionStorage.setItem(ENTERED_KEY, "1");
+    } catch {
+      /* storage unavailable — intro simply shows again next load */
+    }
     if (withSound) {
       setAudioEnabled(true);
       setWorld({ sound: true });
@@ -48,11 +75,11 @@ export function Loader() {
   };
 
   useEffect(() => {
-    if (!entered) document.body.style.overflow = "hidden";
+    if (session === "fresh" && !entered) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
-  }, [entered]);
+  }, [entered, session]);
 
-  if (entered) return null;
+  if (entered || session !== "fresh") return null;
 
   const blur = ready ? 0 : Math.max(0, 26 - count * 0.26);
 

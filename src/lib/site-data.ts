@@ -180,7 +180,7 @@ export type Project = {
   index: string;
   title: string;
   kicker: string;
-  category: "Books & Publishing" | "Premium Brewing Equipment & Accessories" | "Fashion & Lifestyle" | "Growth" | "Creative";
+  category: "Books & Publishing" | "Premium Brewing Equipment & Accessories" | "Fashion & Lifestyle" | "Growth" | "Creative" | "Digital";
   client: string;
   industry: string;
   services: string[];

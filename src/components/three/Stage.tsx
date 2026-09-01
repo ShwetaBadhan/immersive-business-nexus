@@ -60,15 +60,14 @@ function MotionDriver({ motion }: { motion: StageMotion }) {
 function Rig({ tint = 1 }: { tint?: number }) {
   return (
     <>
-      <ambientLight intensity={1.15} />
+      <ambientLight intensity={1.25} />
       <hemisphereLight intensity={0.7} color={"#ffffff"} groundColor={COL.moss} />
-      <directionalLight position={[3.4, 5.2, 4.2]} intensity={2.1} color="#ffffff" />
-      <directionalLight position={[-4.2, -1.4, 2.6]} intensity={0.9} color={COL.neon} />
-      <Environment resolution={128}>
+      <directionalLight position={[3.4, 5.2, 4.2]} intensity={1.6} color="#ffffff" />
+      <directionalLight position={[-4.2, -1.4, 2.6]} intensity={0.6} color={COL.neon} />
+      <Environment resolution={64}>
         <Lightformer intensity={2.4} position={[0, 4, 3]} scale={[9, 4, 1]} color="#ffffff" />
         <Lightformer intensity={1.1 * tint} position={[-4, 1, 2]} scale={[4, 6, 1]} color={COL.neon} />
         <Lightformer intensity={0.8 * tint} position={[4.5, -1.5, 1]} scale={[4, 5, 1]} color={COL.brand} />
-        <Lightformer intensity={0.7} position={[0, -4, -2]} scale={[9, 4, 1]} color={COL.forest} />
       </Environment>
     </>
   );
@@ -106,7 +105,7 @@ export function Stage({
         if (!entry) return;
         setVisible(entry.isIntersecting);
       },
-      { rootMargin: "20% 0px 20% 0px" },
+      { rootMargin: "10% 0px 10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -166,7 +165,7 @@ export function Stage({
     >
       {hydrated && visible && (
         <Canvas
-          dpr={[1, 1.75]}
+          dpr={[1, 1.4]}
           gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
           camera={{ position: camera, fov, near: 0.1, far: 40 }}
           style={{ background: "transparent" }}
@@ -186,9 +185,9 @@ export function Stage({
 
 export const GLASS = {
   transparent: true,
-  transmission: 0.92,
+  transmission: 0.78,
   thickness: 1.1,
-  roughness: 0.08,
+  roughness: 0.14,
   ior: 1.42,
   metalness: 0,
   clearcoat: 1,
