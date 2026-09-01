@@ -24,11 +24,11 @@ function StatBlock({ s, compact = false }: { s: (typeof HERO_STATS)[number]; com
   return (
     <div className="flex flex-col gap-2 whitespace-nowrap text-center sm:text-left">
       <span
-        className={`font-display leading-none text-foreground ${compact ? "text-[clamp(0.65rem,4vw,1rem)] sm:text-lg md:text-2xl" : "text-lg md:text-2xl"}`}
+        className={`font-display leading-none text-foreground ${compact ? "text-[clamp(0.62rem,3.8vw,1rem)] sm:text-lg md:text-2xl" : "text-lg md:text-2xl"}`}
       >
         {s.v}
       </span>
-      <span className={`label !tracking-[0.18em] ${compact ? "!text-[0.5rem] sm:!text-[0.65rem]" : ""}`}>{s.k}</span>
+      <span className={`label !tracking-[0.18em] ${compact ? "!text-[0.48rem] sm:!text-[0.65rem]" : ""}`}>{s.k}</span>
     </div>
   );
 }
