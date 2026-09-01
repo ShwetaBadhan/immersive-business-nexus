@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { cursorProps } from "./Cursor";
 import { live, setWorld, useWorld } from "@/lib/world-store";
 import { playCue, setAudioEnabled } from "@/lib/audio";
+import { cn } from "@/lib/utils";
 
 const LINKS = [
   { to: "/", label: "Home" },
