@@ -20,7 +20,7 @@ const HERO_STATS = [
   { k: "Based in", v: "India" },
 ] as const;
 
-function StatBlock({ s }: { s: typeof HERO_STATS[0] }) {
+function StatBlock({ s }: { s: (typeof HERO_STATS)[number] }) {
   return (
     <div className="flex flex-col gap-2 text-center sm:text-left">
       <span className="font-display text-lg leading-none text-foreground md:text-2xl">{s.v}</span>
