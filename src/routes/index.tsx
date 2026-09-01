@@ -42,8 +42,7 @@ function MobileStat({
   return (
     <div
       className={`flex min-w-0 flex-col gap-1.5 ${align === "right" ? "items-end text-right" : "items-start text-left"}`}
-      data-reveal
-      data-reveal-delay={delay}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       <span className="font-display text-[clamp(1.35rem,6vw,1.75rem)] leading-[0.9] text-foreground">
         {s.v}
