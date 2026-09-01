@@ -45,7 +45,7 @@ export function Nav() {
     >
       <div
         className={cn(
-          "transition-all duration-300 ease-out",
+          "relative z-50 transition-all duration-300 ease-out",
           glass &&
             "border-b border-border/30 bg-deep/85 shadow-[0_1px_0_rgba(0,0,0,0.04)] backdrop-blur-[16px]"
         )}
@@ -80,7 +80,7 @@ export function Nav() {
             playCue("click");
           }}
           className={cn(
-            "pointer-events-auto relative flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
+            "pointer-events-auto relative z-50 flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 md:hidden",
             open && "bg-foreground/10"
           )}
           aria-label="Toggle menu"
