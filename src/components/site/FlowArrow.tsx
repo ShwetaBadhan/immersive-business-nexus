@@ -2,20 +2,33 @@
  * Elegant connector arrow used between the hero statistics.
  * A refined horizontal rule with a clean chevron head and a slow
  * traveling highlight — sized to sit confidently between blocks.
+ *
+ * `reverse` mirrors the arrow so it can point back toward an earlier
+ * statistic (e.g. Ten → 360°) while keeping the exact same proportions
+ * and animation.
  */
 export function FlowArrow({
   vertical = false,
+  reverse = false,
   delay = 0,
 }: {
   vertical?: boolean;
+  reverse?: boolean;
   delay?: number;
 }) {
+  const transforms = [
+    vertical ? "rotate(90deg)" : undefined,
+    reverse ? "scaleX(-1)" : undefined,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <span
       aria-hidden
       className="flow-arrow inline-flex shrink-0 items-center justify-center"
       style={{
-        transform: vertical ? "rotate(90deg)" : undefined,
+        transform: transforms || undefined,
         animationDelay: `${delay}ms`,
       }}
     >
