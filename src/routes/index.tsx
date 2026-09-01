@@ -45,7 +45,7 @@ function MobileStat({
       data-reveal
       data-reveal-delay={delay}
     >
-      <span className="font-display text-[clamp(1.5rem,7vw,2rem)] leading-[0.9] text-foreground">
+      <span className="font-display text-[clamp(1.35rem,6vw,1.75rem)] leading-[0.9] text-foreground">
         {s.v}
       </span>
       <span className="label !text-[0.5rem] !tracking-[0.22em] text-muted-foreground">{s.k}</span>
@@ -105,7 +105,7 @@ function Home() {
       <Telemetry tag="239 / Home" />
       <Overlay>
         {/* 01 — HERO */}
-        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(6rem,16vh,7rem)] sm:pb-10 sm:pt-28 md:px-10 md:pb-12 md:pt-32">
+        <section className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-[clamp(1.5rem,5vh,2.5rem)] pt-[clamp(5rem,11vh,7rem)] sm:pb-10 sm:pt-28 md:px-10 md:pb-12 md:pt-32">
           <HeroBackdrop />
 
           <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center">
@@ -144,7 +144,7 @@ function Home() {
 
 
             <div
-              className="mt-[clamp(1.75rem,4.5vh,2.5rem)] flex flex-col items-center gap-5 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-6"
+              className="mt-[clamp(1.5rem,3.5vh,2.5rem)] flex flex-col items-center gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-6"
               data-reveal
               data-reveal-delay={460}
             >
@@ -157,7 +157,7 @@ function Home() {
 
           {/* hero footer strip — statistics connected by flowing arrows */}
           <div
-            className="relative z-10 mt-[clamp(1.5rem,4vh,2.5rem)] border-t border-border pt-[clamp(1.25rem,3.5vh,2rem)] sm:mt-10 sm:pt-8"
+            className="relative z-10 mt-[clamp(1.25rem,3vh,2.5rem)] border-t border-border pt-[clamp(1rem,2.5vh,1.75rem)] sm:mt-10 sm:pt-8"
             data-reveal
             data-reveal-delay={620}
           >
@@ -173,7 +173,7 @@ function Home() {
 
             {/* Mobile: editorial 2×2 metric strip with hairline flow connectors */}
             <div className="sm:hidden">
-              <div className="grid grid-cols-[minmax(0,1fr)_3.25rem_minmax(0,1fr)] items-center gap-y-[clamp(0.85rem,2.5vh,1.25rem)]">
+              <div className="grid grid-cols-[minmax(0,1fr)_3.25rem_minmax(0,1fr)] items-center gap-y-[clamp(0.7rem,1.8vh,1rem)]">
                 <MobileStat s={HERO_STATS[0]} delay={80} />
                 <MobileFlowLine delay={520} />
                 <MobileStat s={HERO_STATS[1]} align="right" delay={160} />
