@@ -107,7 +107,7 @@ function Home() {
               {HERO_STATS.map((s, i) => (
                 <Fragment key={s.k}>
                   <StatBlock s={s} />
-                  {i < HERO_STATS.length - 1 && (
+                  {i < HERO_STATS.length - 2 && (
                     <FlowArrow delay={(i + 1) * 520} />
                   )}
                 </Fragment>
@@ -118,7 +118,7 @@ function Home() {
             <div className="flex flex-col gap-6 sm:hidden">
               {HERO_STATS.map((s, i) => (
                 <div key={s.k} className="flex items-center gap-4">
-                  {i > 0 && (
+                  {i > 0 && i < HERO_STATS.length - 1 && (
                     <FlowArrow vertical delay={i * 520} />
                   )}
                   <StatBlock s={s} />
