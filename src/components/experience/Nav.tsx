@@ -79,18 +79,28 @@ export function Nav() {
             setOpen((v) => !v);
             playCue("click");
           }}
-          className="pointer-events-auto flex flex-col items-end gap-[5px] py-2 md:hidden"
+          className="pointer-events-auto flex min-h-11 min-w-11 items-center justify-center md:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
         >
-          <span
-            className="block h-px bg-foreground transition-all duration-500"
-            style={{ width: 26, transform: open ? "translateY(6px) rotate(45deg)" : "none" }}
-          />
-          <span
-            className="block h-px bg-foreground transition-all duration-500"
-            style={{ width: open ? 26 : 16, transform: open ? "translateY(-1px) rotate(-45deg)" : "none" }}
-          />
+          <span className="relative flex h-3.5 w-[26px] items-center justify-center">
+            <span
+              className="absolute block bg-foreground transition-all duration-500"
+              style={{
+                width: 26,
+                height: open ? 2 : 1,
+                transform: open ? "rotate(45deg)" : "translateY(-3px)",
+              }}
+            />
+            <span
+              className="absolute block bg-foreground transition-all duration-500"
+              style={{
+                width: open ? 26 : 16,
+                height: open ? 2 : 1,
+                transform: open ? "rotate(-45deg)" : "translateY(3px)",
+              }}
+            />
+          </span>
         </button>
         </div>
       </div>
