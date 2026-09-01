@@ -317,7 +317,7 @@
 /* --- flowing connector arrows (hero statistics) --- */
 @keyframes arrow-flow {
   0% {
-    stroke-dashoffset: 38;
+    stroke-dashoffset: 40;
     opacity: 0;
   }
   18% {
