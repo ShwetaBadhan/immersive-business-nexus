@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Stage } from "@/components/three/Stage";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   ConnectionForm,
   NetworkStructure,

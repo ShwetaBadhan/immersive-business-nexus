@@ -81,9 +81,11 @@ export function Stage({
   tint = 1,
   hover,
   onHoverChange,
+  style,
 }: {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   camera?: THREE.Vector3Tuple;
   fov?: number;
   tint?: number;
@@ -93,6 +95,8 @@ export function Stage({
 }) {
   const host = useRef<HTMLDivElement>(null);
   const hydrated = useHydrated();
+  const coarse =
+    typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches;
   const [visible, setVisible] = useState(false);
   const motion = useRef<StageMotion>({ x: 0, y: 0, tx: 0, ty: 0, scroll: 0.5, hover: 0 }).current;
 
@@ -132,12 +136,24 @@ export function Stage({
       motion.ty = THREE.MathUtils.clamp(((e.clientY - r.top) / r.height) * 2 - 1, -2, 2);
     };
 
+    let queued = 0;
+    const onScroll = () => {
+      if (queued) return;
+      queued = requestAnimationFrame(() => {
+        queued = 0;
+        read();
+      });
+    };
+
     read();
-    window.addEventListener("scroll", read, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", read);
-    window.addEventListener("pointermove", onMove, { passive: true });
+    if (window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("pointermove", onMove, { passive: true });
+    }
     return () => {
-      window.removeEventListener("scroll", read);
+      if (queued) cancelAnimationFrame(queued);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", read);
       window.removeEventListener("pointermove", onMove);
     };
@@ -154,6 +170,7 @@ export function Stage({
       ref={host}
       aria-hidden
       className={`pointer-events-none select-none ${className}`}
+      style={style}
       onPointerEnter={() => {
         if (hover === undefined) motion.hover = 1;
         onHoverChange?.(true);
@@ -165,7 +182,7 @@ export function Stage({
     >
       {hydrated && visible && (
         <Canvas
-          dpr={[1, 1.4]}
+          dpr={coarse ? [1, 1.15] : [1, 1.4]}
           gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
           camera={{ position: camera, fov, near: 0.1, far: 40 }}
           style={{ background: "transparent" }}
