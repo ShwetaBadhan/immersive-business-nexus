@@ -41,7 +41,7 @@ export function ProjectsVisual({ activeRef }: { activeRef: { current: number } }
       camera={mobile ? [0, 0, 11] : [0, 0, 7.2]}
       fov={40}
       tint={mobile ? 0.6 : 1}
-      style={mobile ? { opacity: 0.4 } : undefined}
+      style={{ opacity: mobile ? 0.4 : 1 }}
     >
       <ProjectEnvironment activeRef={activeRef} compact={mobile} />
     </Stage>
