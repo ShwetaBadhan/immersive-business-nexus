@@ -132,7 +132,11 @@ export function SplitHeading({
   return (
     <Tag className={className}>
       {words.map((w, i) => (
-        <span key={`${w}-${i}`} className="inline-block overflow-hidden align-bottom">
+        <span
+          key={`${w}-${i}`}
+          /* mobile: pad the mask so tight line-heights never clip ascenders */
+          className="inline-block overflow-hidden align-bottom max-md:-mt-[0.18em] max-md:pt-[0.18em]"
+        >
           <span
             className="inline-block"
             data-reveal
@@ -144,6 +148,7 @@ export function SplitHeading({
         </span>
       ))}
     </Tag>
+
   );
 }
 

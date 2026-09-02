@@ -144,7 +144,7 @@ function Home() {
 
 
         {/* 02 — INTRODUCTION */}
-        <section className="relative min-h-svh px-5 py-32 md:px-10">
+        <section className="relative px-5 py-16 md:min-h-svh md:px-10 md:py-32">
           <ScrollScene kind="momentum" />
           <div className="relative z-10 mx-auto max-w-6xl">
             <SectionMarker index="02" title="Introduction" />
@@ -154,45 +154,44 @@ function Home() {
               text="We turn ideas into business momentum."
               className="display-lg max-w-[18ch] text-foreground"
             />
-            <div className="mt-16 grid gap-12 md:grid-cols-12">
+            <div className="mt-6 grid gap-8 md:mt-16 md:grid-cols-12 md:gap-12">
               <p className="text-sm leading-relaxed text-muted-foreground md:col-span-5 md:col-start-7 md:text-base" data-reveal data-reveal-delay={200}>
                 Our approach begins with understanding the client's business, industry, objectives, competition, available resources, and growth potential. We identify the most profitable and sustainable path for growth before recommending any service or investment.
               </p>
             </div>
             <div
-  className="mt-24 grid grid-cols-1 gap-10 border-t border-border pt-10 md:grid-cols-3 md:gap-6 justify-items-center text-center"
-  data-reveal
-  data-reveal-delay={280}
->
-  {[
-    { n: "2", l: "Disciplines fused — business & creative" },
-    { n: "3", l: "Continents of client work" },
-    { n: "9", l: "Years building momentum" },
-  ].map((s) => (
-    <div key={s.n}>
-      <div
-        className="font-display text-5xl leading-none text-glow md:text-7xl"
-        style={{ textShadow: "var(--glow-soft)" }}
-      >
-        {s.n}
-      </div>
+              className="mt-12 grid grid-cols-1 justify-items-center gap-8 border-t border-border pt-9 text-center md:mt-24 md:grid-cols-3 md:gap-6 md:pt-10"
+              data-reveal
+              data-reveal-delay={280}
+            >
+              {[
+                { n: "2", l: "Disciplines fused — business & creative" },
+                { n: "3", l: "Continents of client work" },
+                { n: "9", l: "Years building momentum" },
+              ].map((s) => (
+                <div key={s.n}>
+                  <div
+                    className="font-display text-[2.6rem] leading-none text-glow md:text-7xl"
+                    style={{ textShadow: "var(--glow-soft)" }}
+                  >
+                    {s.n}
+                  </div>
 
-      <p className="label mt-4 max-w-[18ch] !tracking-[0.18em]">
-        {s.l}
-      </p>
-    </div>
-  ))}
-</div>
+                  <p className="label mt-3 max-w-[18ch] !tracking-[0.18em] md:mt-4">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
+
         {/* 03 — WHAT WE DO */}
-        <section className="relative px-5 py-24 md:px-10 md:py-32">
+        <section className="relative px-5 py-16 md:px-10 md:py-32">
           <ScrollScene kind="practices" />
           <div className="relative z-10 mx-auto max-w-6xl">
 
             <SectionMarker index="03" title="What we do" />
-            <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="mb-9 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between md:gap-6">
               <SplitHeading
                 as="h2"
                 text="Thirteen practices, one team."
@@ -203,7 +202,7 @@ function Home() {
               </p>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 md:gap-7 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 md:gap-7 lg:grid-cols-3">
               {SERVICES.map((s, i) => (
                 <ServiceCard key={s.id} service={s} delay={i * 80} />
               ))}
@@ -211,26 +210,26 @@ function Home() {
 
 
             {/* approach / value */}
-            <div className="mt-32 grid gap-14 border-t border-border pt-16 md:grid-cols-12">
+            <div className="relative z-10 mt-16 grid gap-8 border-t border-border pt-10 md:mt-32 md:gap-14 md:grid-cols-12 md:pt-16">
               <div className="md:col-span-5">
-                <span className="label">Our approach</span>
+                <span className="label" data-reveal>Our approach</span>
                 <SplitHeading
                   as="h2"
                   text="Business logic first. Craft always."
-                  className="display-md mt-6 max-w-[18ch] text-foreground"
+                  className="display-md mt-3 max-w-[18ch] text-foreground md:mt-6"
                 />
               </div>
               <div className="md:col-span-7">
-                <p className="text-base leading-relaxed text-foreground md:text-lg" data-reveal>
+                <p className="text-[0.95rem] leading-relaxed text-foreground md:text-lg" data-reveal>
                   239 works where commercial strategy and creative execution meet. We start with the maths of the
                   business — where demand sits, what it is worth, what stands in the way — and only then design
                   the brand, product or campaign that moves it.
                 </p>
-                <p className="mt-6 max-w-[58ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={140}>
+                <p className="mt-5 max-w-[58ch] text-sm leading-relaxed text-muted-foreground md:mt-6" data-reveal data-reveal-delay={140}>
                   Small senior team. Direct access to decision-makers. Evidence over opinion, and work that holds
                   up in the market long after the launch.
                 </p>
-                <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-3">
+                <div className="mt-8 grid grid-cols-2 gap-6 md:mt-12 md:grid-cols-3 md:gap-8">
                   {[
                     { t: "Evidence-led", d: "Interviews, data and category study before direction." },
                     { t: "Senior only", d: "The people who pitch are the people who build." },
@@ -245,23 +244,24 @@ function Home() {
               </div>
             </div>
 
-            <div className="mt-24">
+            <div className="mt-14 md:mt-24">
               <Marquee items={HOME_DISCIPLINES} />
             </div>
           </div>
         </section>
 
 
+
         {/* 04 — SELECTED CASE STUDIES */}
-        <section className="relative min-h-svh px-5 py-32 md:px-10">
+        <section className="relative px-5 py-16 md:min-h-svh md:px-10 md:py-32">
           <ScrollScene kind="trajectory" />
           <div className="relative z-10 mx-auto max-w-6xl">
 
             <SectionMarker index="04" title="Selected case studies" />
-            <p className="label mb-14 max-w-[40ch]" data-reveal>
+            <p className="label mb-8 max-w-[40ch] md:mb-14" data-reveal>
               Selected engagements across strategy, brand, digital and growth
             </p>
-            <div className="grid gap-x-10 gap-y-16 md:grid-cols-2">
+            <div className="grid gap-x-10 gap-y-10 md:grid-cols-2 md:gap-y-16">
               {PROJECTS.slice(0, 4).map((p, i) => (
                 <Link
                   key={p.slug}
@@ -269,23 +269,22 @@ function Home() {
                   params={{ slug: p.slug }}
                   {...cursorProps("Open")}
                   onClick={() => playCue("open")}
-                  className="pointer-events-auto group block"
+                  className={`pointer-events-auto group block ${i % 2 ? "md:mt-12" : ""}`}
                   data-reveal
                   data-reveal-delay={i * 90}
-                  style={{ marginTop: i % 2 ? "3rem" : 0 }}
                 >
-                  <div className="flex items-baseline justify-between border-b border-border pb-4">
+                  <div className="flex items-baseline justify-between border-b border-border pb-3 md:pb-4">
                     <span className="label !text-glow">Project {p.index}</span>
                     <span className="label">{p.category}</span>
                   </div>
-                  <h3 className="display-md mt-5 text-foreground transition-all duration-700 group-hover:translate-x-1.5 group-hover:text-glow">
+                  <h3 className="display-md mt-4 text-foreground transition-all duration-700 group-hover:translate-x-1.5 group-hover:text-glow md:mt-5">
                     {p.title}
                   </h3>
-                  <p className="mt-4 max-w-[38ch] text-xs leading-relaxed text-muted-foreground">{p.kicker}</p>
+                  <p className="mt-3 max-w-[38ch] text-xs leading-relaxed text-muted-foreground md:mt-4">{p.kicker}</p>
                 </Link>
               ))}
             </div>
-            <div className="mt-24" data-reveal>
+            <div className="mt-12 md:mt-24" data-reveal>
               <Action to="/case-studies" label="View all">
                 All case studies
               </Action>
@@ -294,7 +293,7 @@ function Home() {
         </section>
 
         {/* 05 — PHILOSOPHY */}
-        <section className="relative flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
+        <section className="relative flex flex-col justify-center px-5 py-16 md:min-h-svh md:px-10 md:py-32">
           <ScrollScene kind="alignment" />
           <div className="relative z-10 mx-auto w-full max-w-6xl">
 
@@ -314,7 +313,7 @@ function Home() {
         </section>
 
         {/* 06 — FINAL CTA */}
-        <section className="relative flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+        <section className="relative flex flex-col items-center justify-center px-5 py-16 text-center md:min-h-svh md:px-10 md:py-32">
           <ScrollScene kind="arrival" />
           <div className="relative z-10 flex w-full flex-col items-center">
           <SplitHeading
@@ -323,17 +322,18 @@ function Home() {
             className="display-lg max-w-[20ch] text-foreground"
           />
 
-          <div className="mt-14" data-reveal data-reveal-delay={320}>
+          <div className="mt-9 md:mt-14" data-reveal data-reveal-delay={320}>
             <Action to="/contact" label="Start">
               Start a project
             </Action>
           </div>
-          <div className="mt-24 flex w-full max-w-6xl items-center justify-between border-t border-border pt-8">
+          <div className="mt-14 flex w-full max-w-6xl items-center justify-between border-t border-border pt-6 md:mt-24 md:pt-8">
             <span className="label">239 The Business Developer LLP</span>
             <span className="label">India</span>
           </div>
           </div>
         </section>
+
 
       </Overlay>
     </>

@@ -37,25 +37,26 @@ function CaseStudies() {
     <>
       <Telemetry tag="239 / Case studies" />
       <Overlay>
-        <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <section className="relative flex min-h-[64svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-24 md:min-h-svh md:px-10 md:pb-20 md:pt-32">
           <SectionBackdrop label="Work" />
           <SectionMarker index="—" title="" />
           <SplitHeading text="Work that moved something." className="display-xl max-w-[14ch] text-foreground" />
-          <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-[44ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={380}>
+          <div className="mt-6 flex flex-col gap-5 md:mt-10 md:flex-row md:items-end md:justify-between md:gap-8">
+            <p className="max-w-[40ch] text-sm leading-relaxed text-muted-foreground md:max-w-[44ch]" data-reveal data-reveal-delay={380}>
               Brand transformations, digital platforms and growth programmes. Filter the index below, then open a case study.
             </p>
             <ScrollHint text="Read the index" />
           </div>
         </section>
 
-        <section className="relative min-h-svh px-5 py-32 md:px-10">
+        <section className="relative px-5 py-14 md:min-h-svh md:px-10 md:py-32">
+
           {/* one quiet project environment behind the whole index */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <ProjectsVisual activeRef={activeRef} />
           </div>
           <div className="relative mx-auto max-w-6xl">
-            <div className="mb-12 flex flex-wrap items-center gap-x-6 gap-y-3" data-no-drag>
+            <div className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-3 md:mb-12 md:gap-x-6" data-no-drag>
               {CATEGORIES.map((c) => (
                 <button
                   key={c}

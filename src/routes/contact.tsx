@@ -62,20 +62,21 @@ function Contact() {
     <>
       <Telemetry tag="239 / Contact" />
       <Overlay>
-        <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <section className="relative flex min-h-[64svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-24 md:min-h-svh md:px-10 md:pb-20 md:pt-32">
           <SectionBackdrop label="Talk" />
           <SectionMarker index="—" title="Contact" />
           <SplitHeading text="Let's make something move." className="display-xl max-w-[14ch] text-foreground" />
-          <p className="mt-8 max-w-[40ch] text-sm leading-relaxed text-muted-foreground md:text-base" data-reveal data-reveal-delay={400}>
+          <p className="mt-5 max-w-[40ch] text-sm leading-relaxed text-muted-foreground md:mt-8 md:text-base" data-reveal data-reveal-delay={400}>
             Have an idea, challenge or opportunity? Let's talk.
           </p>
         </section>
 
-        <section className="px-5 py-24 md:px-10">
-          <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-12">
+        <section className="px-5 py-14 md:px-10 md:py-24">
+          <div className="mx-auto grid max-w-6xl gap-9 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-4">
-              <ConnectionVisual className="mb-14 !h-[260px] md:!h-[320px]" />
-              <div className="space-y-10">
+              <ConnectionVisual className="mb-8 !h-[200px] md:mb-14 md:!h-[320px]" />
+
+              <div className="space-y-6 md:space-y-10">
                 {[
                   { k: "Email", v: "hello@239business.com", href: "mailto:hello@239business.com" },
                   { k: "Phone", v: "+91 XXXXX XXXXX", href: "tel:+91" },
@@ -178,12 +179,13 @@ function Contact() {
           </div>
         </section>
 
-        <section className="flex min-h-[60svh] items-end px-5 pb-14 md:px-10">
-          <div className="mx-auto flex w-full max-w-6xl items-center justify-between border-t border-border pt-8">
+        <section className="flex items-end px-5 pb-10 pt-6 md:min-h-[60svh] md:px-10 md:pb-14">
+          <div className="mx-auto flex w-full max-w-6xl items-center justify-between border-t border-border pt-6 md:pt-8">
             <span className="label">239 The Business Developer LLP</span>
             <span className="label">© {new Date().getFullYear()}</span>
           </div>
         </section>
+
       </Overlay>
     </>
   );

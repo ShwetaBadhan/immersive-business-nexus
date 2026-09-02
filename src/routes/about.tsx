@@ -44,12 +44,12 @@ function About() {
     <>
       <Telemetry tag="239 / About" />
       <Overlay>
-        <section className="relative flex min-h-svh flex-col justify-end overflow-hidden px-5 pb-16 pt-32 md:px-10 md:pb-20">
+        <section className="relative flex min-h-[74svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-24 md:min-h-svh md:px-10 md:pb-20 md:pt-32">
           <SectionBackdrop label="239" />
           <SectionMarker index="—" title="About 239" />
           <SplitHeading text="We build momentum." className="display-xl text-foreground" />
-          <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-[52ch] text-sm leading-relaxed text-muted-foreground md:text-base" data-reveal data-reveal-delay={400}>
+          <div className="mt-6 flex flex-col gap-5 md:mt-10 md:flex-row md:items-end md:justify-between md:gap-8">
+            <p className="max-w-[42ch] text-sm leading-relaxed text-muted-foreground md:max-w-[52ch] md:text-base" data-reveal data-reveal-delay={400}>
               239 The Business Developer LLP works at the intersection of business, creativity, technology and
               growth. We help businesses transform ideas into meaningful experiences and measurable
               opportunities.
@@ -58,8 +58,8 @@ function About() {
           </div>
         </section>
 
-        <section className="px-5 py-32 md:px-10">
-          <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-12">
+        <section className="px-5 py-16 md:px-10 md:py-32">
+          <div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-5">
               <SectionMarker index="01" title="How we connect" />
               <SplitHeading
@@ -67,25 +67,25 @@ function About() {
                 text="People, ideas and businesses, wired together."
                 className="display-md max-w-[20ch] text-foreground"
               />
-              <p className="mt-8 max-w-[42ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={180}>
+              <p className="mt-5 max-w-[42ch] text-sm leading-relaxed text-muted-foreground md:mt-8" data-reveal data-reveal-delay={180}>
                 Every engagement is a network: the people who decide, the ideas that move them and the systems
                 that carry it. We design the whole structure, not a single node.
               </p>
             </div>
             <div className="md:col-span-6 md:col-start-7" data-reveal data-reveal-delay={240}>
-              <NetworkVisual />
+              <NetworkVisual className="!h-[260px] md:!h-[520px]" />
             </div>
           </div>
         </section>
 
-        <section className="min-h-svh px-5 py-32 md:px-10">
+        <section className="px-5 py-16 md:min-h-svh md:px-10 md:py-32">
           <div className="mx-auto max-w-6xl">
             <SectionMarker index="02" title="Our approach" />
             <div className="grid gap-px border border-border md:grid-cols-2">
               {APPROACH.map((a, i) => (
                 <div
                   key={a.t}
-                  className="pointer-events-auto group relative overflow-hidden border-border p-8 transition-colors duration-700 md:p-12"
+                  className="pointer-events-auto group relative overflow-hidden border-border p-6 transition-colors duration-700 md:p-12"
                   style={{ borderRightWidth: i % 2 === 0 ? 1 : 0, borderBottomWidth: i < 2 ? 1 : 0 }}
                   data-reveal
                   data-reveal-delay={i * 110}
@@ -96,10 +96,10 @@ function About() {
                   />
                   <div className="relative">
                     <span className="font-mono text-[0.6rem] text-neon">{a.n}</span>
-                    <h3 className="display-md mt-6 text-foreground transition-colors duration-500 group-hover:text-glow">
+                    <h3 className="display-md mt-4 text-foreground transition-colors duration-500 group-hover:text-glow md:mt-6">
                       {a.t}
                     </h3>
-                    <p className="mt-4 max-w-[34ch] text-xs leading-relaxed text-muted-foreground">{a.d}</p>
+                    <p className="mt-3 max-w-[34ch] text-xs leading-relaxed text-muted-foreground md:mt-4">{a.d}</p>
                   </div>
                 </div>
               ))}
@@ -107,13 +107,13 @@ function About() {
           </div>
         </section>
 
-        <section className="flex min-h-svh flex-col justify-center px-5 py-32 md:px-10">
+        <section className="flex flex-col justify-center px-5 py-16 md:min-h-svh md:px-10 md:py-32">
           <div className="mx-auto w-full max-w-6xl">
             <SectionMarker index="03" title="Our mindset" />
             {MINDSET.map((m, i) => (
               <h2
                 key={m}
-                className="display-lg border-b border-border py-4 text-foreground"
+                className="display-lg border-b border-border py-3 text-foreground md:py-4"
                 data-reveal
                 data-reveal-delay={i * 150}
                 style={{ paddingLeft: `${i * 4}%`, color: i === 3 ? "var(--color-glow)" : undefined }}
@@ -124,19 +124,19 @@ function About() {
           </div>
         </section>
 
-        <section className="min-h-svh px-5 py-32 md:px-10">
+        <section className="px-5 py-16 md:min-h-svh md:px-10 md:py-32">
           <div className="mx-auto max-w-6xl">
             <SectionMarker index="04" title="The journey" />
-            <ol className="relative ml-3 border-l border-neon/25 pl-8 md:ml-6 md:pl-14">
+            <ol className="relative ml-2 border-l border-neon/25 pl-6 md:ml-6 md:pl-14">
               {JOURNEY.map((j, i) => (
-                <li key={j.year} className="relative pb-16 last:pb-0" data-reveal data-reveal-delay={i * 110}>
+                <li key={j.year} className="relative pb-9 last:pb-0 md:pb-16" data-reveal data-reveal-delay={i * 110}>
                   <span
-                    className="absolute -left-[41px] top-2 h-2.5 w-2.5 rounded-full bg-neon md:-left-[63px]"
+                    className="absolute -left-[31px] top-2 h-2.5 w-2.5 rounded-full bg-neon md:-left-[63px]"
                     style={{ boxShadow: "var(--glow-hard)" }}
                   />
                   <span className="label !text-glow">{j.year}</span>
-                  <h3 className="display-md mt-3 text-foreground">{j.t}</h3>
-                  <p className="mt-3 max-w-[44ch] text-xs leading-relaxed text-muted-foreground md:text-sm">
+                  <h3 className="display-md mt-2 text-foreground md:mt-3">{j.t}</h3>
+                  <p className="mt-2 max-w-[44ch] text-xs leading-relaxed text-muted-foreground md:mt-3 md:text-sm">
                     {j.d}
                   </p>
                 </li>
@@ -145,15 +145,16 @@ function About() {
           </div>
         </section>
 
-        <section className="flex min-h-svh flex-col items-center justify-center px-5 py-32 text-center md:px-10">
+        <section className="flex flex-col items-center justify-center px-5 py-20 text-center md:min-h-svh md:px-10 md:py-32">
           <SplitHeading as="h2" text="Let's make something move." className="display-lg max-w-[18ch] text-foreground" />
-          <div className="mt-14" data-reveal data-reveal-delay={300}>
+          <div className="mt-9 md:mt-14" data-reveal data-reveal-delay={300}>
             <Action to="/contact" label="Talk">
               Start a conversation
             </Action>
           </div>
         </section>
       </Overlay>
+
     </>
   );
 }

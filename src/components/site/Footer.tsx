@@ -25,7 +25,7 @@ export function Footer() {
 
   return (
     <footer className="pointer-events-auto relative z-20 border-t border-border bg-card/85 backdrop-blur-xl">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-12 md:px-10 md:py-20">
+      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-11 md:grid-cols-12 md:gap-12 md:px-10 md:py-20">
         <div className="md:col-span-4">
           <Link to="/" {...cursorProps("Home")} className="font-display text-4xl uppercase leading-none tracking-[-0.05em] text-foreground">
             239
