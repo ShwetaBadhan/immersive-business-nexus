@@ -54,7 +54,7 @@ function About() {
               growth. We help businesses transform ideas into meaningful experiences and measurable
               opportunities.
             </p>
-            <ScrollHint text="Enter the structure" />
+            {/* <ScrollHint text="Enter the structure" /> */}
           </div>
         </section>
 
