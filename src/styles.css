@@ -424,7 +424,7 @@
 
   /* softer, quicker reveal so nothing feels delayed on a phone.
      :not(.reveal-in) keeps the revealed state from being overridden here. */
-  .reveal:not(.reveal-in) {
+  .reveal:not(.reveal-in):not(.reveal-left):not(.reveal-right):not(.reveal-up):not(.reveal-zoom) {
     transform: translateY(0.9rem);
   }
   .reveal {
