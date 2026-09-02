@@ -272,7 +272,13 @@ export function ServiceGlyph({ kind }: { kind: GlyphKind }) {
  * CASE STUDIES — one quiet project environment behind the index
  * ------------------------------------------------------------------ */
 
-export function ProjectEnvironment({ activeRef }: { activeRef: { current: number } }) {
+export function ProjectEnvironment({
+  activeRef,
+  compact = false,
+}: {
+  activeRef: { current: number };
+  compact?: boolean;
+}) {
   const motion = useStageMotion();
   const group = useRef<THREE.Group>(null);
   const rings = useRef<THREE.Group>(null);
@@ -306,9 +312,9 @@ export function ProjectEnvironment({ activeRef }: { activeRef: { current: number
       <pointLight ref={accent} color={COL.neon} intensity={6} distance={16} decay={1.6} position={[0, 1, 3]} />
 
       <group ref={rings}>
-        {[2.5, 1.95, 1.4].map((r, i) => (
+        {(compact ? [2.5] : [2.5, 1.95, 1.4]).map((r, i) => (
           <mesh key={r} rotation={[Math.PI / 2.1, i * 0.22, 0]}>
-            <torusGeometry args={[r, 0.008, 8, 160]} />
+            <torusGeometry args={[r, 0.008, compact ? 6 : 8, compact ? 80 : 160]} />
             <meshStandardMaterial
               color={i === 1 ? COL.neon : COL.brand}
               metalness={0.5}
@@ -320,16 +326,25 @@ export function ProjectEnvironment({ activeRef }: { activeRef: { current: number
         ))}
       </group>
 
-      <mesh rotation={[0, 0.4, 0]} scale={1.25}>
-        <tubeGeometry args={[curve, 160, 0.045, 16, false]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1.4} color="#edf6f0" />
+      <mesh rotation={[0, 0.4, 0]} scale={compact ? 1.05 : 1.25}>
+        <tubeGeometry args={[curve, compact ? 80 : 160, 0.045, compact ? 8 : 16, false]} />
+        <meshPhysicalMaterial
+          {...GLASS}
+          thickness={1.4}
+          color="#edf6f0"
+          transmission={compact ? 0.6 : GLASS.transmission}
+          opacity={compact ? 0.6 : 1}
+        />
       </mesh>
 
-      {[
-        [-1.85, 0.9, -0.6],
-        [1.9, -0.7, -0.4],
-        [0.4, 1.5, -1.1],
-      ].map((p, i) => (
+      {(compact
+        ? [[-1.85, 0.9, -0.6]]
+        : [
+            [-1.85, 0.9, -0.6],
+            [1.9, -0.7, -0.4],
+            [0.4, 1.5, -1.1],
+          ]
+      ).map((p, i) => (
         <mesh key={i} position={p as THREE.Vector3Tuple}>
           <icosahedronGeometry args={[i === 0 ? 0.16 : 0.1, 1]} />
           {i === 1 ? <meshStandardMaterial {...EMERALD} /> : <meshStandardMaterial {...CHROME} />}

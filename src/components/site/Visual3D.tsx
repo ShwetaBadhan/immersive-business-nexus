@@ -33,9 +33,16 @@ export function ServiceGlyphVisual({ kind, hovered = false }: { kind: GlyphKind;
 
 /** CASE STUDIES — quiet project environment that reacts to the hovered row. */
 export function ProjectsVisual({ activeRef }: { activeRef: { current: number } }) {
+  const mobile = useIsMobile();
   return (
-    <Stage className="absolute inset-0 h-full w-full" camera={[0, 0, 7.2]} fov={40}>
-      <ProjectEnvironment activeRef={activeRef} />
+    <Stage
+      className="absolute inset-0 h-full w-full"
+      camera={mobile ? [0, 0, 11] : [0, 0, 7.2]}
+      fov={40}
+      tint={mobile ? 0.6 : 1}
+      style={mobile ? { opacity: 0.4 } : undefined}
+    >
+      <ProjectEnvironment activeRef={activeRef} compact={mobile} />
     </Stage>
   );
 }
