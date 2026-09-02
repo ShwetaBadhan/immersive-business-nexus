@@ -124,7 +124,7 @@ export function ScrollScene({ kind }: { kind: SceneKind }) {
         fov={mobile ? 46 : 40}
         tint={0.9}
       >
-        <DepthHaze count={mobile ? Math.round(cfg.haze * 0.35) : cfg.haze} depth={16} />
+        {!mobile && <DepthHaze count={cfg.haze} depth={16} />}
         <Drift
           side={cfg.side}
           offsetX={mobile ? cfg.m.offsetX : cfg.offsetX}

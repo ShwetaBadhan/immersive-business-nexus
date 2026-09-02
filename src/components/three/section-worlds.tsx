@@ -135,13 +135,13 @@ export function MomentumWorld({ compact = false }: { compact?: boolean }) {
           <cylinderGeometry args={[0.085, 0.1, 1.5, seg]} />
           <meshPhysicalMaterial {...GLASS} thickness={1.2} roughness={0.18} color="#eef7f1" {...base(0.72)} />
         </mesh>
-        {/* tapered nib */}
-        <mesh position={[0, -0.66, 0]}>
+        {/* tapered nib — apex points down toward the writing surface */}
+        <mesh position={[0, -0.66, 0]} rotation={[Math.PI, 0, 0]}>
           <coneGeometry args={[0.085, 0.36, seg]} />
           <meshStandardMaterial {...CHROME} {...base(0.7)} />
         </mesh>
         {/* nib tip */}
-        <mesh position={[0, -0.87, 0]}>
+        <mesh position={[0, -0.87, 0]} rotation={[Math.PI, 0, 0]}>
           <coneGeometry args={[0.018, 0.1, 8]} />
           <meshStandardMaterial {...EMERALD} {...base(0.8)} />
         </mesh>
