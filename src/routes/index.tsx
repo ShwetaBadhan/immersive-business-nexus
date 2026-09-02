@@ -194,12 +194,12 @@ function Home() {
             <div className="mb-9 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between md:gap-6">
               <SplitHeading
                 as="h2"
-                text="Thirteen practices, one team."
+                text="Nine practices, one team."
                 className="display-lg max-w-[16ch] text-foreground"
               />
-              <p className="max-w-[38ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={220}>
+              {/* <p className="max-w-[38ch] text-sm leading-relaxed text-muted-foreground" data-reveal data-reveal-delay={220}>
                 Each practice stands on its own. Most engagements combine two or three, run by the same senior team.
-              </p>
+              </p> */}
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 md:gap-7 lg:grid-cols-3">
@@ -232,7 +232,7 @@ function Home() {
                 <div className="mt-8 grid grid-cols-2 gap-6 md:mt-12 md:grid-cols-3 md:gap-8">
                   {[
                     { t: "Evidence-led", d: "Interviews, data and category study before direction." },
-                    { t: "Senior only", d: "The people who pitch are the people who build." },
+                    // { t: "Senior only", d: "The people who pitch are the people who build." },
                     { t: "Built to last", d: "Systems and playbooks that survive handover." },
                   ].map((v, i) => (
                     <div key={v.t} data-reveal data-reveal-delay={i * 110}>
