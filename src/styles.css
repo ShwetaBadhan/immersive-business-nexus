@@ -358,3 +358,102 @@
     letter-spacing: -0.02em;
   }
 }
+
+/* ================================================================== *
+ * MOBILE-ONLY REFINEMENTS (max-width: 767px)
+ * Desktop values above are untouched.
+ * ================================================================== */
+
+@media (max-width: 767px) {
+  /* tighter, stronger editorial type scale */
+  .display-lg {
+    font-size: clamp(2.1rem, 10.5vw, 3.1rem);
+    line-height: 0.94;
+    letter-spacing: -0.032em;
+  }
+  .display-md {
+    font-size: clamp(1.35rem, 6.4vw, 1.9rem);
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* softer, quicker reveal so nothing feels delayed on a phone */
+  .reveal {
+    transform: translateY(0.9rem);
+    transition:
+      opacity 0.7s var(--ease-world),
+      transform 0.8s var(--ease-world);
+  }
+}
+
+/* --- mobile hero: slow-drifting abstract forms --- */
+@keyframes hero-drift-a {
+  0% {
+    transform: translate3d(-6%, 4%, 0) scale(0.94) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(8%, -6%, 0) scale(1.06) rotate(12deg);
+  }
+  100% {
+    transform: translate3d(-6%, 4%, 0) scale(0.94) rotate(0deg);
+  }
+}
+
+@keyframes hero-drift-b {
+  0% {
+    transform: translate3d(5%, -5%, 0) scale(1.04) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-7%, 7%, 0) scale(0.92) rotate(-14deg);
+  }
+  100% {
+    transform: translate3d(5%, -5%, 0) scale(1.04) rotate(0deg);
+  }
+}
+
+@keyframes hero-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-float-a {
+  animation: hero-drift-a 22s ease-in-out infinite;
+}
+.hero-float-b {
+  animation: hero-drift-b 28s ease-in-out infinite;
+}
+.hero-spin {
+  animation: hero-spin-slow 46s linear infinite;
+}
+
+/* --- mobile swipe rail (related services) --- */
+@utility swipe-rail {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+@layer components {
+  .swipe-rail::-webkit-scrollbar {
+    display: none;
+  }
+  .swipe-rail > * {
+    scroll-snap-align: start;
+    flex: 0 0 82%;
+  }
+}

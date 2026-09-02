@@ -170,6 +170,44 @@ export function HeroBackdrop() {
         }}
       />
 
+      {/* mobile only: a few elegant abstract forms drifting around the type.
+          Pure CSS (no extra WebGL) so the phone stays fast. They frame the
+          content near the edges and never sit under the reading column. */}
+      {compact && (
+        <div className="absolute inset-0">
+          {/* thin chrome ring, top-left */}
+          <div className="hero-float-a absolute -left-10 top-[14%] h-32 w-32">
+            <div className="hero-spin h-full w-full rounded-full border border-neon/25" />
+          </div>
+          {/* soft glass fragment, right edge */}
+          <div
+            className="hero-float-b absolute -right-12 top-[30%] h-40 w-40 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle at 34% 30%, oklch(0.99 0.02 155 / 85%), oklch(0.90 0.05 158 / 35%) 58%, transparent 72%)",
+              filter: "blur(0.5px)",
+              opacity: 0.55,
+            }}
+          />
+          {/* minimal ribbon, lower-left */}
+          <svg
+            className="hero-float-a absolute -left-6 bottom-[24%] h-24 w-44 text-neon/30"
+            viewBox="0 0 180 90"
+            fill="none"
+            style={{ animationDuration: "34s" }}
+          >
+            <path d="M2 74C36 74 44 12 88 12s52 62 90 62" stroke="currentColor" strokeWidth="1" />
+            <path d="M2 84C40 84 50 26 92 26s54 58 86 58" stroke="currentColor" strokeWidth="0.5" opacity="0.6" />
+          </svg>
+          {/* tiny metallic fragment, upper-right */}
+          <div
+            className="hero-float-b absolute right-[16%] top-[9%] h-3 w-3 rotate-45 bg-neon/30"
+            style={{ animationDuration: "19s" }}
+          />
+        </div>
+      )}
+
+
       {/* film grain */}
       <div
         className="absolute inset-0 opacity-[0.035] mix-blend-multiply"

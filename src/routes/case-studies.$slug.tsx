@@ -65,21 +65,21 @@ function CaseStudy() {
 
   return (
     <Overlay>
-      <article className="pointer-events-auto mx-auto mb-0 mt-24 max-w-5xl border border-border bg-card/90 backdrop-blur-xl md:mt-28">
+      <article className="pointer-events-auto mx-auto mb-0 mt-20 max-w-5xl border border-border bg-card/90 backdrop-blur-xl md:mt-28">
         {/* header */}
-        <header className="px-6 pb-14 pt-16 md:px-14 md:pb-20 md:pt-24">
+        <header className="px-5 pb-9 pt-10 md:px-14 md:pb-20 md:pt-24">
           <div className="flex flex-wrap items-center gap-4">
             <span className="label !text-glow">{project.index}</span>
             <span className="h-px w-8 bg-border" />
             <span className="label">{project.category}</span>
           </div>
           <h1
-            className="display-lg mt-8 max-w-[18ch] text-foreground"
+            className="display-lg mt-5 max-w-[18ch] text-foreground md:mt-8"
           >
             {project.title}
           </h1>
           <p
-            className="mt-8 max-w-[54ch] text-base leading-relaxed text-muted-foreground md:text-lg"
+            className="mt-5 max-w-[46ch] text-[0.95rem] leading-relaxed text-muted-foreground md:mt-8 md:max-w-[54ch] md:text-lg"
           >
             {project.kicker}
           </p>
@@ -87,7 +87,8 @@ function CaseStudy() {
 
         {/* large visual */}
         <div
-          className="mx-6 h-[42svh] border border-border md:mx-14 md:h-[52svh]"
+          className="mx-5 h-[30svh] border border-border md:mx-14 md:h-[52svh]"
+
           style={{
             background: `linear-gradient(135deg,
               oklch(0.9445 0.0132 152.3),
@@ -95,7 +96,7 @@ function CaseStudy() {
               oklch(0.6248 0.1268 157.8 / 55%))`,
           }}
         >
-          <div className="flex h-full items-end justify-between p-6 md:p-10">
+          <div className="flex h-full items-end justify-between p-5 md:p-10">
             <span className="font-display text-6xl uppercase leading-none tracking-[-0.05em] text-foreground/70 md:text-8xl">
               239
             </span>
@@ -104,8 +105,8 @@ function CaseStudy() {
         </div>
 
         {/* overview */}
-        <section className="px-6 py-16 md:px-14 md:py-20">
-          <div className="grid grid-cols-2 gap-8 border-t border-border pt-10 md:grid-cols-4">
+        <section className="px-5 py-10 md:px-14 md:py-20">
+          <div className="grid grid-cols-2 gap-6 border-t border-border pt-7 md:gap-8 md:grid-cols-4 md:pt-10">
             {overview.map((o) => (
               <div key={o.k}>
                 <span className="label">{o.k}</span>
@@ -116,18 +117,18 @@ function CaseStudy() {
         </section>
 
        {/* chapters */}
-<div className="px-6 md:px-14">
+<div className="px-5 md:px-14">
   {chapters.map((c) => (
     <section
       key={c.n}
-      className="grid gap-6 border-t border-border py-14 md:grid-cols-12 md:gap-10"
+      className="grid gap-4 border-t border-border py-9 md:grid-cols-12 md:gap-10 md:py-14"
     >
       <div className="md:col-span-4">
         <span className="label !text-glow">{c.n}</span>
-        <h2 className="display-md mt-4 text-foreground">{c.t}</h2>
+        <h2 className="display-md mt-3 text-foreground md:mt-4">{c.t}</h2>
       </div>
 
-      <p className="whitespace-pre-line text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed">
+      <p className="whitespace-pre-line text-[0.95rem] leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed">
         {c.b}
       </p>
     </section>
@@ -135,11 +136,11 @@ function CaseStudy() {
 </div>
 
 {/* results */}
-<section className="px-6 pb-16 md:px-14 md:pb-20">
-  <div className="border-t border-border pt-12">
+<section className="px-5 pb-10 md:px-14 md:pb-20">
+  <div className="border-t border-border pt-8 md:pt-12">
     <span className="label">03 — Results</span>
 
-    <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
+    <div className="mt-7 grid gap-7 md:mt-10 md:grid-cols-3 md:gap-8 lg:gap-12">
       {project.results.map((r) => (
         <div key={r.label} className="min-w-0">
           <div className="font-display text-4xl leading-[0.95] tracking-[-0.04em] text-glow sm:text-5xl md:text-[3.5rem] lg:text-[4rem]">
@@ -156,8 +157,8 @@ function CaseStudy() {
 </section>
 
 {/* impact */}
-<section className="px-6 md:px-14">
-  <section className="grid gap-6 border-t border-border py-14 md:grid-cols-12 md:gap-10">
+<section className="px-5 md:px-14">
+  <section className="grid gap-4 border-t border-border py-9 md:grid-cols-12 md:gap-10 md:py-14">
     <div className="md:col-span-4">
       <span className="label !text-glow">04</span>
       <h2 className="display-md mt-4 text-foreground">
@@ -165,20 +166,20 @@ function CaseStudy() {
       </h2>
     </div>
 
-    <p className="whitespace-pre-line text-base leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed">
+    <p className="whitespace-pre-line text-[0.95rem] leading-relaxed text-muted-foreground md:col-span-8 md:text-lg md:leading-relaxed">
       {project.impact}
     </p>
   </section>
 </section>
 
         {/* next */}
-        <section className="border-t border-border px-6 py-14 md:px-14 md:py-16">
+        <section className="border-t border-border px-5 py-10 md:px-14 md:py-16">
           <span className="label">Next project</span>
           <Link
             to="/case-studies/$slug"
             params={{ slug: next.slug }}
             {...cursorProps("Open")}
-            className="group mt-6 block"
+            className="group mt-5 block md:mt-6"
           >
             <h2 className="display-md text-foreground transition-colors duration-500 group-hover:text-glow">
               {next.title}
@@ -187,7 +188,7 @@ function CaseStudy() {
               {next.kicker}
             </p>
           </Link>
-          <div className="mt-12 flex flex-wrap gap-5">
+          <div className="mt-8 flex flex-wrap gap-4 md:mt-12 md:gap-5">
             <Action to="/case-studies" label="Index">
               All case studies
             </Action>

@@ -109,24 +109,59 @@ export function Drift({
 }
 
 /* --------------------------- 02 INTRODUCTION --------------------------- */
-/** A large frosted knot inside an oversized chrome halo. */
+/**
+ * An abstract, minimal pen: a slender glass barrel, a chrome tapered nib and a
+ * single emerald band, held in a wide chrome orbit. Reads as strategy, ideas
+ * and creative thinking rather than a literal office pen.
+ */
 export function MomentumWorld({ compact = false }: { compact?: boolean }) {
+  const pen = useRef<THREE.Group>(null);
   const halo = useRef<THREE.Group>(null);
   useFrame((s) => {
-    if (halo.current) halo.current.rotation.z = s.clock.elapsedTime * 0.06;
+    const t = s.clock.elapsedTime;
+    if (halo.current) halo.current.rotation.z = t * 0.05;
+    if (pen.current) {
+      pen.current.rotation.y = t * 0.16;
+      pen.current.position.y = Math.sin(t * 0.5) * 0.07;
+      pen.current.rotation.z = -0.42 + Math.sin(t * 0.33) * 0.05;
+    }
   });
+  const seg = compact ? 16 : 32;
   return (
     <group>
-      <mesh>
-        <torusKnotGeometry args={[0.72, 0.2, compact ? 64 : 120, 16, 2, 3]} />
-        <meshPhysicalMaterial
-          {...GLASS}
-          thickness={1.4}
-          roughness={0.22}
-          color="#eef7f1"
-          {...base(0.66)}
-        />
-      </mesh>
+      <group ref={pen} rotation={[0, 0, -0.42]}>
+        {/* barrel */}
+        <mesh position={[0, 0.24, 0]}>
+          <cylinderGeometry args={[0.085, 0.1, 1.5, seg]} />
+          <meshPhysicalMaterial {...GLASS} thickness={1.2} roughness={0.18} color="#eef7f1" {...base(0.72)} />
+        </mesh>
+        {/* tapered nib */}
+        <mesh position={[0, -0.66, 0]}>
+          <coneGeometry args={[0.085, 0.36, seg]} />
+          <meshStandardMaterial {...CHROME} {...base(0.7)} />
+        </mesh>
+        {/* nib tip */}
+        <mesh position={[0, -0.87, 0]}>
+          <coneGeometry args={[0.018, 0.1, 8]} />
+          <meshStandardMaterial {...EMERALD} {...base(0.8)} />
+        </mesh>
+        {/* grip band */}
+        <mesh position={[0, -0.42, 0]}>
+          <cylinderGeometry args={[0.098, 0.098, 0.08, seg]} />
+          <meshStandardMaterial {...EMERALD} {...base(0.62)} />
+        </mesh>
+        {/* cap ring */}
+        <mesh position={[0, 0.9, 0]}>
+          <cylinderGeometry args={[0.092, 0.092, 0.22, seg]} />
+          <meshStandardMaterial {...CHROME} {...base(0.58)} />
+        </mesh>
+        {/* clip — a single thin line */}
+        <mesh position={[0.1, 0.78, 0]} rotation={[0, 0, 0.04]}>
+          <boxGeometry args={[0.016, 0.42, 0.05]} />
+          <meshStandardMaterial {...CHROME} {...base(0.5)} />
+        </mesh>
+      </group>
+
       <group ref={halo}>
         <mesh rotation={[Math.PI / 2.4, 0.25, 0]}>
           <torusGeometry args={[1.55, 0.012, 6, 96]} />
@@ -146,6 +181,7 @@ export function MomentumWorld({ compact = false }: { compact?: boolean }) {
     </group>
   );
 }
+
 
 /* ---------------------------- 03 WHAT WE DO ---------------------------- */
 /** Stacked translucent architectural panels — a tall glass massing. */
