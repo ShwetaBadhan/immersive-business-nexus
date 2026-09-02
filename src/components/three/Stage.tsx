@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type ReactNode,
 } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -85,7 +86,7 @@ export function Stage({
 }: {
   children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   camera?: THREE.Vector3Tuple;
   fov?: number;
   tint?: number;
