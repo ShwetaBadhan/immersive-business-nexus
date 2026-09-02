@@ -385,13 +385,17 @@
     text-wrap: pretty;
   }
 
-  /* softer, quicker reveal so nothing feels delayed on a phone */
-  .reveal {
+  /* softer, quicker reveal so nothing feels delayed on a phone.
+     :not(.reveal-in) keeps the revealed state from being overridden here. */
+  .reveal:not(.reveal-in) {
     transform: translateY(0.9rem);
+  }
+  .reveal {
     transition:
       opacity 0.7s var(--ease-world),
       transform 0.8s var(--ease-world);
   }
+
 }
 
 /* --- mobile hero: slow-drifting abstract forms --- */
