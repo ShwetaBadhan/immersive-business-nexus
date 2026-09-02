@@ -37,7 +37,7 @@ function CaseStudies() {
     <>
       <Telemetry tag="239 / Case studies" />
       <Overlay>
-        <section className="relative flex min-h-[64svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-24 md:min-h-svh md:px-10 md:pb-20 md:pt-32">
+        <section className="relative flex flex-col justify-end overflow-hidden px-5 pb-10 pt-14 md:min-h-[64svh] md:px-10 md:pb-20 md:pt-32">
           <SectionBackdrop label="Work" />
           <SectionMarker index="—" title="" />
           <SplitHeading text="Work that moved something." className="display-xl max-w-[14ch] text-foreground" />
