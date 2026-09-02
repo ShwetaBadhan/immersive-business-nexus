@@ -215,6 +215,43 @@
   transform: none;
 }
 
+/* directional entrances — only the pre-reveal state is overridden so a
+   revealed element always settles at transform:none (never stuck hidden). */
+@layer components {
+  .reveal-left:not(.reveal-in) {
+    transform: translate3d(-34px, 0, 0);
+  }
+  .reveal-right:not(.reveal-in) {
+    transform: translate3d(34px, 0, 0);
+  }
+  .reveal-up:not(.reveal-in) {
+    transform: translate3d(0, 30px, 0);
+  }
+  .reveal-zoom:not(.reveal-in) {
+    transform: scale(0.965);
+  }
+  .reveal-left,
+  .reveal-right,
+  .reveal-up,
+  .reveal-zoom {
+    transition:
+      opacity 0.8s var(--ease-world),
+      transform 0.9s var(--ease-world);
+  }
+}
+
+@media (max-width: 767px) {
+  .reveal-left:not(.reveal-in) {
+    transform: translate3d(-18px, 0, 0);
+  }
+  .reveal-right:not(.reveal-in) {
+    transform: translate3d(18px, 0, 0);
+  }
+  .reveal-up:not(.reveal-in) {
+    transform: translate3d(0, 18px, 0);
+  }
+}
+
 @utility rule-line {
   height: 1px;
   width: 100%;
