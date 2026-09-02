@@ -12,9 +12,9 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    id: "business-development",
+    id: "business-strategy-and-growth-consulting",
     index: "01",
-    title: "Business Research & Growth Consulting",
+    title: "Business Strategy & Growth Consulting",
     short: "Business & Market Research",
     body: "Helping businesses identify opportunities, partnerships and growth pathways.",
     glyph: "2",
@@ -38,7 +38,7 @@ export const SERVICES: Service[] = [
     ],
   },
    {
-    id: "digital-experiences",
+    id: "branding-marketing-and-communications",
     index: "02",
     title: "Branding, Marketing & Communications",
     short: "Brand Development & Positioning",
@@ -63,7 +63,7 @@ export const SERVICES: Service[] = [
     ],
   },
   {
-    id: "brand-strategy",
+    id: "e-commerce-and-marketplace-management",
     index: "03",
     title: "E-Commerce & Marketplace Management",
     short: "E-Commerce Strategy & Setup",
@@ -87,7 +87,7 @@ export const SERVICES: Service[] = [
   },
  
   {
-    id: "creative-solutions",
+    id: "technology-and-digital-solutions",
     index: "04",
     title: "Technology & Digital Solutions",
     short: "Website Development",
@@ -111,7 +111,7 @@ export const SERVICES: Service[] = [
     ],
   },
   {
-    id: "growth-strategy",
+    id: "warehousing-fulfillment-and-operations",
     index: "05",
     title: "Warehousing, Fulfillment & Operations",
     short: "Warehousing & Storage",
@@ -136,7 +136,7 @@ export const SERVICES: Service[] = [
     ],
   },
   {
-    id: "digital-transformation",
+    id: "business-support-compliance-and-corporate-solutions",
     index: "06",
     title: "Business Support, Compliance & Corporate Solutions",
     short: "Company Registration & Business Setup",

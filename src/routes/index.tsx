@@ -139,20 +139,30 @@ function Home() {
                 Our approach begins with understanding the client's business, industry, objectives, competition, available resources, and growth potential. We identify the most profitable and sustainable path for growth before recommending any service or investment.
               </p>
             </div>
-            <div className="mt-24 grid grid-cols-3 gap-6 border-t border-border pt-10" data-reveal data-reveal-delay={280}>
-              {[
-                { n: "2", l: "Disciplines fused — business & creative" },
-                { n: "3", l: "Continents of client work" },
-                { n: "9", l: "Years building momentum" },
-              ].map((s) => (
-                <div key={s.n}>
-                  <div className="font-display text-5xl leading-none text-glow md:text-7xl" style={{ textShadow: "var(--glow-soft)" }}>
-                    {s.n}
-                  </div>
-                  <p className="label mt-4 max-w-[18ch] !tracking-[0.18em]">{s.l}</p>
-                </div>
-              ))}
-            </div>
+            <div
+  className="mt-24 grid grid-cols-1 gap-10 border-t border-border pt-10 md:grid-cols-3 md:gap-6 justify-items-center text-center"
+  data-reveal
+  data-reveal-delay={280}
+>
+  {[
+    { n: "2", l: "Disciplines fused — business & creative" },
+    { n: "3", l: "Continents of client work" },
+    { n: "9", l: "Years building momentum" },
+  ].map((s) => (
+    <div key={s.n}>
+      <div
+        className="font-display text-5xl leading-none text-glow md:text-7xl"
+        style={{ textShadow: "var(--glow-soft)" }}
+      >
+        {s.n}
+      </div>
+
+      <p className="label mt-4 max-w-[18ch] !tracking-[0.18em]">
+        {s.l}
+      </p>
+    </div>
+  ))}
+</div>
           </div>
         </section>
 
