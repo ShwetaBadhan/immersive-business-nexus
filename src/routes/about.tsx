@@ -44,12 +44,12 @@ function About() {
     <>
       <Telemetry tag="239 / About" />
       <Overlay>
-        <section className="relative flex min-h-[74svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-24 md:min-h-svh md:px-10 md:pb-20 md:pt-32">
+        <section className="relative flex flex-col justify-end overflow-hidden px-5 pb-10 pt-14 md:min-h-[70svh] md:px-10 md:pb-16 md:pt-20">
           <SectionBackdrop label="239" />
           <SectionMarker index="—" title="About 239" />
           <SplitHeading text="We build momentum." className="display-xl text-foreground" />
           <div className="mt-6 flex flex-col gap-5 md:mt-10 md:flex-row md:items-end md:justify-between md:gap-8">
-            <p className="max-w-[42ch] text-sm leading-relaxed text-muted-foreground md:max-w-[52ch] md:text-base" data-reveal data-reveal-delay={400}>
+            <p className="max-w-[42ch] text-sm leading-relaxed text-muted-foreground md:max-w-[52ch] md:text-base" data-reveal="left" data-reveal-delay={400}>
               239 The Business Developer LLP works at the intersection of business, creativity, technology and
               growth. We help businesses transform ideas into meaningful experiences and measurable
               opportunities.
@@ -67,12 +67,12 @@ function About() {
                 text="People, ideas and businesses, wired together."
                 className="display-md max-w-[20ch] text-foreground"
               />
-              <p className="mt-5 max-w-[42ch] text-sm leading-relaxed text-muted-foreground md:mt-8" data-reveal data-reveal-delay={180}>
+              <p className="mt-5 max-w-[42ch] text-sm leading-relaxed text-muted-foreground md:mt-8" data-reveal="left" data-reveal-delay={180}>
                 Every engagement is a network: the people who decide, the ideas that move them and the systems
                 that carry it. We design the whole structure, not a single node.
               </p>
             </div>
-            <div className="md:col-span-6 md:col-start-7" data-reveal data-reveal-delay={240}>
+            <div className="md:col-span-6 md:col-start-7" data-reveal="zoom" data-reveal-delay={240}>
               <NetworkVisual className="!h-[260px] md:!h-[520px]" />
             </div>
           </div>
@@ -87,7 +87,7 @@ function About() {
                   key={a.t}
                   className="pointer-events-auto group relative overflow-hidden border-border p-6 transition-colors duration-700 md:p-12"
                   style={{ borderRightWidth: i % 2 === 0 ? 1 : 0, borderBottomWidth: i < 2 ? 1 : 0 }}
-                  data-reveal
+                  data-reveal={i % 2 === 0 ? "left" : "right"}
                   data-reveal-delay={i * 110}
                 >
                   <span
@@ -114,7 +114,7 @@ function About() {
               <h2
                 key={m}
                 className="display-lg border-b border-border py-3 text-foreground md:py-4"
-                data-reveal
+                data-reveal={i % 2 === 0 ? "left" : "right"}
                 data-reveal-delay={i * 150}
                 style={{ paddingLeft: `${i * 4}%`, color: i === 3 ? "var(--color-glow)" : undefined }}
               >
@@ -129,7 +129,7 @@ function About() {
             <SectionMarker index="04" title="The journey" />
             <ol className="relative ml-2 border-l border-neon/25 pl-6 md:ml-6 md:pl-14">
               {JOURNEY.map((j, i) => (
-                <li key={j.year} className="relative pb-9 last:pb-0 md:pb-16" data-reveal data-reveal-delay={i * 110}>
+                <li key={j.year} className="relative pb-9 last:pb-0 md:pb-16" data-reveal="left" data-reveal-delay={i * 110}>
                   <span
                     className="absolute -left-[31px] top-2 h-2.5 w-2.5 rounded-full bg-neon md:-left-[63px]"
                     style={{ boxShadow: "var(--glow-hard)" }}
@@ -147,7 +147,7 @@ function About() {
 
         <section className="flex flex-col items-center justify-center px-5 py-20 text-center md:min-h-svh md:px-10 md:py-32">
           <SplitHeading as="h2" text="Let's make something move." className="display-lg max-w-[18ch] text-foreground" />
-          <div className="mt-9 md:mt-14" data-reveal data-reveal-delay={300}>
+          <div className="mt-9 md:mt-14" data-reveal="up" data-reveal-delay={300}>
             <Action to="/contact" label="Talk">
               Start a conversation
             </Action>
