@@ -11,7 +11,17 @@ export function useReveal(deps: unknown[] = []) {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    nodes.forEach((n) => n.classList.add("reveal"));
+    const DIRS: Record<string, string> = {
+      left: "reveal-left",
+      right: "reveal-right",
+      up: "reveal-up",
+      zoom: "reveal-zoom",
+    };
+    nodes.forEach((n) => {
+      n.classList.add("reveal");
+      const dir = DIRS[n.dataset["reveal"] ?? ""];
+      if (dir) n.classList.add(dir);
+    });
 
     const mobile = window.matchMedia("(max-width: 767px)").matches;
     const show = (el: HTMLElement) => {
