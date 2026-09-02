@@ -160,27 +160,29 @@ function Home() {
               </p>
             </div>
             <div
-              className="mt-12 grid grid-cols-1 justify-items-center gap-8 border-t border-border pt-9 text-center md:mt-24 md:grid-cols-3 md:gap-6 md:pt-10"
-              data-reveal
-              data-reveal-delay={280}
-            >
-              {[
-                { n: "2", l: "Disciplines fused — business & creative" },
-                { n: "3", l: "Continents of client work" },
-                { n: "9", l: "Years building momentum" },
-              ].map((s) => (
-                <div key={s.n}>
-                  <div
-                    className="font-display text-[2.6rem] leading-none text-glow md:text-7xl"
-                    style={{ textShadow: "var(--glow-soft)" }}
-                  >
-                    {s.n}
-                  </div>
+  className="mt-12 grid grid-cols-3 justify-items-center gap-3 border-t border-border pt-9 text-center md:mt-24 md:gap-6 md:pt-10"
+  data-reveal
+  data-reveal-delay={280}
+>
+  {[
+    { n: "2", l: "Disciplines fused — business & creative" },
+    { n: "3", l: "Continents of client work" },
+    { n: "9", l: "Years building momentum" },
+  ].map((s) => (
+    <div key={s.n}>
+      <div
+        className="font-display text-[2rem] leading-none text-glow md:text-7xl"
+        style={{ textShadow: "var(--glow-soft)" }}
+      >
+        {s.n}
+      </div>
 
-                  <p className="label mt-3 max-w-[18ch] !tracking-[0.18em] md:mt-4">{s.l}</p>
-                </div>
-              ))}
-            </div>
+      <p className="label mt-3 max-w-[18ch] !tracking-[0.12em] md:mt-4">
+        {s.l}
+      </p>
+    </div>
+  ))}
+</div>
           </div>
         </section>
 

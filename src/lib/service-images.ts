@@ -3,14 +3,18 @@ import brandStrategy from "@/assets/service-brand-strategy.jpg";
 import digitalExperiences from "@/assets/service-digital-experiences.jpg";
 import creativeSolutions from "@/assets/service-creative-solutions.jpg";
 import growthStrategy from "@/assets/service-growth-strategy.jpg";
+import ecommerce from "@/assets/service-growth-strategy.jpg";
 import digitalTransformation from "@/assets/service-digital-transformation.jpg";
+import digitalresearch from "@/assets/service-digital-transformation.jpg";
 
 export const SERVICE_IMAGES: Record<string, string> = {
-  "business-strategy-and-growth-consulting": businessDevelopment,
-  "branding-marketing-and-communications": brandStrategy,
-  "e-commerce-and-marketplace-management": digitalExperiences,
-  "technology-and-digital-solutions": creativeSolutions,
-  "warehousing-fulfillment-and-operation": growthStrategy,
-  "business-support-compliance-and-corporate-solutions": digitalTransformation,
-  "warehousing-fulfillment-and-operations": digitalTransformation,
+  "business-research-and-growth-strategy": digitalresearch,
+  "e-commerce-and-marketplace-growth": brandStrategy,
+  "warehousing-fulfillment-and-logistics": digitalExperiences,
+  "branding-creative-and-content": creativeSolutions,
+  "digital-marketing-and-social-growth": growthStrategy,
+  "technology-and-digital-solutions": digitalTransformation,
+  "pr-sponsorship-and-business-communications": digitalTransformation,
+  "business-setup-legal-and-compliance": ecommerce,
+  "corporate-merchandise-and-promotional-solutions": businessDevelopment,
 };
