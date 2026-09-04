@@ -4,6 +4,8 @@ import { cursorProps } from "./Cursor";
 import { live, setWorld, useWorld } from "@/lib/world-store";
 import { playCue, setAudioEnabled } from "@/lib/audio";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
+
 
 const LINKS = [
   { to: "/", label: "Home" },
@@ -70,8 +72,10 @@ export function Nav() {
             {LINKS.map((l) => (
               <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
             ))}
+            <ThemeToggle />
             <SoundToggle sound={sound} onToggle={toggleSound} />
           </nav>
+
 
         <button
           {...cursorProps(open ? "Close" : "Menu")}
@@ -141,12 +145,16 @@ export function Nav() {
             </Link>
           );
         })}
-        <button
-          onClick={toggleSound}
-          className="label mt-10 self-start text-foreground/80 transition-colors duration-500 hover:text-glow"
-        >
-          Sound {sound ? "on" : "off"}
-        </button>
+        <div className="mt-10 flex items-center gap-8">
+          <ThemeToggle />
+          <button
+            onClick={toggleSound}
+            className="label text-foreground/80 transition-colors duration-500 hover:text-glow"
+          >
+            Sound {sound ? "on" : "off"}
+          </button>
+        </div>
+
       </div>
 
       <ScrollProgress />

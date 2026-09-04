@@ -107,10 +107,46 @@
   --ease-world: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
 .dark {
   color-scheme: dark;
+
+  /* deep forest night + emerald accents */
+  --deep: oklch(0.1738 0.0233 165.8);
+  --forest: oklch(0.2262 0.0308 164.2);
+  --brand: oklch(0.6402 0.1188 158.6);
+  --neon: oklch(0.7488 0.1512 158.2);
+  --glow: oklch(0.8215 0.1442 157.6);
+  --moss: oklch(0.3585 0.0372 162.4);
+
+  --background: oklch(0.1738 0.0233 165.8);
+  --foreground: oklch(0.9542 0.0102 152.4);
+  --card: oklch(0.2062 0.0268 165);
+  --card-foreground: oklch(0.9542 0.0102 152.4);
+  --popover: oklch(0.2062 0.0268 165);
+  --popover-foreground: oklch(0.9542 0.0102 152.4);
+  --primary: oklch(0.7488 0.1512 158.2);
+  --primary-foreground: oklch(0.1738 0.0233 165.8);
+  --secondary: oklch(0.2482 0.0288 164.2);
+  --secondary-foreground: oklch(0.9542 0.0102 152.4);
+  --muted: oklch(0.2482 0.0288 164.2);
+  --muted-foreground: oklch(0.7215 0.0208 158.4);
+  --accent: oklch(0.2782 0.0342 162.8);
+  --accent-foreground: oklch(0.9542 0.0102 152.4);
+  --destructive: oklch(0.58 0.19 25);
+  --destructive-foreground: oklch(0.9542 0.0102 152.4);
+  --border: oklch(0.9542 0.0102 152.4 / 16%);
+  --input: oklch(0.9542 0.0102 152.4 / 22%);
+  --ring: oklch(0.7488 0.1512 158.2 / 45%);
+
+  --glow-soft: 0 10px 44px oklch(0.7488 0.1512 158.2 / 22%);
+  --glow-hard: 0 6px 20px oklch(0.7488 0.1512 158.2 / 30%);
+  --gradient-veil: radial-gradient(
+    circle at 50% 55%,
+    oklch(0.2262 0.0308 164.2),
+    oklch(0.1738 0.0233 165.8) 72%
+  );
 }
+
 
 @layer base {
   * {
