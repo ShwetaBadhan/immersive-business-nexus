@@ -145,12 +145,16 @@ export function Nav() {
             </Link>
           );
         })}
-        <button
-          onClick={toggleSound}
-          className="label mt-10 self-start text-foreground/80 transition-colors duration-500 hover:text-glow"
-        >
-          Sound {sound ? "on" : "off"}
-        </button>
+        <div className="mt-10 flex items-center gap-8">
+          <ThemeToggle />
+          <button
+            onClick={toggleSound}
+            className="label text-foreground/80 transition-colors duration-500 hover:text-glow"
+          >
+            Sound {sound ? "on" : "off"}
+          </button>
+        </div>
+
       </div>
 
       <ScrollProgress />
