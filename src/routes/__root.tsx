@@ -130,6 +130,12 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    initTheme();
+  }, []);
+
+
+
   return (
     <QueryClientProvider client={queryClient}>
       <SmoothScroll />
