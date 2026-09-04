@@ -110,9 +110,11 @@ export function HeroBackdrop() {
           backgroundImage: `url(${heroEnv})`,
           ...framing,
           filter: compact
-            ? "blur(1.5px) saturate(0.62) brightness(1.1)"
-            : "blur(2.5px) saturate(0.58) brightness(1.16)",
-          opacity: compact ? 0.82 : 0.7,
+            ? "blur(1.5px) var(--hero-img-filter-sm)"
+            : "blur(2.5px) var(--hero-img-filter)",
+          opacity: compact
+            ? "var(--hero-img-opacity-sm)"
+            : "var(--hero-img-opacity)",
         }}
       />
 
@@ -123,8 +125,8 @@ export function HeroBackdrop() {
         style={{
           backgroundImage: `url(${heroEnv})`,
           ...framing,
-          filter: "blur(1px) saturate(0.6) brightness(1.12)",
-          opacity: compact ? 0.24 : 0.34,
+          filter: "blur(1px) var(--hero-img-filter)",
+          opacity: compact ? 0.2 : 0.3,
           maskImage: compact
             ? "radial-gradient(120% 70% at 50% 66%, rgba(0,0,0,0.95), rgba(0,0,0,0) 74%)"
             : "radial-gradient(120% 90% at 70% 60%, rgba(0,0,0,0.95), rgba(0,0,0,0) 72%)",
@@ -140,7 +142,7 @@ export function HeroBackdrop() {
         className="absolute inset-[-20%] will-change-transform"
         style={{
           background:
-            "radial-gradient(45% 45% at 50% 40%, oklch(0.99 0.01 150 / 60%), transparent 70%)",
+            "radial-gradient(45% 45% at 50% 40%, var(--hero-light), transparent 70%)",
         }}
       />
 
@@ -158,8 +160,8 @@ export function HeroBackdrop() {
         className="absolute inset-0"
         style={{
           background: compact
-            ? "radial-gradient(76% 40% at 50% 38%, oklch(0.99 0.004 150 / 78%), oklch(0.985 0.005 150 / 16%) 84%)"
-            : "radial-gradient(60% 50% at 50% 46%, oklch(0.99 0.004 150 / 88%), oklch(0.985 0.005 150 / 30%) 80%)",
+            ? "radial-gradient(76% 40% at 50% 38%, var(--wash-core-sm), var(--wash-edge-sm) 84%)"
+            : "radial-gradient(60% 50% at 50% 46%, var(--wash-core), var(--wash-edge) 80%)",
         }}
       />
       <div
@@ -183,8 +185,7 @@ export function HeroBackdrop() {
           <div
             className="hero-float-b absolute -right-12 top-[30%] h-40 w-40 rounded-full"
             style={{
-              background:
-                "radial-gradient(circle at 34% 30%, oklch(0.99 0.02 155 / 85%), oklch(0.90 0.05 158 / 35%) 58%, transparent 72%)",
+              background: "var(--hero-fragment)",
               filter: "blur(0.5px)",
               opacity: 0.55,
             }}
@@ -210,7 +211,7 @@ export function HeroBackdrop() {
 
       {/* film grain */}
       <div
-        className="absolute inset-0 opacity-[0.035] mix-blend-multiply"
+        className="absolute inset-0 opacity-[0.035] mix-blend-overlay dark:opacity-[0.05]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E\")",
