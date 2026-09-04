@@ -43,7 +43,7 @@ export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: 
             loading="lazy"
             width={1200}
             height={900}
-            className="aspect-[16/10] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+            className="aspect-[16/10] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03] dark:brightness-[0.78] dark:contrast-[1.05] dark:saturate-[0.9]"
           />
         )}
         {/* 3D practice glyph — same materials and light as the rest of the site */}

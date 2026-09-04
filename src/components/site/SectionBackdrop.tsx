@@ -11,7 +11,7 @@ export function SectionBackdrop({ label }: { label?: string }) {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(70% 60% at 68% 22%, oklch(0.97 0.03 158 / 42%), transparent 70%)",
+            "radial-gradient(70% 60% at 68% 22%, var(--wash-section), transparent 70%)",
         }}
       />
       <span className="absolute left-[16%] top-0 h-full w-px bg-neon/12" />

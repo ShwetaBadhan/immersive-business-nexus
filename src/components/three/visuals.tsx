@@ -87,7 +87,7 @@ export function NetworkStructure() {
             {i % 4 === 0 ? (
               <meshStandardMaterial {...EMERALD} />
             ) : i % 3 === 0 ? (
-              <meshPhysicalMaterial {...GLASS} color="#ffffff" />
+              <meshPhysicalMaterial {...GLASS} color={COL.paper} />
             ) : (
               <meshStandardMaterial {...CHROME} />
             )}
@@ -106,7 +106,7 @@ export function NetworkStructure() {
       {/* glass core — the business at the centre of the network */}
       <mesh ref={core} position={[0, 0.25, 0]}>
         <icosahedronGeometry args={[0.42, 1]} />
-        <meshPhysicalMaterial {...GLASS} color="#eef7f1" thickness={1.6} />
+        <meshPhysicalMaterial {...GLASS} color={COL.paper} thickness={1.6} />
       </mesh>
       <mesh position={[0, 0.25, 0]}>
         <icosahedronGeometry args={[0.44, 1]} />
@@ -212,7 +212,7 @@ export function ServiceGlyph({ kind }: { kind: GlyphKind }) {
           {[0, 1, 2].map((i) => (
             <mesh key={i} position={[i * 0.12 - 0.12, i * 0.16 - 0.16, i * 0.26 - 0.26]} rotation={[-0.42, 0.3, 0]}>
               <boxGeometry args={[1.05 - i * 0.12, 0.7 - i * 0.08, 0.02]} />
-              <meshPhysicalMaterial {...GLASS} thickness={0.7} color="#f2faf5" />
+              <meshPhysicalMaterial {...GLASS} thickness={0.7} color={COL.paper} />
             </mesh>
           ))}
           <mesh position={[0.16, 0.2, 0.3]} rotation={[-0.42, 0.3, 0]}>
@@ -226,7 +226,7 @@ export function ServiceGlyph({ kind }: { kind: GlyphKind }) {
         <group ref={inner}>
           <mesh>
             <tubeGeometry args={[flow, 128, 0.05, 16, false]} />
-            <meshPhysicalMaterial {...GLASS} thickness={1.2} color="#eaf6ee" />
+            <meshPhysicalMaterial {...GLASS} thickness={1.2} color={COL.paper} />
           </mesh>
           <mesh scale={0.98}>
             <tubeGeometry args={[flow, 96, 0.012, 8, false]} />
@@ -331,7 +331,7 @@ export function ProjectEnvironment({
         <meshPhysicalMaterial
           {...GLASS}
           thickness={1.4}
-          color="#edf6f0"
+          color={COL.paper}
           transmission={compact ? 0.6 : GLASS.transmission}
           opacity={compact ? 0.6 : 1}
         />
@@ -391,7 +391,7 @@ export function ConnectionForm() {
     <group ref={group}>
       <mesh ref={a} rotation={[Math.PI / 2.6, 0, 0]}>
         <torusGeometry args={[1.05, 0.11, 32, 144]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1.5} color="#eef7f1" />
+        <meshPhysicalMaterial {...GLASS} thickness={1.5} color={COL.paper} />
       </mesh>
       <mesh ref={b} rotation={[0, Math.PI / 2.4, 0.5]}>
         <torusGeometry args={[1.05, 0.045, 24, 144]} />

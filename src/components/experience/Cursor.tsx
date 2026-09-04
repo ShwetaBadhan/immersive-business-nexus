@@ -56,11 +56,12 @@ export function Cursor() {
           height: expanded ? 78 : 34,
           opacity: expanded ? 1 : 0.55,
           borderColor: expanded
-            ? "oklch(0.4562 0.0975 159.2 / 55%)"
-            : "oklch(0.2312 0.0344 165.2 / 28%)",
+            ? "color-mix(in oklab, var(--color-neon) 60%, transparent)"
+            : "color-mix(in oklab, var(--color-foreground) 28%, transparent)",
           backgroundColor: expanded
-            ? "oklch(0.9445 0.0132 152.3 / 72%)"
+            ? "color-mix(in oklab, var(--color-secondary) 78%, transparent)"
             : "transparent",
+
           backdropFilter: expanded ? "blur(3px)" : "none",
           boxShadow: expanded ? "var(--glow-soft)" : "none",
         }}
