@@ -151,7 +151,7 @@ export function MomentumForm() {
     <group>
       <mesh>
         <icosahedronGeometry args={[0.5, 0]} />
-        <meshPhysicalMaterial {...GLASS} thickness={0.6} roughness={0.24} color="#f2faf6" {...base(0.9)} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.6} roughness={0.24} color={COL.paper} {...base(0.9)} />
       </mesh>
       <group ref={ring}>
         <mesh rotation={[Math.PI / 2.3, 0.2, 0]}>
@@ -181,7 +181,7 @@ export function PracticeLattice({ compact = false }: { compact?: boolean }) {
         return (
           <mesh key={i} position={[o * 0.3, o * 0.34, o * -0.28]} rotation={[-0.3, 0.22, o * 0.08]}>
             <boxGeometry args={[0.62, 0.4, 0.012]} />
-            <meshPhysicalMaterial {...GLASS} thickness={0.4} roughness={0.2} color="#f3fbf7" {...base(0.85)} />
+            <meshPhysicalMaterial {...GLASS} thickness={0.4} roughness={0.2} color={COL.paper} {...base(0.85)} />
           </mesh>
         );
       })}
@@ -224,7 +224,7 @@ export function TrajectoryRibbon() {
       ))}
       <mesh position={[0.9, -0.5, -0.4]}>
         <icosahedronGeometry args={[0.09, 0]} />
-        <meshPhysicalMaterial {...GLASS} thickness={0.3} color="#f2faf6" {...base(0.75)} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.3} color={COL.paper} {...base(0.75)} />
       </mesh>
     </group>
   );
@@ -273,7 +273,7 @@ export function ArrivalCore() {
     <group>
       <mesh ref={shell}>
         <dodecahedronGeometry args={[0.42, 0]} />
-        <meshPhysicalMaterial {...GLASS} thickness={0.7} roughness={0.22} color="#f4fbf8" {...base(0.9)} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.7} roughness={0.22} color={COL.paper} {...base(0.9)} />
       </mesh>
       <mesh>
         <sphereGeometry args={[0.09, 18, 18]} />
@@ -379,7 +379,7 @@ export function CrystalShard() {
     <group>
       <mesh ref={m}>
         <octahedronGeometry args={[0.6, 0]} />
-        <meshPhysicalMaterial {...GLASS} thickness={0.9} roughness={0.14} color="#f1faf6" {...base(0.92)} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.9} roughness={0.14} color={COL.paper} {...base(0.92)} />
       </mesh>
       <mesh rotation={[Math.PI / 2.6, 0.4, 0]}>
         <torusGeometry args={[0.9, 0.008, 8, 96]} />
@@ -409,7 +409,7 @@ export function RibbonArc() {
     <group ref={g}>
       <mesh>
         <tubeGeometry args={[curve, 110, 0.028, 10, false]} />
-        <meshPhysicalMaterial {...GLASS} thickness={0.6} roughness={0.16} color="#eff9f4" {...base(0.88)} />
+        <meshPhysicalMaterial {...GLASS} thickness={0.6} roughness={0.16} color={COL.paper} {...base(0.88)} />
       </mesh>
       <mesh>
         <tubeGeometry args={[curve, 110, 0.005, 8, false]} />
@@ -457,7 +457,7 @@ export function GlassMonolith() {
       {[0, 1, 2].map((i) => (
         <mesh key={i} position={[0, (i - 1) * 0.36, 0]} rotation={[0, i * 0.35, 0]}>
           <boxGeometry args={[0.7 - i * 0.12, 0.28, 0.7 - i * 0.12]} />
-          <meshPhysicalMaterial {...GLASS} thickness={0.8} roughness={0.18} color="#f2faf6" {...base(0.86)} />
+          <meshPhysicalMaterial {...GLASS} thickness={0.8} roughness={0.18} color={COL.paper} {...base(0.86)} />
         </mesh>
       ))}
       <mesh position={[0, 0.78, 0]}>
@@ -494,7 +494,7 @@ export function NodeCluster() {
           {i % 3 === 0 ? (
             <meshStandardMaterial {...EMERALD} {...base(0.8)} />
           ) : (
-            <meshPhysicalMaterial {...GLASS} thickness={0.4} color="#f2faf6" {...base(0.8)} />
+            <meshPhysicalMaterial {...GLASS} thickness={0.4} color={COL.paper} {...base(0.8)} />
           )}
         </mesh>
       ))}

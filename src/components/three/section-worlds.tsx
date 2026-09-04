@@ -133,7 +133,7 @@ export function MomentumWorld({ compact = false }: { compact?: boolean }) {
         {/* barrel */}
         <mesh position={[0, 0.24, 0]}>
           <cylinderGeometry args={[0.085, 0.1, 1.5, seg]} />
-          <meshPhysicalMaterial {...GLASS} thickness={1.2} roughness={0.18} color="#eef7f1" {...base(0.72)} />
+          <meshPhysicalMaterial {...GLASS} thickness={1.2} roughness={0.18} color={COL.paper} {...base(0.72)} />
         </mesh>
         {/* tapered nib — apex points down toward the writing surface */}
         <mesh position={[0, -0.66, 0]} rotation={[Math.PI, 0, 0]}>
@@ -202,7 +202,7 @@ export function PracticeWorld({ compact = false }: { compact?: boolean }) {
               {...GLASS}
               thickness={0.7}
               roughness={0.2}
-              color="#f1f9f4"
+              color={COL.paper}
               {...base(0.6)}
             />
           </mesh>
@@ -244,7 +244,7 @@ export function TrajectoryWorld({ compact = false }: { compact?: boolean }) {
     <group>
       <mesh>
         <tubeGeometry args={[curve, compact ? 60 : 110, 0.055, 10, false]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1} roughness={0.16} color="#eff8f2" {...base(0.64)} />
+        <meshPhysicalMaterial {...GLASS} thickness={1} roughness={0.16} color={COL.paper} {...base(0.64)} />
       </mesh>
       <mesh ref={shell}>
         <icosahedronGeometry args={[1.15, 1]} />
@@ -278,7 +278,7 @@ export function AlignmentWorld({ compact = false }: { compact?: boolean }) {
       ))}
       <mesh>
         <sphereGeometry args={[0.55, 24, 24]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1.6} roughness={0.28} color="#f2faf6" {...base(0.62)} />
+        <meshPhysicalMaterial {...GLASS} thickness={1.6} roughness={0.28} color={COL.paper} {...base(0.62)} />
       </mesh>
     </group>
   );
@@ -298,7 +298,7 @@ export function ArrivalWorld({ compact = false }: { compact?: boolean }) {
     <group>
       <mesh>
         <dodecahedronGeometry args={[1.1, 0]} />
-        <meshPhysicalMaterial {...GLASS} thickness={1.8} roughness={0.2} color="#eef7f1" {...base(0.68)} />
+        <meshPhysicalMaterial {...GLASS} thickness={1.8} roughness={0.2} color={COL.paper} {...base(0.68)} />
       </mesh>
       <group ref={frame}>
         {[0, 1, 2].map((i) => (
