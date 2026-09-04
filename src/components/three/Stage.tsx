@@ -58,21 +58,23 @@ function MotionDriver({ motion }: { motion: StageMotion }) {
 }
 
 /** Chrome / glass reflections without any network fetch. */
-function Rig({ tint = 1 }: { tint?: number }) {
+function Rig({ tint = 1, dark = false }: { tint?: number; dark?: boolean }) {
+  const k = dark ? 0.4 : 1;
   return (
     <>
-      <ambientLight intensity={1.25} />
-      <hemisphereLight intensity={0.7} color={"#ffffff"} groundColor={COL.moss} />
-      <directionalLight position={[3.4, 5.2, 4.2]} intensity={1.6} color="#ffffff" />
-      <directionalLight position={[-4.2, -1.4, 2.6]} intensity={0.6} color={COL.neon} />
+      <ambientLight intensity={1.25 * k} />
+      <hemisphereLight intensity={0.7 * k} color={COL.paper} groundColor={COL.moss} />
+      <directionalLight position={[3.4, 5.2, 4.2]} intensity={1.6 * (dark ? 0.55 : 1)} color={COL.paper} />
+      <directionalLight position={[-4.2, -1.4, 2.6]} intensity={dark ? 1.1 : 0.6} color={COL.neon} />
       <Environment resolution={64}>
-        <Lightformer intensity={2.4} position={[0, 4, 3]} scale={[9, 4, 1]} color="#ffffff" />
-        <Lightformer intensity={1.1 * tint} position={[-4, 1, 2]} scale={[4, 6, 1]} color={COL.neon} />
-        <Lightformer intensity={0.8 * tint} position={[4.5, -1.5, 1]} scale={[4, 5, 1]} color={COL.brand} />
+        <Lightformer intensity={2.4 * k} position={[0, 4, 3]} scale={[9, 4, 1]} color={COL.paper} />
+        <Lightformer intensity={1.1 * tint * (dark ? 1.4 : 1)} position={[-4, 1, 2]} scale={[4, 6, 1]} color={COL.neon} />
+        <Lightformer intensity={0.8 * tint * (dark ? 1.3 : 1)} position={[4.5, -1.5, 1]} scale={[4, 5, 1]} color={COL.brand} />
       </Environment>
     </>
   );
 }
+
 
 export function Stage({
   children,
