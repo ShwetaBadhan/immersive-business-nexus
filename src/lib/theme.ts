@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { setPaletteTheme } from "@/components/three/palette";
 
 export type Theme = "light" | "dark";
 
@@ -7,12 +8,14 @@ let theme: Theme = "light";
 const listeners = new Set<() => void>();
 
 function apply(next: Theme) {
+  setPaletteTheme(next);
   if (typeof document === "undefined") return;
   const root = document.documentElement;
   root.classList.toggle("dark", next === "dark");
   root.setAttribute("data-theme", next);
   root.style.colorScheme = next;
 }
+
 
 export function initTheme() {
   if (typeof window === "undefined") return;
