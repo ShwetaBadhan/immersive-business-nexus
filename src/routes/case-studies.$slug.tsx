@@ -91,10 +91,11 @@ function CaseStudy() {
 
           style={{
             background: `linear-gradient(135deg,
-              oklch(0.9445 0.0132 152.3),
-              oklch(0.8358 0.0281 158.2) 55%,
-              oklch(0.6248 0.1268 157.8 / 55%))`,
+              var(--color-forest),
+              var(--color-moss) 55%,
+              color-mix(in oklab, var(--color-neon) 55%, transparent))`,
           }}
+
         >
           <div className="flex h-full items-end justify-between p-5 md:p-10">
             <span className="font-display text-6xl uppercase leading-none tracking-[-0.05em] text-foreground/70 md:text-8xl">
