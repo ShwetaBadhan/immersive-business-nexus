@@ -12,6 +12,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
 import { COL } from "./palette";
+import { useTheme } from "@/lib/theme";
 
 /* ------------------------------------------------------------------ *
  * Shared stage for the section-level 3D visuals.
@@ -98,6 +99,7 @@ export function Stage({
 }) {
   const host = useRef<HTMLDivElement>(null);
   const hydrated = useHydrated();
+  const theme = useTheme();
   const coarse =
     typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches;
   const [visible, setVisible] = useState(false);
@@ -185,6 +187,7 @@ export function Stage({
     >
       {hydrated && visible && (
         <Canvas
+          key={theme}
           dpr={coarse ? [1, 1.15] : [1, 1.4]}
           gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
           camera={{ position: camera, fov, near: 0.1, far: 40 }}
@@ -192,7 +195,7 @@ export function Stage({
         >
           <MotionCtx.Provider value={motion}>
             <MotionDriver motion={motion} />
-            <Rig tint={tint} />
+            <Rig tint={tint} dark={theme === "dark"} />
             {children}
           </MotionCtx.Provider>
         </Canvas>
@@ -218,17 +221,23 @@ export const GLASS = {
 export const CHROME = {
   metalness: 1,
   roughness: 0.16,
-  color: "#e9f1ec",
-} as const;
+  get color() {
+    return COL.paper;
+  },
+};
 
 export const EMERALD = {
   metalness: 0.75,
   roughness: 0.22,
-  color: COL.neon,
-} as const;
+  get color() {
+    return COL.neon;
+  },
+};
 
 export const DEEP = {
   metalness: 0.6,
   roughness: 0.3,
-  color: COL.glow,
-} as const;
+  get color() {
+    return COL.glow;
+  },
+};
