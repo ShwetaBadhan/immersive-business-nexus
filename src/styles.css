@@ -222,7 +222,7 @@ main {
   }
 
   ::selection {
-    background: oklch(0.6248 0.1268 157.8 / 26%);
+    background: color-mix(in oklab, var(--color-neon) 26%, transparent);
   }
 
   h1,
@@ -349,8 +349,8 @@ main {
   width: 100%;
   background: linear-gradient(
     to right,
-    oklch(0.4562 0.0975 159.2 / 45%),
-    oklch(0.2312 0.0344 165.2 / 0%)
+    color-mix(in oklab, var(--color-neon) 45%, transparent),
+    transparent
   );
 }
 
