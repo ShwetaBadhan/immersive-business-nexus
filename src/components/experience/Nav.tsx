@@ -70,8 +70,10 @@ export function Nav() {
             {LINKS.map((l) => (
               <NavItem key={l.to} to={l.to} label={l.label} active={isActive(pathname, l.to)} />
             ))}
+            <ThemeToggle />
             <SoundToggle sound={sound} onToggle={toggleSound} />
           </nav>
+
 
         <button
           {...cursorProps(open ? "Close" : "Menu")}
