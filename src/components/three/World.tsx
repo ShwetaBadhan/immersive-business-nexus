@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { live, useWorld, type WorldVariant } from "@/lib/world-store";
 import { COL } from "./palette";
 import { ParticleField } from "./ParticleField";
+import { useTheme } from "@/lib/theme";
 
 
 /* ---------------- camera rig: scroll + pointer drive the whole world ------- */
@@ -81,11 +82,11 @@ function Atmosphere({ quality }: { quality: "high" | "low" }) {
     <>
       <color attach="background" args={[COL.deep]} />
       <fogExp2 attach="fog" args={[COL.deep, quality === "high" ? 0.026 : 0.036]} />
-      <ambientLight intensity={0.9} color={COL.deep} />
-      <hemisphereLight intensity={0.9} color={COL.deep} groundColor={COL.moss} />
+      <ambientLight intensity={0.9} color={COL.forest} />
+      <hemisphereLight intensity={0.9} color={COL.forest} groundColor={COL.moss} />
       <pointLight ref={key} color={COL.neon} intensity={18} distance={26} decay={1.6} />
       <pointLight ref={rim} color={COL.glow} intensity={9} distance={20} decay={1.8} />
-      <directionalLight position={[4, 6, 6]} intensity={1.7} color="#ffffff" />
+      <directionalLight position={[4, 6, 6]} intensity={1.7} color={COL.paper} />
       <directionalLight position={[-5, -2, 3]} intensity={0.8} color={COL.forest} />
     </>
   );
@@ -114,10 +115,12 @@ function Scene({ variant, quality }: { variant: WorldVariant; quality: "high" | 
 
 export default function World({ variant }: { variant: WorldVariant; hue?: number }) {
   const quality = useWorld((s) => s.quality);
+  const theme = useTheme();
 
   return (
     <div className="fixed inset-0 z-0">
       <Canvas
+        key={theme}
         dpr={quality === "high" ? [1, 1.6] : [0.7, 1]}
         gl={{
           antialias: true,
