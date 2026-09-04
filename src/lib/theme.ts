@@ -8,15 +8,16 @@ const listeners = new Set<() => void>();
 
 function apply(next: Theme) {
   if (typeof document === "undefined") return;
-  document.documentElement.classList.toggle("dark", next === "dark");
+  const root = document.documentElement;
+  root.classList.toggle("dark", next === "dark");
+  root.setAttribute("data-theme", next);
+  root.style.colorScheme = next;
 }
 
 export function initTheme() {
   if (typeof window === "undefined") return;
   const stored = window.localStorage.getItem(KEY) as Theme | null;
-  const prefers =
-    window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  theme = stored ?? prefers;
+  theme = stored ?? "light";
   apply(theme);
   listeners.forEach((l) => l());
 }
