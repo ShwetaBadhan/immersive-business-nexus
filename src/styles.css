@@ -105,47 +105,103 @@
     oklch(0.9772 0.0055 145.5) 72%
   );
   --ease-world: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* backdrop washes (hero + section headers) */
+  --wash-core: oklch(0.99 0.004 150 / 88%);
+  --wash-edge: oklch(0.985 0.005 150 / 30%);
+  --wash-core-sm: oklch(0.99 0.004 150 / 78%);
+  --wash-edge-sm: oklch(0.985 0.005 150 / 16%);
+  --wash-section: oklch(0.97 0.03 158 / 42%);
+  --hero-light: oklch(0.99 0.01 150 / 60%);
+  --hero-img-filter: saturate(0.58) brightness(1.16);
+  --hero-img-filter-sm: saturate(0.62) brightness(1.1);
+  --hero-img-opacity: 0.7;
+  --hero-img-opacity-sm: 0.82;
+  --hero-fragment: radial-gradient(
+    circle at 34% 30%,
+    oklch(0.99 0.02 155 / 85%),
+    oklch(0.9 0.05 158 / 35%) 58%,
+    transparent 72%
+  );
 }
 
 .dark {
   color-scheme: dark;
 
-  /* deep forest night + emerald accents */
-  --deep: oklch(0.1738 0.0233 165.8);
-  --forest: oklch(0.2262 0.0308 164.2);
-  --brand: oklch(0.6402 0.1188 158.6);
-  --neon: oklch(0.7488 0.1512 158.2);
-  --glow: oklch(0.8215 0.1442 157.6);
-  --moss: oklch(0.3585 0.0372 162.4);
+  /* deep charcoal night + emerald accents */
+  --deep: #0a0d0c;
+  --forest: #111614;
+  --brand: #2bbf79;
+  --neon: #39d98a;
+  --glow: #6fe9b0;
+  --moss: #1a231f;
 
-  --background: oklch(0.1738 0.0233 165.8);
-  --foreground: oklch(0.9542 0.0102 152.4);
-  --card: oklch(0.2062 0.0268 165);
-  --card-foreground: oklch(0.9542 0.0102 152.4);
-  --popover: oklch(0.2062 0.0268 165);
-  --popover-foreground: oklch(0.9542 0.0102 152.4);
-  --primary: oklch(0.7488 0.1512 158.2);
-  --primary-foreground: oklch(0.1738 0.0233 165.8);
-  --secondary: oklch(0.2482 0.0288 164.2);
-  --secondary-foreground: oklch(0.9542 0.0102 152.4);
-  --muted: oklch(0.2482 0.0288 164.2);
-  --muted-foreground: oklch(0.7215 0.0208 158.4);
-  --accent: oklch(0.2782 0.0342 162.8);
-  --accent-foreground: oklch(0.9542 0.0102 152.4);
+  --background: #0a0d0c;
+  --foreground: #f2f5f3;
+  --card: #111614;
+  --card-foreground: #f2f5f3;
+  --popover: #141a18;
+  --popover-foreground: #f2f5f3;
+  --primary: #39d98a;
+  --primary-foreground: #0a0d0c;
+  --secondary: #161d1a;
+  --secondary-foreground: #f2f5f3;
+  --muted: #161d1a;
+  --muted-foreground: #a8b2ae;
+  --accent: #1b2420;
+  --accent-foreground: #f2f5f3;
   --destructive: oklch(0.58 0.19 25);
-  --destructive-foreground: oklch(0.9542 0.0102 152.4);
-  --border: oklch(0.9542 0.0102 152.4 / 16%);
-  --input: oklch(0.9542 0.0102 152.4 / 22%);
-  --ring: oklch(0.7488 0.1512 158.2 / 45%);
+  --destructive-foreground: #f2f5f3;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.18);
+  --ring: rgba(57, 217, 138, 0.45);
 
-  --glow-soft: 0 10px 44px oklch(0.7488 0.1512 158.2 / 22%);
-  --glow-hard: 0 6px 20px oklch(0.7488 0.1512 158.2 / 30%);
-  --gradient-veil: radial-gradient(
-    circle at 50% 55%,
-    oklch(0.2262 0.0308 164.2),
-    oklch(0.1738 0.0233 165.8) 72%
+  --text-primary: #f2f5f3;
+  --text-secondary: #a8b2ae;
+  --text-muted: #737d79;
+  --surface: #111614;
+
+  --glow-soft: 0 10px 44px rgba(57, 217, 138, 0.18);
+  --glow-hard: 0 6px 20px rgba(57, 217, 138, 0.26);
+  --gradient-veil: radial-gradient(circle at 50% 55%, #111614, #0a0d0c 72%);
+
+  /* dark backdrop washes: keep type legible without a white veil */
+  --wash-core: rgba(10, 13, 12, 0.86);
+  --wash-edge: rgba(10, 13, 12, 0.35);
+  --wash-core-sm: rgba(10, 13, 12, 0.78);
+  --wash-edge-sm: rgba(10, 13, 12, 0.2);
+  --wash-section: rgba(57, 217, 138, 0.07);
+  --hero-light: rgba(57, 217, 138, 0.14);
+  --hero-img-filter: saturate(0.42) brightness(0.34) contrast(1.05);
+  --hero-img-filter-sm: saturate(0.45) brightness(0.36) contrast(1.05);
+  --hero-img-opacity: 0.5;
+  --hero-img-opacity-sm: 0.55;
+  --hero-fragment: radial-gradient(
+    circle at 34% 30%,
+    rgba(57, 217, 138, 0.3),
+    rgba(57, 217, 138, 0.08) 58%,
+    transparent 72%
   );
 }
+
+/* smooth theme crossfade */
+html {
+  transition:
+    background-color 380ms var(--ease-world),
+    color 380ms var(--ease-world);
+}
+body,
+header,
+footer,
+section,
+aside,
+main {
+  transition:
+    background-color 380ms var(--ease-world),
+    border-color 380ms var(--ease-world),
+    color 380ms var(--ease-world);
+}
+
 
 
 @layer base {
