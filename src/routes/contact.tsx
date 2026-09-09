@@ -78,9 +78,9 @@ function Contact() {
 
               <div className="space-y-6 md:space-y-10">
                 {[
-                  { k: "Email", v: "hello@239business.com", href: "mailto:hello@239business.com" },
-                  { k: "Phone", v: "+91 XXXXX XXXXX", href: "tel:+91" },
-                  { k: "Studio", v: "India" },
+                  { k: "Email", v: "info@239tbd.com", href: "mailto:info@239tbd.com" },
+                  { k: "Phone", v: "+91 95499 36342", href: "tel:+919549936342" },
+                  { k: "Studio", v: "Lower Ground Kh, 1273, Old Delhi Gurugram Rd, opp. Fun N Food Village, Kapas Hera Extension, New Delhi, Delhi, 110097" },
                 ].map((c, i) => (
                   <div key={c.k} data-reveal data-reveal-delay={i * 110}>
                     <span className="label">{c.k}</span>

@@ -75,23 +75,23 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
             <li>
               <a
-                href="mailto:hello@239.studio"
+                href="mailto:info@239tbd.com"
                 {...cursorProps("Mail")}
                 className="link-underline transition-colors duration-500 hover:text-foreground"
               >
-                hello@239.studio
+                info@239tbd.com
               </a>
             </li>
             <li>
               <a
-                href="tel:+919000002390"
+                href="tel:+919549936342"
                 {...cursorProps("Call")}
                 className="link-underline transition-colors duration-500 hover:text-foreground"
               >
-                +91 90000 02390
+                +91 95499 36342
               </a>
             </li>
-            <li className="pt-1 leading-relaxed">Studio 239, Bengaluru, India</li>
+            <li className="pt-1 leading-relaxed">Lower Ground Kh, 1273, Old Delhi Gurugram Rd, opp. Fun N Food Village, Kapas Hera Extension, New Delhi, Delhi, 110097</li>
           </ul>
 
           <h2 className="label mt-8">Social</h2>

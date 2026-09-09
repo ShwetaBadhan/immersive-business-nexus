@@ -638,9 +638,9 @@ Interactive 3D environment in the background.
 
 Contact information:
 
-**[HELLO@239BUSINESS.COM](mailto:HELLO@239BUSINESS.COM)**
+**[info@239tbd.com](mailto:info@239tbd.com)**
 
-**+91 XXXXX XXXXX**
+**+91 95499 36342**
 
 Add:
 
